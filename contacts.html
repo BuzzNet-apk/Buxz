@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        body {
+            background:
+                radial-gradient(circle at top right, rgba(124,58,237,.16), transparent 35%),
+                radial-gradient(circle at bottom left, rgba(212,175,55,.08), transparent 35%),
+                #07070a;
+            color: #f8f7ff;
+        }
+
+        .contacts-page {
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+            min-height: 100vh;
+            padding-bottom: 35px;
+        }
+
+        .contacts-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 17px 18px;
+            background: rgba(7,7,10,.88);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+        .back-btn,
+        .top-action {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.08);
+            background: #111116;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .top-title {
+            flex: 1;
+        }
+
+        .top-title h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .top-title span {
+            color: #92919d;
+            font-size: 12px;
+        }
+
+        .hero {
+            padding: 28px 18px 20px;
+        }
+
+        .hero h2 {
+            margin: 0 0 8px;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -.7px;
+        }
+
+        .hero p {
+            margin: 0;
+            color: #92919d;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .search-wrap {
+            padding: 0 18px 20px;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #111116;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 16px;
+            padding: 13px 15px;
+            transition: .25s;
+        }
+
+        .search-box:focus-within {
+            border-color: rgba(124,58,237,.65);
+            box-shadow: 0 0 0 3px rgba(124,58,237,.08);
+        }
+
+        .search-box i {
+            color: #92919d;
+        }
+
+        .search-box input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .search-box input::placeholder {
+            color: #777581;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding: 0 18px 25px;
+        }
+
+        .quick-card {
+            background: linear-gradient(145deg, #15141b, #0f0f14);
+            border: 1px solid rgba(255,255,255,.07);
+            border-radius: 17px;
+            padding: 15px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(124,58,237,.5);
+        }
+
+        .quick-icon {
+            width: 42px;
+            height: 42px;
+            margin: 0 auto 9px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(124,58,237,.13);
+            color: #a78bfa;
+            font-size: 17px;
+        }
+
+        .quick-card:nth-child(2) .quick-icon {
+            background: rgba(212,175,55,.12);
+            color: #f1d77a;
+        }
+
+        .quick-card:nth-child(3) .quick-icon {
+            background: rgba(124,58,237,.13);
+            color: #a78bfa;
+        }
+
+        .quick-card strong {
+            display: block;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 18px 12px;
+        }
+
+        .section-title h3 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: .3px;
+        }
+
+        .section-title span {
+            color: #92919d;
+            font-size: 12px;
+        }
+
+        .contact-list {
+            padding: 0 12px;
+        }
+
+        .contact {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 12px 8px;
+            border-radius: 17px;
+            transition: .2s;
+            cursor: pointer;
+        }
+
+        .contact:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(212,175,55,.25);
+        }
+
+        .avatar-box {
+            position: relative;
+            width: 52px;
+            height: 52px;
+            min-width: 52px;
+        }
+
+        .online {
+            position: absolute;
+            right: 1px;
+            bottom: 2px;
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
+            background: #35d07f;
+            border: 3px solid #111116;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-name {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .contact-name i {
+            color: #d4af37;
+            font-size: 11px;
+        }
+
+        .contact-status {
+            margin-top: 4px;
+            color: #92919d;
+            font-size: 12px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chat-btn {
+            width: 39px;
+            height: 39px;
+            border-radius: 50%;
+            border: 1px solid rgba(124,58,237,.3);
+            background: rgba(124,58,237,.10);
+            color: #a78bfa;
+            cursor: pointer;
+        }
+
+        .empty-state {
+            display: none;
+            padding: 35px 20px;
+            text-align: center;
+            color: #92919d;
+        }
+
+        .empty-state i {
+            font-size: 30px;
+            margin-bottom: 12px;
+            color: #a78bfa;
+        }
+
+        @media (max-width: 420px) {
+            .quick-actions {
+                gap: 7px;
+            }
+
+            .quick-card {
+                padding: 13px 7px;
+            }
+
+            .hero h2 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="contacts-page">
+
+    <!-- TOP BAR -->
+    <header class="contacts-topbar">
+
+        <a href="index.html" class="back-btn" aria-label="Back">
+            <i class="fa-solid fa-arrow-left"></i>
+        </a>
+
+        <div class="top-title">
+            <h1>Contacts</h1>
+            <span>Connect with people</span>
+        </div>
+
+        <button class="top-action" onclick="toggleSearch()" aria-label="Search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+        <h2>Start a conversation</h2>
+        <p>
+            Find your friends, create a group, or invite someone to BuzzChat.
+        </p>
+    </section>
+
+
+    <!-- SEARCH -->
+    <div class="search-wrap">
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="contactSearch"
+                placeholder="Search contacts..."
+                oninput="searchContacts()"
+            >
+        </div>
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <div class="quick-actions">
+
+        <div class="quick-card" onclick="createGroup()">
+            <div class="quick-icon">
+                <i class="fa-solid fa-users"></i>
+            </div>
+            <strong>New Group</strong>
+        </div>
+
+        <div class="quick-card" onclick="createChannel()">
+            <div class="quick-icon">
+                <i class="fa-solid fa-bullhorn"></i>
+            </div>
+            <strong>New Channel</strong>
+        </div>
+
+        <div class="quick-card" onclick="inviteFriend()">
+            <div class="quick-icon">
+                <i class="fa-solid fa-user-plus"></i>
+            </div>
+            <strong>Invite Friend</strong>
+        </div>
+
+    </div>
+
+
+    <!-- CONTACTS -->
+    <div class="section-title">
+        <h3>MY CONTACTS</h3>
+        <span id="contactCount">6 contacts</span>
+    </div>
+
+
+    <div class="contact-list" id="contactList">
+
+        <!-- DANIEL -->
+        <div class="contact" data-name="Daniel K.">
+            <div class="avatar-box">
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=47"
+                     alt="Daniel K.">
+                <span class="online"></span>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-name">
+                    Daniel K.
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <div class="contact-status">online</div>
+            </div>
+
+            <button class="chat-btn"
+                    onclick="openChat('Daniel K.')">
+                <i class="fa-regular fa-comment"></i>
+            </button>
+        </div>
+
+
+        <!-- ALICIA -->
+        <div class="contact" data-name="Alicia M.">
+            <div class="avatar-box">
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=32"
+                     alt="Alicia M.">
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-name">
+                    Alicia M.
+                </div>
+                <div class="contact-status">last seen recently</div>
+            </div>
+
+            <button class="chat-btn"
+                    onclick="openChat('Alicia M.')">
+                <i class="fa-regular fa-comment"></i>
+            </button>
+        </div>
+
+
+        <!-- MAYA -->
+        <div class="contact" data-name="Maya R.">
+            <div class="avatar-box">
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=12"
+                     alt="Maya R.">
+                <span class="online"></span>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-name">
+                    Maya R.
+                </div>
+                <div class="contact-status">online</div>
+            </div>
+
+            <button class="chat-btn"
+                    onclick="openChat('Maya R.')">
+                <i class="fa-regular fa-comment"></i>
+            </button>
+        </div>
+
+
+        <!-- ALEX -->
+        <div class="contact" data-name="Alex T.">
+            <div class="avatar-box">
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=11"
+                     alt="Alex T.">
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-name">
+                    Alex T.
+                </div>
+                <div class="contact-status">last seen today</div>
+            </div>
+
+            <button class="chat-btn"
+                    onclick="openChat('Alex T.')">
+                <i class="fa-regular fa-comment"></i>
+            </button>
+        </div>
+
+
+        <!-- SARAH -->
+        <div class="contact" data-name="Sarah N.">
+            <div class="avatar-box">
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=44"
+                     alt="Sarah N.">
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-name">
+                    Sarah N.
+                </div>
+                <div class="contact-status">last seen yesterday</div>
+            </div>
+
+            <button class="chat-btn"
+                    onclick="openChat('Sarah N.')">
+                <i class="fa-regular fa-comment"></i>
+            </button>
+        </div>
+
+
+        <!-- MICHAEL -->
+        <div class="contact" data-name="Michael B.">
+            <div class="avatar-box">
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=68"
+                     alt="Michael B.">
+                <span class="online"></span>
+            </div>
+
+            <div class="contact-info">
+                <div class="contact-name">
+                    Michael B.
+                </div>
+                <div class="contact-status">online</div>
+            </div>
+
+            <button class="chat-btn"
+                    onclick="openChat('Michael B.')">
+                <i class="fa-regular fa-comment"></i>
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- EMPTY SEARCH RESULT -->
+    <div class="empty-state" id="emptyState">
+        <i class="fa-solid fa-user-slash"></i>
+        <div>No contacts found</div>
+    </div>
+
+</div>
+
+
+<script>
+
+    function openChat(name) {
+        window.location.href = "chat.html";
+    }
+
+
+    function searchContacts() {
+
+        const input = document
+            .getElementById("contactSearch")
+            .value
+            .toLowerCase()
+            .trim();
+
+        const contacts = document.querySelectorAll(".contact");
+        const emptyState = document.getElementById("emptyState");
+
+        let visible = 0;
+
+        contacts.forEach(contact => {
+
+            const name = contact
+                .dataset.name
+                .toLowerCase();
+
+            if (name.includes(input)) {
+                contact.style.display = "flex";
+                visible++;
+            } else {
+                contact.style.display = "none";
+            }
+
+        });
+
+        emptyState.style.display =
+            visible === 0 ? "block" : "none";
+
+        document.getElementById("contactCount").textContent =
+            input ? visible + " found" : "6 contacts";
+    }
+
+
+    function toggleSearch() {
+
+        const input = document.getElementById("contactSearch");
+
+        input.focus();
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+
+    function createGroup() {
+        alert("New Group\n\nGroup creation will be connected when BuzzChat functionality is added.");
+    }
+
+
+    function createChannel() {
+        alert("New Channel\n\nChannel creation will be connected when BuzzChat functionality is added.");
+    }
+
+
+    function inviteFriend() {
+        alert("Invite Friend\n\nInvite sharing will be connected when BuzzChat functionality is added.");
+    }
+
+</script>
+
+</body>
+</html>

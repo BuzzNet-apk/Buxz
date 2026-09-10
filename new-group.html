@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>New Group • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+<div class="new-group-page">
+
+  <header class="new-group-header">
+    <a href="new-chat.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+
+    <div>
+      <h1>New Group</h1>
+      <p>Add people to your group</p>
+    </div>
+  </header>
+
+
+  <!-- GROUP NAME -->
+
+  <section class="group-name-card">
+
+    <div class="group-photo">
+      <i class="fa-solid fa-camera"></i>
+    </div>
+
+    <div class="group-name-input">
+      <label>GROUP NAME</label>
+
+      <input
+        type="text"
+        id="groupName"
+        placeholder="Enter group name"
+        maxlength="40"
+      >
+    </div>
+
+  </section>
+
+
+  <!-- SEARCH -->
+
+  <div class="new-group-search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+
+    <input
+      type="text"
+      id="groupSearch"
+      placeholder="Search people..."
+    >
+  </div>
+
+
+  <!-- SELECTED MEMBERS -->
+
+  <section id="selectedMembers" class="selected-members"></section>
+
+
+  <!-- PEOPLE -->
+
+  <section class="group-people">
+
+    <p class="section-label">CONTACTS</p>
+
+
+    <article class="group-person" data-name="Daniel K.">
+
+      <div class="group-person-info">
+        <img src="https://i.pravatar.cc/150?img=47" alt="Daniel">
+
+        <div>
+          <h3>Daniel K.</h3>
+          <p>Online</p>
+        </div>
+      </div>
+
+      <button class="select-person">
+        <i class="fa-solid fa-check"></i>
+      </button>
+
+    </article>
+
+
+    <article class="group-person" data-name="Alicia M.">
+
+      <div class="group-person-info">
+        <img src="https://i.pravatar.cc/150?img=32" alt="Alicia">
+
+        <div>
+          <h3>Alicia M.</h3>
+          <p>Available</p>
+        </div>
+      </div>
+
+      <button class="select-person">
+        <i class="fa-solid fa-check"></i>
+      </button>
+
+    </article>
+
+
+    <article class="group-person" data-name="Maya">
+
+      <div class="group-person-info">
+        <img src="https://i.pravatar.cc/150?img=12" alt="Maya">
+
+        <div>
+          <h3>Maya</h3>
+          <p>Available</p>
+        </div>
+      </div>
+
+      <button class="select-person">
+        <i class="fa-solid fa-check"></i>
+      </button>
+
+    </article>
+
+  </section>
+
+
+  <!-- CREATE -->
+
+  <button class="create-group-btn" id="createGroupBtn">
+    <i class="fa-solid fa-users"></i>
+    <span>Create Group</span>
+  </button>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

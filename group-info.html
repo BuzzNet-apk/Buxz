@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Group Info • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+  <div class="group-info-page">
+
+    <!-- HEADER -->
+
+    <header class="group-info-header">
+
+      <a href="chat.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+
+      <div>
+        <h1>Group Info</h1>
+        <p>Manage your group</p>
+      </div>
+
+    </header>
+
+
+    <!-- GROUP PROFILE -->
+
+    <section class="group-profile-card">
+
+      <div class="group-info-avatar">
+
+        <img id="groupInfoAvatar"
+             src="https://i.pravatar.cc/150?img=47"
+             alt="Group">
+
+      </div>
+
+      <h2 id="groupInfoName">Group Name</h2>
+
+      <p id="groupInfoMembers">0 members</p>
+
+    </section>
+
+
+    <!-- GROUP ACTIONS -->
+
+    <section class="group-info-actions">
+
+     <button class="group-info-action" id="addMembersBtn">
+
+        <div class="info-action-icon">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+
+        <div>
+          <h3>Add Members</h3>
+          <p>Invite people to this group</p>
+        </div>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+
+      <button class="group-info-action">
+
+        <div class="info-action-icon">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+
+        <div>
+          <h3>Notifications</h3>
+          <p>Group notification settings</p>
+        </div>
+
+        <i class="fa-solid fa-chevron-right"></i>
+
+      </button>
+
+    </section>
+
+
+    <!-- MEMBERS -->
+
+    <section class="group-members-section">
+
+      <div class="group-section-title">
+
+        <h3>Members</h3>
+
+        <span id="memberCount">0</span>
+
+      </div>
+
+      <div id="groupMembers"></div>
+
+    </section>
+
+
+    <!-- LEAVE GROUP -->
+
+    <button class="leave-group-btn"
+            id="leaveGroupBtn">
+
+      <i class="fa-solid fa-right-from-bracket"></i>
+
+      <span>Leave Group</span>
+
+    </button>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const activeGroup =
+      localStorage.getItem("buzzchatActiveGroup");
+
+
+    const savedGroups =
+      JSON.parse(
+        localStorage.getItem("buzzchatGroups") || "[]"
+      );
+
+
+    const group =
+      savedGroups.find(function(item){
+
+        return item.name === activeGroup;
+
+      });
+
+
+    if(group){
+
+      const name =
+        document.getElementById("groupInfoName");
+
+      const avatar =
+        document.getElementById("groupInfoAvatar");
+
+      const members =
+        document.getElementById("groupMembers");
+
+      const memberCount =
+        document.getElementById("memberCount");
+
+      const membersText =
+        document.getElementById("groupInfoMembers");
+
+
+      name.textContent = group.name;
+
+
+      if(group.image){
+
+        avatar.src = group.image;
+
+      }
+
+
+      const total =
+        group.members.length;
+
+
+      membersText.textContent =
+        total + " member" +
+        (total === 1 ? "" : "s");
+
+
+      memberCount.textContent =
+        total;
+
+
+      group.members.forEach(function(memberName){
+
+        const member =
+          document.createElement("div");
+
+        member.className =
+          "group-info-member";
+
+
+        member.innerHTML = `
+
+          <img src="https://i.pravatar.cc/150?img=47"
+               alt="${memberName}">
+
+          <div>
+
+            <h4>${memberName}</h4>
+
+            <p>Group member</p>
+
+          </div>
+
+        `;
+
+
+        members.appendChild(member);
+
+      });
+
+    }
+
+
+    const leaveGroupBtn =
+      document.getElementById("leaveGroupBtn");
+
+
+    if(leaveGroupBtn){
+
+      leaveGroupBtn.addEventListener(
+        "click",
+        function(){
+
+          if(!activeGroup) return;
+
+
+          const confirmLeave =
+            confirm(
+              "Leave " +
+              activeGroup +
+              "?"
+            );
+
+
+          if(!confirmLeave) return;
+
+
+          const remainingGroups =
+            savedGroups.filter(function(group){
+
+              return group.name !== activeGroup;
+
+            });
+
+
+          localStorage.setItem(
+            "buzzchatGroups",
+            JSON.stringify(remainingGroups)
+          );
+
+
+          localStorage.removeItem(
+            "buzzchatActiveGroup"
+          );
+
+
+          window.location.href =
+            "groups.html";
+
+        }
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>

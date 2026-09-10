@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>New Chat • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="new-chat-page">
+
+    <!-- HEADER -->
+    <header class="new-chat-header">
+
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+
+      <div>
+        <h1>New Chat</h1>
+        <p>Start a conversation</p>
+      </div>
+
+    </header>
+
+
+    <!-- SEARCH -->
+    <div class="new-chat-search">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        id="newChatSearch"
+        placeholder="Search people..."
+      >
+
+    </div>
+
+
+    <!-- QUICK ACTIONS -->
+    <section class="new-chat-actions">
+
+   <button class="new-chat-action" onclick="window.location.href='new-group.html'">
+        <div class="action-icon group">
+          <i class="fa-solid fa-users"></i>
+        </div>
+
+        <div>
+          <h3>New Group</h3>
+          <p>Create a group conversation</p>
+        </div>
+      </button>
+
+      <button class="new-chat-action">
+        <div class="action-icon channel">
+          <i class="fa-solid fa-tower-broadcast"></i>
+        </div>
+
+        <div>
+          <h3>New Channel</h3>
+          <p>Start broadcasting</p>
+        </div>
+      </button>
+
+    </section>
+
+
+    <!-- PEOPLE -->
+    <section class="new-chat-people">
+
+      <p class="section-label">PEOPLE</p>
+
+      <article class="person-item" onclick="window.location.href='chat.html'">
+
+        <img src="https://i.pravatar.cc/150?img=32" alt="Alicia">
+
+        <div>
+          <h3>Alicia M.</h3>
+          <p>Hey! Let's chat 👋</p>
+        </div>
+
+      </article>
+
+
+      <article class="person-item" onclick="window.location.href='chat.html'">
+
+        <img src="https://i.pravatar.cc/150?img=12" alt="Maya">
+
+        <div>
+          <h3>Maya</h3>
+          <p>Available to chat</p>
+        </div>
+
+      </article>
+
+
+      <article class="person-item" onclick="window.location.href='chat.html'">
+
+        <img src="https://i.pravatar.cc/150?img=47" alt="Daniel">
+
+        <div>
+          <h3>Daniel K.</h3>
+          <p>Online</p>
+        </div>
+
+      </article>
+
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

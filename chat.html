@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Chat • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+  <div class="chat-page">
+
+    <!-- CHAT HEADER -->
+
+    <header class="chat-header">
+
+      <a href="index.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+
+
+      <div class="chat-profile">
+
+        <div class="chat-avatar">
+          <img id="chatAvatar"
+               src="https://i.pravatar.cc/150?img=47"
+               alt="Daniel">
+        </div>
+
+        <div>
+          <h2 id="chatName">Daniel K.</h2>
+          <p id="chatSubtitle">online</p>
+        </div>
+
+      </div>
+
+
+      <div class="chat-actions">
+
+        <button id="voiceCallBtn"
+                aria-label="Voice call">
+          <i class="fa-solid fa-phone"></i>
+        </button>
+
+
+        <button id="videoCallBtn"
+                aria-label="Video call">
+          <i class="fa-solid fa-video"></i>
+        </button>
+
+
+     <button id="chatMenuBtn"
+        aria-label="Chat menu">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- MESSAGES -->
+
+    <main class="messages">
+
+      <div class="date-divider">
+        <span>Today</span>
+      </div>
+
+
+      <div class="message received">
+
+        <p>Hey! 👋</p>
+
+        <span>10:35</span>
+
+      </div>
+
+
+      <div class="message received">
+
+        <p>Are we still meeting today?</p>
+
+        <span>10:36</span>
+
+      </div>
+
+
+      <div class="message sent">
+
+        <p>Yes, definitely. I'll be there 👍</p>
+
+        <span>
+          10:38
+          <i class="fa-solid fa-check-double"></i>
+        </span>
+
+      </div>
+
+
+      <div class="message received">
+
+        <p>Perfect! See you soon.</p>
+
+        <span>10:40</span>
+
+      </div>
+
+    </main>
+
+
+    <!-- MESSAGE COMPOSER -->
+
+    <footer class="message-composer">
+
+      <button class="composer-btn"
+              id="emojiBtn"
+              aria-label="Emoji">
+
+        <i class="fa-regular fa-face-smile"></i>
+
+      </button>
+
+
+      <input
+        type="text"
+        id="messageInput"
+        placeholder="Message..."
+        autocomplete="off"
+      >
+
+
+      <button class="composer-btn"
+              id="attachBtn"
+              aria-label="Attach">
+
+        <i class="fa-solid fa-paperclip"></i>
+
+      </button>
+
+
+      <button class="send-btn"
+              id="sendBtn"
+              aria-label="Send message">
+
+        <i class="fa-solid fa-paper-plane"></i>
+
+      </button>
+
+    </footer>
+
+  </div>
+
+
+  <!-- GROUP INFORMATION -->
+
+  <script>
+
+    const activeGroup =
+      localStorage.getItem("buzzchatActiveGroup");
+
+
+    const chatName =
+      document.getElementById("chatName");
+
+
+    const chatSubtitle =
+      document.getElementById("chatSubtitle");
+
+
+    const chatAvatar =
+      document.getElementById("chatAvatar");
+
+
+    if (activeGroup && chatName) {
+
+      chatName.textContent =
+        activeGroup;
+
+
+      const savedGroups =
+        JSON.parse(
+          localStorage.getItem("buzzchatGroups") || "[]"
+        );
+
+
+      const group =
+        savedGroups.find(function(group) {
+
+          return group.name === activeGroup;
+
+        });
+
+
+      if (group) {
+
+        if (group.image && chatAvatar) {
+
+          chatAvatar.src =
+            group.image;
+
+        }
+
+
+        if (chatSubtitle) {
+
+          chatSubtitle.textContent =
+            group.members.length +
+            " members";
+
+        }
+
+      }
+
+    }
+
+  </script>
+
+
+  <!-- BUZZCHAT SCRIPT -->
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>

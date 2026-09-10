@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Account Settings • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.15),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212,175,55,.07),
+                    transparent 35%
+                ),
+                #07070a;
+
+            color: #f8f7ff;
+
+            font-family: Inter, sans-serif;
+        }
+
+
+        .account-page {
+            width: 100%;
+            max-width: 700px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            padding-bottom: 40px;
+        }
+
+
+        /* TOPBAR */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 15px 18px;
+
+            background: rgba(7,7,10,.88);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .menu-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .page-title {
+            flex: 1;
+        }
+
+
+        .page-title h1 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .page-title span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 30px 18px 20px;
+        }
+
+
+        .hero-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 21px;
+
+            margin-bottom: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,.20),
+                    rgba(212,175,55,.10)
+                );
+
+            border: 1px solid rgba(124,58,237,.23);
+
+            color: #a78bfa;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 15px 45px rgba(124,58,237,.10);
+        }
+
+
+        .hero h2 {
+            margin: 0 0 9px;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .hero p {
+            margin: 0;
+
+            color: #92919d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* ACCOUNT CARD */
+
+        .account-card {
+            margin: 0 18px 28px;
+
+            padding: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.12),
+                    rgba(17,17,22,.95)
+                );
+
+            border: 1px solid rgba(124,58,237,.20);
+
+            box-shadow:
+                0 18px 45px rgba(0,0,0,.20);
+        }
+
+
+        .avatar {
+            width: 64px;
+            height: 64px;
+
+            min-width: 64px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid rgba(212,175,55,.35);
+
+            box-shadow:
+                0 0 0 5px rgba(212,175,55,.04);
+        }
+
+
+        .account-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .account-name {
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            font-size: 15px;
+
+            font-weight: 800;
+        }
+
+
+        .verified {
+            color: #a78bfa;
+
+            font-size: 12px;
+        }
+
+
+        .username {
+            margin-top: 5px;
+
+            color: #a78bfa;
+
+            font-size: 11px;
+        }
+
+
+        .account-id {
+            margin-top: 6px;
+
+            color: #66646e;
+
+            font-size: 9px;
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            padding: 0 18px 9px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .settings-list {
+            padding: 0 12px;
+
+            margin-bottom: 26px;
+        }
+
+
+        /* SETTING */
+
+        .setting {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 9px;
+
+            border-radius: 17px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .setting:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .setting-icon {
+            width: 43px;
+            height: 43px;
+
+            min-width: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+
+            font-size: 15px;
+        }
+
+
+        .setting:nth-child(2) .setting-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .setting:nth-child(3) .setting-icon {
+            background: rgba(53,208,127,.09);
+
+            color: #55dd93;
+        }
+
+
+        .setting:nth-child(4) .setting-icon {
+            background: rgba(255,255,255,.06);
+
+            color: #b7b4c1;
+        }
+
+
+        .setting-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .setting-name {
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .setting-description {
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            line-height: 1.45;
+        }
+
+
+        .setting-value {
+            color: #a78bfa;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .chevron {
+            color: #55535e;
+
+            font-size: 10px;
+        }
+
+
+        /* DANGER */
+
+        .danger-card {
+            margin: 0 18px 28px;
+
+            padding: 17px;
+
+            border-radius: 19px;
+
+            background:
+                rgba(120,30,40,.08);
+
+            border: 1px solid rgba(220,70,85,.13);
+        }
+
+
+        .danger-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .danger-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: rgba(220,70,85,.10);
+
+            color: #ef7180;
+        }
+
+
+        .danger-header strong {
+            font-size: 12px;
+        }
+
+
+        .danger-header span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        .danger-button {
+            width: 100%;
+
+            padding: 12px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(220,70,85,.20);
+
+            background: rgba(220,70,85,.07);
+
+            color: #ef7180;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .footer {
+            padding: 10px 20px 30px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="account-page">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <a href="settings.html"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="page-title">
+
+            <h1>Account</h1>
+
+            <span>Manage your BuzzChat account</span>
+
+        </div>
+
+
+        <button class="menu-btn"
+                onclick="accountMenu()">
+
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-icon">
+
+            <i class="fa-solid fa-user-gear"></i>
+
+        </div>
+
+
+        <h2>Your account</h2>
+
+
+        <p>
+            Manage your personal information, username,
+            phone number and account preferences.
+        </p>
+
+    </section>
+
+
+
+    <!-- ACCOUNT -->
+
+    <div class="account-card">
+
+        <img
+            class="avatar"
+            src="https://i.pravatar.cc/150?img=47"
+            alt="Profile photo"
+        >
+
+
+        <div class="account-info">
+
+            <div class="account-name">
+
+                Daniel K.
+
+                <i class="fa-solid fa-circle-check verified"></i>
+
+            </div>
+
+
+            <div class="username">
+                @danielk
+            </div>
+
+
+            <div class="account-id">
+                BuzzChat ID • BC-248-019
+            </div>
+
+        </div>
+
+
+        <i class="fa-solid fa-chevron-right chevron"></i>
+
+    </div>
+
+
+
+    <!-- PERSONAL INFORMATION -->
+
+    <div class="section-title">
+        PERSONAL INFORMATION
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="editProfile()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Name & profile
+                </div>
+
+                <div class="setting-description">
+                    Change your name, photo and personal details.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="changeUsername()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-at"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Username
+                </div>
+
+                <div class="setting-description">
+                    Your unique BuzzChat username.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                @danielk
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="changeContact()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-phone"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Phone number
+                </div>
+
+                <div class="setting-description">
+                    Manage the number connected to your account.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Verified
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="changeEmail()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-envelope"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Email address
+                </div>
+
+                <div class="setting-description">
+                    Add or update your recovery email.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Protected
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ACCOUNT PREFERENCES -->
+
+    <div class="section-title">
+        ACCOUNT PREFERENCES
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="openPrivacy()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-eye"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Privacy
+                </div>
+
+                <div class="setting-description">
+                    Control who can see your information and contact you.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="openSecurity()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Security
+                </div>
+
+                <div class="setting-description">
+                    Protect your account and manage login security.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="openNotifications()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-bell"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Notifications
+                </div>
+
+                <div class="setting-description">
+                    Choose how BuzzChat alerts you.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- DANGER ZONE -->
+
+    <div class="section-title">
+        ACCOUNT CONTROL
+    </div>
+
+
+    <div class="danger-card">
+
+        <div class="danger-header">
+
+            <div class="danger-icon">
+
+                <i class="fa-solid fa-user-slash"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Deactivate account
+                </strong>
+
+                <span>
+                    Temporarily disable your BuzzChat account.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button class="danger-button"
+                onclick="deactivateAccount()">
+
+            Deactivate my account
+
+        </button>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div>
+            <i class="fa-solid fa-lock"></i>
+            Your account belongs to you.
+        </div>
+
+        BuzzChat Account Center • Version 1.0.0
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    function editProfile() {
+
+        window.location.href = "profile.html";
+
+    }
+
+
+    function changeUsername() {
+
+        alert(
+            "Username management\n\n" +
+            "Your username can be changed from the account profile settings."
+        );
+
+    }
+
+
+    function changeContact() {
+
+        alert(
+            "Phone number\n\n" +
+            "Phone number management will be connected to the BuzzChat account system."
+        );
+
+    }
+
+
+    function changeEmail() {
+
+        alert(
+            "Email address\n\n" +
+            "Email verification and recovery will be connected when account authentication is added."
+        );
+
+    }
+
+
+    function openPrivacy() {
+
+        window.location.href = "privacy.html";
+
+    }
+
+
+    function openSecurity() {
+
+        window.location.href = "security.html";
+
+    }
+
+
+    function openNotifications() {
+
+        window.location.href = "notifications-settings.html";
+
+    }
+
+
+    function accountMenu() {
+
+        alert(
+            "Account options\n\n" +
+            "More account management options will be available here."
+        );
+
+    }
+
+
+    function deactivateAccount() {
+
+        const confirmed = confirm(
+            "Are you sure you want to deactivate your BuzzChat account?"
+        );
+
+        if (confirmed) {
+
+            alert(
+                "Account deactivation will be connected to the secure account system later."
+            );
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>

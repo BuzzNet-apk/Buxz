@@ -1,0 +1,1209 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Calls • BuzzChat</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #07070a;
+      --surface: #111116;
+      --surface2: #18181f;
+      --purple: #7c3aed;
+      --purpleLight: #a78bfa;
+      --gold: #d4af37;
+      --goldLight: #f1d77a;
+      --white: #f8f7ff;
+      --muted: #92919d;
+      --green: #22c55e;
+      --red: #ef4444;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.18),
+          transparent 38%
+        ),
+        var(--black);
+
+      color: var(--white);
+
+      font-family: Inter, sans-serif;
+
+      padding-bottom: 85px;
+    }
+
+    .page {
+      width: min(600px, 100%);
+      margin: auto;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      height: 65px;
+
+      padding: 0 17px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 20;
+
+      background: rgba(7,7,10,.88);
+
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--white);
+
+      background: var(--surface2);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      text-decoration: none;
+    }
+
+    .title-area h1 {
+      margin: 0;
+
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .title-area span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .top-action {
+      width: 39px;
+      height: 39px;
+
+      border: none;
+
+      border-radius: 12px;
+
+      background: var(--surface2);
+
+      color: var(--white);
+
+      font-size: 14px;
+    }
+
+    /* HERO */
+
+    .hero {
+      margin: 16px 13px;
+
+      padding: 22px 18px;
+
+      border-radius: 21px;
+
+      background:
+        radial-gradient(
+          circle at 80% 20%,
+          rgba(212,175,55,.13),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.18),
+          rgba(17,17,22,.96)
+        );
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      position: relative;
+
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: 180px;
+      height: 180px;
+
+      border: 1px solid rgba(212,175,55,.12);
+
+      border-radius: 50%;
+
+      right: -75px;
+      bottom: -90px;
+    }
+
+    .hero-icon {
+      width: 50px;
+      height: 50px;
+
+      border-radius: 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #3b176e
+        );
+
+      color: var(--goldLight);
+
+      font-size: 19px;
+
+      box-shadow:
+        0 10px 25px rgba(124,58,237,.25);
+
+      margin-bottom: 14px;
+    }
+
+    .hero h2 {
+      margin: 0;
+
+      font-size: 20px;
+    }
+
+    .hero p {
+      margin: 7px 0 0;
+
+      max-width: 390px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+
+      line-height: 1.6;
+    }
+
+    /* QUICK ACTIONS */
+
+    .quick-actions {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin: 0 13px 22px;
+    }
+
+    .quick-btn {
+      min-height: 57px;
+
+      border-radius: 16px;
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      background: var(--surface);
+
+      color: var(--white);
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      padding: 10px 13px;
+
+      text-align: left;
+
+      font-family: inherit;
+    }
+
+    .quick-icon {
+      width: 36px;
+      height: 36px;
+
+      min-width: 36px;
+
+      border-radius: 11px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(124,58,237,.14);
+
+      color: var(--purpleLight);
+    }
+
+    .quick-btn.video .quick-icon {
+      color: var(--goldLight);
+
+      background: rgba(212,175,55,.1);
+    }
+
+    .quick-btn strong {
+      display: block;
+
+      font-size: 10px;
+    }
+
+    .quick-btn span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    /* SECTION */
+
+    .section {
+      margin: 0 13px 18px;
+    }
+
+    .section-header {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 4px 9px;
+    }
+
+    .section-header h3 {
+      margin: 0;
+
+      font-size: 12px;
+    }
+
+    .section-header a {
+      color: var(--purpleLight);
+
+      text-decoration: none;
+
+      font-size: 9px;
+
+      font-weight: 700;
+    }
+
+    .call-list {
+      background: var(--surface);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      border-radius: 19px;
+
+      overflow: hidden;
+    }
+
+    /* CALL ITEM */
+
+    .call-item {
+      min-height: 72px;
+
+      padding: 10px 13px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    .call-item:last-child {
+      border-bottom: none;
+    }
+
+    .avatar {
+      width: 47px;
+      height: 47px;
+
+      min-width: 47px;
+
+      border-radius: 50%;
+
+      overflow: hidden;
+
+      border: 2px solid rgba(212,175,55,.24);
+
+      position: relative;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+    .avatar.online::after {
+      content: "";
+
+      position: absolute;
+
+      width: 10px;
+      height: 10px;
+
+      right: 0;
+      bottom: 0;
+
+      background: var(--green);
+
+      border: 2px solid var(--surface);
+
+      border-radius: 50%;
+    }
+
+    .call-info {
+      flex: 1;
+
+      min-width: 0;
+    }
+
+    .call-name {
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+    }
+
+    .call-name strong {
+      font-size: 11px;
+    }
+
+    .verified {
+      color: var(--goldLight);
+
+      font-size: 10px;
+    }
+
+    .call-details {
+      display: flex;
+
+      align-items: center;
+
+      gap: 6px;
+
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .call-details.missed {
+      color: var(--red);
+    }
+
+    .call-details.outgoing {
+      color: var(--green);
+    }
+
+    .call-button {
+      width: 37px;
+      height: 37px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      background: var(--surface2);
+
+      color: var(--purpleLight);
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+    .call-button.video {
+      color: var(--goldLight);
+    }
+
+    /* FAVORITES */
+
+    .favorite-list {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 9px;
+    }
+
+    .favorite {
+      padding: 13px 5px;
+
+      border-radius: 15px;
+
+      background: var(--surface);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      text-align: center;
+    }
+
+    .favorite-avatar {
+      width: 47px;
+      height: 47px;
+
+      margin: 0 auto 7px;
+
+      border-radius: 50%;
+
+      overflow: hidden;
+
+      border: 2px solid rgba(212,175,55,.25);
+    }
+
+    .favorite-avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .favorite strong {
+      display: block;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+
+      white-space: nowrap;
+
+      font-size: 8px;
+    }
+
+    .favorite small {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 7px;
+    }
+
+    /* EMPTY SEARCH */
+
+    .search-box {
+      display: none;
+
+      margin: 12px 13px;
+
+      height: 43px;
+
+      align-items: center;
+
+      gap: 9px;
+
+      padding: 0 13px;
+
+      border-radius: 13px;
+
+      background: var(--surface);
+
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    .search-box.show {
+      display: flex;
+    }
+
+    .search-box i {
+      color: var(--muted);
+    }
+
+    .search-box input {
+      flex: 1;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 11px;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottom-nav {
+      position: fixed;
+
+      left: 50%;
+      bottom: 0;
+
+      transform: translateX(-50%);
+
+      width: min(600px, 100%);
+
+      height: 68px;
+
+      display: grid;
+
+      grid-template-columns: repeat(5, 1fr);
+
+      background: rgba(12,12,17,.97);
+
+      border-top: 1px solid rgba(255,255,255,.07);
+
+      backdrop-filter: blur(18px);
+
+      z-index: 50;
+    }
+
+    .nav-item {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 5px;
+
+      font-size: 9px;
+    }
+
+    .nav-item i {
+      font-size: 16px;
+    }
+
+    .nav-item.active {
+      color: var(--goldLight);
+    }
+
+    .ik-nav {
+      width: 32px;
+      height: 32px;
+
+      border-radius: 50%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #251032
+        );
+
+      border: 1px solid rgba(212,175,55,.45);
+
+      color: var(--goldLight);
+
+      font-size: 10px;
+
+      font-weight: 800;
+    }
+
+    @media (max-width: 360px) {
+
+      .favorite-list {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+    }
+
+  </style></head><body><div class="page">  <!-- TOP BAR -->  <header class="topbar"><div class="top-left">
+
+  <a href="index.html" class="back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </a>
+
+  <div class="title-area">
+
+    <h1>Calls</h1>
+
+    <span>
+      Voice & video communication
+    </span>
+
+  </div>
+
+</div>
+
+<button
+  class="top-action"
+  onclick="toggleSearch()"
+>
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+
+  </header>  <!-- SEARCH -->  <div class="search-box" id="searchBox"><i class="fa-solid fa-magnifying-glass"></i>
+
+<input
+  type="search"
+  placeholder="Search calls..."
+  id="searchInput"
+>
+
+  </div>  <!-- HERO -->  <section class="hero"><div class="hero-icon">
+
+  <i class="fa-solid fa-phone-volume"></i>
+
+</div>
+
+<h2>
+  Stay connected
+</h2>
+
+<p>
+  Make secure voice and video calls with the people
+  who matter. Your recent calls will appear here.
+</p>
+
+  </section>  <!-- QUICK ACTIONS -->  <div class="quick-actions"><button
+  class="quick-btn"
+  onclick="startCall('voice')"
+>
+
+  <div class="quick-icon">
+
+    <i class="fa-solid fa-phone"></i>
+
+  </div>
+
+  <div>
+
+    <strong>
+      New voice call
+    </strong>
+
+    <span>
+      Call a contact
+    </span>
+
+  </div>
+
+</button>
+
+
+<button
+  class="quick-btn video"
+  onclick="startCall('video')"
+>
+
+  <div class="quick-icon">
+
+    <i class="fa-solid fa-video"></i>
+
+  </div>
+
+  <div>
+
+    <strong>
+      New video call
+    </strong>
+
+    <span>
+      Start a video chat
+    </span>
+
+  </div>
+
+</button>
+
+  </div>  <!-- FAVORITES -->  <section class="section"><div class="section-header">
+
+  <h3>
+    Favorites
+  </h3>
+
+  <a href="#">
+    Manage
+  </a>
+
+</div>
+
+
+<div class="favorite-list">
+
+  <div class="favorite">
+
+    <div class="favorite-avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=32"
+        alt="Alicia"
+      >
+
+    </div>
+
+    <strong>
+      Alicia
+    </strong>
+
+    <small>
+      Mobile
+    </small>
+
+  </div>
+
+
+  <div class="favorite">
+
+    <div class="favorite-avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=12"
+        alt="Maya"
+      >
+
+    </div>
+
+    <strong>
+      Maya
+    </strong>
+
+    <small>
+      Mobile
+    </small>
+
+  </div>
+
+
+  <div class="favorite">
+
+    <div class="favorite-avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=47"
+        alt="Daniel"
+      >
+
+    </div>
+
+    <strong>
+      Daniel
+    </strong>
+
+    <small>
+      Mobile
+    </small>
+
+  </div>
+
+
+  <div class="favorite">
+
+    <div class="favorite-avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=68"
+        alt="Alex"
+      >
+
+    </div>
+
+    <strong>
+      Alex
+    </strong>
+
+    <small>
+      Mobile
+    </small>
+
+  </div>
+
+</div>
+
+  </section>  <!-- RECENT -->  <section class="section"><div class="section-header">
+
+  <h3>
+    Recent calls
+  </h3>
+
+  <a href="#">
+    Clear
+  </a>
+
+</div>
+
+
+<div class="call-list">
+
+
+  <!-- DANIEL -->
+
+  <div class="call-item">
+
+    <div class="avatar online">
+
+      <img
+        src="https://i.pravatar.cc/150?img=47"
+        alt="Daniel K."
+      >
+
+    </div>
+
+    <div class="call-info">
+
+      <div class="call-name">
+
+        <strong>
+          Daniel K.
+        </strong>
+
+        <i class="fa-solid fa-circle-check verified"></i>
+
+      </div>
+
+      <div class="call-details outgoing">
+
+        <i class="fa-solid fa-arrow-up-right"></i>
+
+        <span>
+          Today, 10:42 AM
+        </span>
+
+        <span>
+          • 08:24
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      class="call-button"
+      onclick="startCall('voice','Daniel K.')"
+    >
+
+      <i class="fa-solid fa-phone"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ALICIA -->
+
+  <div class="call-item">
+
+    <div class="avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=32"
+        alt="Alicia M."
+      >
+
+    </div>
+
+    <div class="call-info">
+
+      <div class="call-name">
+
+        <strong>
+          Alicia M.
+        </strong>
+
+      </div>
+
+      <div class="call-details missed">
+
+        <i class="fa-solid fa-arrow-down-left"></i>
+
+        <span>
+          Today, 08:17 AM
+        </span>
+
+        <span>
+          • Missed
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      class="call-button video"
+      onclick="startCall('video','Alicia M.')"
+    >
+
+      <i class="fa-solid fa-video"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- MAYA -->
+
+  <div class="call-item">
+
+    <div class="avatar online">
+
+      <img
+        src="https://i.pravatar.cc/150?img=12"
+        alt="Maya"
+      >
+
+    </div>
+
+    <div class="call-info">
+
+      <div class="call-name">
+
+        <strong>
+          Maya
+        </strong>
+
+      </div>
+
+      <div class="call-details outgoing">
+
+        <i class="fa-solid fa-arrow-up-right"></i>
+
+        <span>
+          Yesterday, 7:35 PM
+        </span>
+
+        <span>
+          • 14:52
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      class="call-button"
+      onclick="startCall('voice','Maya')"
+    >
+
+      <i class="fa-solid fa-phone"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- ALEX -->
+
+  <div class="call-item">
+
+    <div class="avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=68"
+        alt="Alex"
+      >
+
+    </div>
+
+    <div class="call-info">
+
+      <div class="call-name">
+
+        <strong>
+          Alex
+        </strong>
+
+      </div>
+
+      <div class="call-details">
+
+        <i class="fa-solid fa-arrow-up-right"></i>
+
+        <span>
+          Yesterday, 2:10 PM
+        </span>
+
+        <span>
+          • 03:41
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      class="call-button video"
+      onclick="startCall('video','Alex')"
+    >
+
+      <i class="fa-solid fa-video"></i>
+
+    </button>
+
+  </div>
+
+
+  <!-- BUZZCHAT OFFICIAL -->
+
+  <div class="call-item">
+
+    <div class="avatar">
+
+      <img
+        src="https://i.pravatar.cc/150?img=11"
+        alt="BuzzChat Official"
+      >
+
+    </div>
+
+    <div class="call-info">
+
+      <div class="call-name">
+
+        <strong>
+          BuzzChat Official
+        </strong>
+
+        <i class="fa-solid fa-circle-check verified"></i>
+
+      </div>
+
+      <div class="call-details">
+
+        <i class="fa-solid fa-video"></i>
+
+        <span>
+          Monday, 4:25 PM
+        </span>
+
+        <span>
+          • Group call
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      class="call-button video"
+      onclick="startCall('video','BuzzChat Official')"
+    >
+
+      <i class="fa-solid fa-video"></i>
+
+    </button>
+
+  </div>
+
+</div>
+
+  </section></div><!-- BOTTOM NAV --><nav class="bottom-nav">  <a href="index.html" class="nav-item"><i class="fa-solid fa-comments"></i>
+
+<span>
+  Chats
+</span>
+
+  </a>  <a href="updates.html" class="nav-item"><i class="fa-regular fa-circle-play"></i>
+
+<span>
+  Updates
+</span>
+
+  </a>  <a href="groups.html" class="nav-item"><i class="fa-solid fa-users"></i>
+
+<span>
+  Groups
+</span>
+
+  </a>  <a href="channels.html" class="nav-item"><i class="fa-solid fa-bullhorn"></i>
+
+<span>
+  Channels
+</span>
+
+  </a>  <a href="ik.html" class="nav-item"><div class="ik-nav">
+  ik
+</div>
+
+<span>
+  ik
+</span>
+
+  </a></nav><script>
+
+  function toggleSearch() {
+
+    const box =
+      document.getElementById("searchBox");
+
+    box.classList.toggle("show");
+
+    if (box.classList.contains("show")) {
+
+      document
+        .getElementById("searchInput")
+        .focus();
+
+    }
+
+  }
+
+
+  function startCall(type, person = "a contact") {
+
+    const callType =
+      type === "video"
+        ? "video"
+        : "voice";
+
+    alert(
+      "Starting " +
+      callType +
+      " call with " +
+      person +
+      ".\n\nCalling functionality will be connected later."
+    );
+
+  }
+
+</script></body>
+</html>

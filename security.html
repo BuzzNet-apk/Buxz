@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Security • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(circle at top right,
+                    rgba(124,58,237,.16),
+                    transparent 35%),
+                radial-gradient(circle at bottom left,
+                    rgba(212,175,55,.08),
+                    transparent 35%),
+                #07070a;
+
+            color: #f8f7ff;
+
+            font-family: Inter, sans-serif;
+        }
+
+
+        .security-page {
+            width: 100%;
+            max-width: 700px;
+            min-height: 100vh;
+            margin: auto;
+            padding-bottom: 45px;
+        }
+
+
+        /* TOP BAR */
+
+        .security-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 16px 18px;
+
+            background: rgba(7,7,10,.88);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .info-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .title {
+            flex: 1;
+        }
+
+
+        .title h1 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .title span {
+            color: #92919d;
+
+            font-size: 12px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 30px 18px 22px;
+        }
+
+
+        .security-logo {
+            width: 68px;
+            height: 68px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 18px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,.20),
+                    rgba(212,175,55,.11)
+                );
+
+            border: 1px solid rgba(212,175,55,.22);
+
+            color: #f1d77a;
+
+            font-size: 27px;
+
+            box-shadow:
+                0 15px 45px rgba(124,58,237,.13);
+        }
+
+
+        .hero h2 {
+            margin: 0 0 9px;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .hero p {
+            margin: 0;
+
+            color: #92919d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* SECURITY STATUS */
+
+        .security-status {
+            margin: 0 18px 27px;
+
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(53,208,127,.08),
+                    rgba(17,17,22,.94)
+                );
+
+            border: 1px solid rgba(53,208,127,.17);
+        }
+
+
+        .status-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 10px;
+        }
+
+
+        .status-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+
+        .status-label i {
+            color: #55dd93;
+        }
+
+
+        .protected {
+            color: #55dd93;
+
+            font-size: 11px;
+
+            font-weight: 800;
+        }
+
+
+        .status-text {
+            color: #92919d;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            padding: 0 18px 10px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .security-list {
+            padding: 0 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* SECURITY ITEM */
+
+        .security-item {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 9px;
+
+            border-radius: 17px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .security-item:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .item-icon {
+            width: 43px;
+            height: 43px;
+
+            min-width: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+
+            font-size: 16px;
+        }
+
+
+        .security-item:nth-child(2) .item-icon,
+        .security-item:nth-child(5) .item-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .security-item:nth-child(3) .item-icon {
+            background: rgba(53,208,127,.09);
+
+            color: #55dd93;
+        }
+
+
+        .item-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .item-name {
+            color: #f8f7ff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .item-description {
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 11px;
+
+            line-height: 1.45;
+        }
+
+
+        .item-value {
+            color: #a78bfa;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .chevron {
+            color: #55535e;
+
+            font-size: 10px;
+        }
+
+
+        /* TOGGLE */
+
+        .toggle {
+            position: relative;
+
+            width: 43px;
+            height: 24px;
+
+            border: none;
+
+            border-radius: 30px;
+
+            background: #292831;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            flex-shrink: 0;
+        }
+
+
+        .toggle::after {
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            top: 3px;
+            left: 3px;
+
+            border-radius: 50%;
+
+            background: #92919d;
+
+            transition: .25s;
+        }
+
+
+        .toggle.active {
+            background: #7c3aed;
+        }
+
+
+        .toggle.active::after {
+            left: 22px;
+
+            background: #fff;
+        }
+
+
+        /* DEVICES CARD */
+
+        .device-card {
+            margin: 0 18px 28px;
+
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .device-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .device-icon {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 14px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            background: rgba(124,58,237,.12);
+
+            color: #a78bfa;
+        }
+
+
+        .device-header strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .device-header span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        .device-row {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 12px 0;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+
+        .device-row i {
+            width: 30px;
+
+            color: #92919d;
+
+            text-align: center;
+        }
+
+
+        .device-info {
+            flex: 1;
+        }
+
+
+        .device-info strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .device-info span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        .current-device {
+            color: #55dd93;
+
+            font-size: 10px;
+
+            font-weight: 700;
+        }
+
+
+        /* WARNING */
+
+        .warning {
+            margin: 0 18px 28px;
+
+            padding: 15px;
+
+            display: flex;
+
+            gap: 11px;
+
+            border-radius: 16px;
+
+            background: rgba(212,175,55,.07);
+
+            border: 1px solid rgba(212,175,55,.14);
+        }
+
+
+        .warning i {
+            color: #f1d77a;
+
+            margin-top: 2px;
+        }
+
+
+        .warning p {
+            margin: 0;
+
+            color: #aaa7b3;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            padding: 10px 25px 25px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="security-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="security-topbar">
+
+        <a href="settings.html"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="title">
+
+            <h1>Security</h1>
+
+            <span>Protect your BuzzChat account</span>
+
+        </div>
+
+
+        <button class="info-btn"
+                onclick="securityInfo()">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="security-logo">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+        </div>
+
+
+        <h2>Keep your account secure</h2>
+
+
+        <p>
+            Manage your login protection, connected devices,
+            verification settings and account security activity.
+        </p>
+
+    </section>
+
+
+
+    <!-- STATUS -->
+
+    <div class="security-status">
+
+        <div class="status-top">
+
+            <div class="status-label">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                Security status
+
+            </div>
+
+
+            <div class="protected">
+                PROTECTED
+            </div>
+
+        </div>
+
+
+        <div class="status-text">
+
+            No unusual security activity has been detected
+            on this account.
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ACCOUNT SECURITY -->
+
+    <div class="section-title">
+        ACCOUNT SECURITY
+    </div>
+
+
+    <div class="security-list">
+
+
+        <!-- TWO STEP -->
+
+        <div class="security-item"
+             onclick="securityAction('Two-step verification')">
+
+            <div class="item-icon">
+
+                <i class="fa-solid fa-key"></i>
+
+            </div>
+
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Two-step verification
+                </div>
+
+                <div class="item-description">
+                    Add another layer of protection to your account.
+                </div>
+
+            </div>
+
+
+            <div class="item-value">
+                Off
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <!-- LOGIN ALERTS -->
+
+        <div class="security-item"
+             onclick="toggleSecurity(this)">
+
+            <div class="item-icon">
+
+                <i class="fa-solid fa-bell"></i>
+
+            </div>
+
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Login alerts
+                </div>
+
+                <div class="item-description">
+                    Get notified when your account is accessed.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    aria-label="Login alerts">
+
+            </button>
+
+        </div>
+
+
+
+        <!-- APP LOCK -->
+
+        <div class="security-item"
+             onclick="toggleSecurity(this)">
+
+            <div class="item-icon">
+
+                <i class="fa-solid fa-lock"></i>
+
+            </div>
+
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    App lock
+                </div>
+
+                <div class="item-description">
+                    Require device security before opening BuzzChat.
+                </div>
+
+            </div>
+
+
+            <button class="toggle"
+                    aria-label="App lock">
+
+            </button>
+
+        </div>
+
+
+
+        <!-- PASSWORD -->
+
+        <div class="security-item"
+             onclick="securityAction('Change password')">
+
+            <div class="item-icon">
+
+                <i class="fa-solid fa-lock-open"></i>
+
+            </div>
+
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Change password
+                </div>
+
+                <div class="item-description">
+                    Update your BuzzChat account password.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- DEVICES -->
+
+    <div class="section-title">
+        CONNECTED DEVICES
+    </div>
+
+
+    <div class="device-card">
+
+
+        <div class="device-header">
+
+            <div class="device-icon">
+
+                <i class="fa-solid fa-mobile-screen-button"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Linked devices
+                </strong>
+
+                <span>
+                    Devices currently connected to your account
+                </span>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CURRENT DEVICE -->
+
+        <div class="device-row">
+
+            <i class="fa-solid fa-mobile-screen"></i>
+
+
+            <div class="device-info">
+
+                <strong>
+                    Android phone
+                </strong>
+
+                <span>
+                    Active now • BuzzChat mobile
+                </span>
+
+            </div>
+
+
+            <span class="current-device">
+                CURRENT
+            </span>
+
+        </div>
+
+
+
+        <!-- WEB -->
+
+        <div class="device-row">
+
+            <i class="fa-solid fa-desktop"></i>
+
+
+            <div class="device-info">
+
+                <strong>
+                    Web browser
+                </strong>
+
+                <span>
+                    No active session
+                </span>
+
+            </div>
+
+
+            <span class="item-value">
+                —
+            </span>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ACTIVITY -->
+
+    <div class="section-title">
+        SECURITY ACTIVITY
+    </div>
+
+
+    <div class="security-list">
+
+
+        <div class="security-item"
+             onclick="securityAction('Recent activity')">
+
+            <div class="item-icon">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+            </div>
+
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Recent security activity
+                </div>
+
+                <div class="item-description">
+                    Review recent account security events.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="security-item"
+             onclick="securityAction('Recovery')">
+
+            <div class="item-icon">
+
+                <i class="fa-solid fa-life-ring"></i>
+
+            </div>
+
+
+            <div class="item-info">
+
+                <div class="item-name">
+                    Account recovery
+                </div>
+
+                <div class="item-description">
+                    Manage your recovery information.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- WARNING -->
+
+    <div class="warning">
+
+        <i class="fa-solid fa-triangle-exclamation"></i>
+
+        <p>
+            Never share your password, verification codes or
+            recovery information with anyone. BuzzChat will
+            never ask you to send these details through a chat.
+        </p>
+
+    </div>
+
+
+
+    <div class="footer">
+
+        <div>
+            <i class="fa-solid fa-shield-halved"></i>
+            BuzzChat Security Center
+        </div>
+
+        Security controls shown here are ready for connection
+        to the full BuzzChat account system.
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    function toggleSecurity(element) {
+
+        const toggle =
+            element.querySelector(".toggle");
+
+        if (!toggle) return;
+
+        toggle.classList.toggle("active");
+
+    }
+
+
+    function securityAction(name) {
+
+        alert(
+            name +
+            "\n\nThis security feature will become fully functional when the BuzzChat account system is connected."
+        );
+
+    }
+
+
+    function securityInfo() {
+
+        alert(
+            "BuzzChat Security\n\n" +
+            "Use this area to manage account protection, " +
+            "login alerts, connected devices and recovery options."
+        );
+
+    }
+
+</script>
+
+
+</body>
+</html>

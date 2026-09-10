@@ -1,0 +1,257 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>BuzzChat</title>  <link rel="stylesheet" href="style.css">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head><body>  <div class="app-shell"><!-- TOP BAR -->
+<header class="topbar">
+
+  <div class="brand">
+    <div class="brand-mark">
+      <i class="fa-solid fa-bolt"></i>
+    </div>
+
+    <div>
+      <h1>BuzzChat</h1>
+      <span>Stay connected</span>
+    </div>
+  </div>
+
+  <div class="top-actions">
+    <button class="top-btn" id="searchBtn">
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </button>
+
+    <button class="top-btn">
+      <i class="fa-solid fa-ellipsis-vertical"></i>
+    </button>
+  </div>
+
+</header>
+
+
+<!-- SEARCH -->
+<div class="search-box" id="searchBox">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="text" placeholder="Search chats...">
+</div>
+
+
+<main>
+
+  <!-- PAGE TITLE -->
+  <section class="page-heading">
+
+    <div>
+      <p class="eyebrow">MESSAGES</p>
+      <h2>Chats</h2>
+    </div>
+
+    <button class="new-chat">
+      <i class="fa-solid fa-pen-to-square"></i>
+      <span>New</span>
+    </button>
+
+  </section>
+
+
+  <!-- CHAT FILTERS -->
+  <div class="chat-tabs">
+
+    <button class="chat-tab active">All</button>
+    <button class="chat-tab">Unread <span>3</span></button>
+    <button class="chat-tab">Groups</button>
+    <button class="chat-tab">Favorites</button>
+
+  </div>
+
+
+  <!-- CHAT LIST -->
+  <section class="chat-list">
+
+
+    <!-- CHAT 1 -->
+  <article class="chat-item" onclick="window.location.href='chat.html'">
+
+      <div class="avatar-wrap online">
+        <img src="https://i.pravatar.cc/150?img=47" alt="Daniel">
+      </div>
+
+      <div class="chat-details">
+
+        <div class="chat-top">
+          <h3>Daniel K.</h3>
+          <time>10:42</time>
+        </div>
+
+        <div class="chat-bottom">
+          <p>Hey, are we still meeting today?</p>
+          <span class="badge">2</span>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- CHAT 2 -->
+   <article class="chat-item" onclick="window.location.href='chat.html'">
+
+      <div class="avatar-wrap">
+        <img src="https://i.pravatar.cc/150?img=32" alt="Alicia">
+      </div>
+
+      <div class="chat-details">
+
+        <div class="chat-top">
+          <h3>Alicia M.</h3>
+          <time>09:18</time>
+        </div>
+
+        <div class="chat-bottom">
+          <p><i class="fa-solid fa-check-double delivered"></i> I'll send it shortly.</p>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- GROUP -->
+   <article class="chat-item" onclick="window.location.href='chat.html'">
+
+      <div class="group-avatar">
+        <div class="mini-avatar one"></div>
+        <div class="mini-avatar two"></div>
+        <div class="mini-avatar three"></div>
+      </div>
+
+      <div class="chat-details">
+
+        <div class="chat-top">
+          <h3>BuzzChat Creators</h3>
+          <time>Yesterday</time>
+        </div>
+
+        <div class="chat-bottom">
+          <p><strong>Brian:</strong> The new design looks amazing 🔥</p>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- IK -->
+  <article class="chat-item ik-chat" onclick="window.location.href='ik.html'">
+
+      <div class="ik-avatar">
+        <span>ik</span>
+      </div>
+
+      <div class="chat-details">
+
+        <div class="chat-top">
+          <h3>ik <span class="ai-tag">AI</span></h3>
+          <time>Yesterday</time>
+        </div>
+
+        <div class="chat-bottom">
+          <p>Your intelligent BuzzChat assistant</p>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- CHAT 3 -->
+    <article class="chat-item" onclick="window.location.href='chat.html'">
+
+      <div class="avatar-wrap">
+        <img src="https://i.pravatar.cc/150?img=12" alt="Maya">
+      </div>
+
+      <div class="chat-details">
+
+        <div class="chat-top">
+          <h3>Maya</h3>
+          <time>Monday</time>
+        </div>
+
+        <div class="chat-bottom">
+          <p>😂😂 That was actually crazy!</p>
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <!-- CHANNEL -->
+  <article class="chat-item channel-item" onclick="window.location.href='chat.html'">
+
+      <div class="channel-avatar">
+        <i class="fa-solid fa-tower-broadcast"></i>
+      </div>
+
+      <div class="chat-details">
+
+        <div class="chat-top">
+          <h3>BuzzChat Official <i class="fa-solid fa-circle-check verified"></i></h3>
+          <time>Sunday</time>
+        </div>
+
+        <div class="chat-bottom">
+          <p>Welcome to the future of messaging.</p>
+        </div>
+
+      </div>
+
+    </article>
+
+  </section>
+
+</main>
+
+<!-- FLOATING BUTTON -->
+<a href="contacts.html" class="fab" id="newChatBtn">
+  <i class="fa-solid fa-plus"></i>
+</a>
+
+<!-- BOTTOM NAVIGATION -->
+<nav class="bottom-nav">
+
+  <!-- Chats -->
+  <a href="index.html" class="nav-link active">
+    <i class="fa-solid fa-message"></i>
+    <span>Chats</span>
+  </a>
+
+  <!-- Updates -->
+  <a href="updates.html" class="nav-link">
+    <i class="fa-solid fa-circle-play"></i>
+    <span>Updates</span>
+  </a>
+
+  <!-- Groups -->
+  <a href="groups.html" class="nav-link">
+    <i class="fa-solid fa-users"></i>
+    <span>Groups</span>
+  </a>
+
+  <!-- Channels -->
+  <a href="channels.html" class="nav-link">
+    <i class="fa-solid fa-tower-broadcast"></i>
+    <span>Channels</span>
+  </a>
+
+  <!-- ik -->
+  <a href="ik.html" class="nav-link ik-link">
+    <span class="ik-nav-icon">ik</span>
+    <span>ik</span>
+  </a>
+
+</nav>
+
+  </div>  <script src="script.js"></script></body>
+</html>

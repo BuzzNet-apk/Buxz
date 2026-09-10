@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Updates • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top right, rgba(124,58,237,.16), transparent 35%),
+        radial-gradient(circle at bottom left, rgba(212,175,55,.06), transparent 30%),
+        #07070a;
+      color: #f8f7ff;
+      font-family: Inter, sans-serif;
+    }
+
+    button,
+    input {
+      font-family: inherit;
+    }
+
+    .updates-page {
+      min-height: 100vh;
+      max-width: 700px;
+      margin: auto;
+      padding-bottom: 100px;
+    }
+
+    /* TOP BAR */
+
+    .updates-topbar {
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      background: rgba(7,7,10,.92);
+      backdrop-filter: blur(18px);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .updates-title {
+      font-size: 23px;
+      font-weight: 800;
+      letter-spacing: -.5px;
+    }
+
+    .updates-title span {
+      color: #d4af37;
+    }
+
+    .updates-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .top-action {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+      background: #111116;
+      color: #f8f7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .top-action:active,
+    .add-status:active,
+    .status-item:active,
+    .nav-link:active {
+      transform: scale(.96);
+    }
+
+    /* CONTENT */
+
+    .updates-content {
+      max-width: 600px;
+      margin: auto;
+      padding: 24px 16px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      color: #92919d;
+      margin: 12px 4px 15px;
+      text-transform: uppercase;
+    }
+
+    /* MY STATUS */
+
+    .my-status {
+      background: linear-gradient(
+        135deg,
+        rgba(124,58,237,.14),
+        rgba(212,175,55,.08)
+      );
+      border: 1px solid rgba(212,175,55,.16);
+      border-radius: 20px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .my-status::before {
+      content: "";
+      position: absolute;
+      width: 140px;
+      height: 140px;
+      background: rgba(124,58,237,.12);
+      filter: blur(45px);
+      right: -40px;
+      top: -50px;
+    }
+
+    .status-avatar-wrap {
+      width: 62px;
+      height: 62px;
+      min-width: 62px;
+      border-radius: 50%;
+      padding: 3px;
+      background: linear-gradient(135deg, #d4af37, #7c3aed);
+      position: relative;
+      z-index: 2;
+    }
+
+    .status-avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #111116;
+      display: block;
+    }
+
+    .my-status-info {
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+
+    .my-status-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .my-status-sub {
+      color: #92919d;
+      font-size: 12px;
+    }
+
+    .add-status {
+      width: 43px;
+      height: 43px;
+      border-radius: 50%;
+      border: 1px solid rgba(212,175,55,.3);
+      background: rgba(212,175,55,.1);
+      color: #f1d77a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    /* STATUS LIST */
+
+    .status-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .status-item {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #f8f7ff;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 10px;
+      border-radius: 17px;
+      text-align: left;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .status-item:hover {
+      background: rgba(255,255,255,.035);
+    }
+
+    .status-ring {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+      border-radius: 50%;
+      padding: 3px;
+      background: conic-gradient(
+        #7c3aed,
+        #d4af37,
+        #a78bfa,
+        #7c3aed
+      );
+    }
+
+    .status-ring img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #07070a;
+      display: block;
+    }
+
+    .status-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .status-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .status-time {
+      font-size: 12px;
+      color: #92919d;
+    }
+
+    .status-arrow {
+      color: #666572;
+      font-size: 13px;
+    }
+
+    .viewed .status-ring {
+      background: #34333d;
+    }
+
+    .viewed {
+      opacity: .72;
+    }
+
+    /* STATUS PREVIEW */
+
+    .preview-section {
+      margin-top: 30px;
+    }
+
+    .preview-card {
+      height: 190px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.6),
+          rgba(20,15,35,.95)
+        );
+      cursor: pointer;
+    }
+
+    .preview-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .preview-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,.92),
+        rgba(0,0,0,.1),
+        rgba(0,0,0,.05)
+      );
+    }
+
+    .preview-content {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 17px;
+      z-index: 2;
+    }
+
+    .preview-content h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .preview-content p {
+      margin: 0;
+      color: rgba(255,255,255,.75);
+      font-size: 11px;
+    }
+
+    /* CHANNEL UPDATE */
+
+    .channel-update {
+      margin-top: 24px;
+      padding: 17px;
+      border-radius: 20px;
+      background: #111116;
+      border: 1px solid rgba(255,255,255,.07);
+    }
+
+    .channel-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 13px;
+    }
+
+    .channel-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #7c3aed, #4c1d95);
+      color: white;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .channel-info {
+      flex: 1;
+    }
+
+    .channel-name {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .channel-meta {
+      color: #777581;
+      font-size: 10px;
+    }
+
+    .channel-post {
+      color: #aaa7b2;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    /* BOTTOM NAVIGATION */
+
+    .bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 700px;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+      background: rgba(10,10,15,.96);
+      backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(255,255,255,.07);
+      z-index: 50;
+    }
+
+    .nav-link {
+      flex: 1;
+      color: #777581;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 9px;
+      font-weight: 600;
+      min-height: 52px;
+      transition: .2s;
+    }
+
+    .nav-link i {
+      font-size: 17px;
+    }
+
+    .nav-link.active {
+      color: #d4af37;
+    }
+
+    .ik-nav-icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #7c3aed, #4c1d95);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* MODAL */
+
+    .status-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: rgba(0,0,0,.82);
+      backdrop-filter: blur(10px);
+    }
+
+    .status-modal.show {
+      display: flex;
+    }
+
+    .modal-card {
+      width: 100%;
+      max-width: 390px;
+      padding: 22px;
+      border-radius: 24px;
+      background: #111116;
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: 0 25px 70px rgba(0,0,0,.5);
+    }
+
+    .modal-card h2 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .modal-card p {
+      color: #92919d;
+      font-size: 12px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .status-input {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: #08080c;
+      color: white;
+      outline: none;
+      margin-bottom: 12px;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      border: 0;
+      border-radius: 13px;
+      padding: 13px;
+      color: white;
+      cursor: pointer;
+      background: #24242d;
+      font-weight: 700;
+    }
+
+    .modal-btn.primary {
+      background: #7c3aed;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="updates-page">
+
+  <header class="updates-topbar">
+
+    <div class="updates-title">
+      Up<span>dates</span>
+    </div>
+
+    <div class="updates-actions">
+
+      <button class="top-action" id="searchUpdatesBtn" aria-label="Search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+      <button class="top-action" id="moreUpdatesBtn" aria-label="More">
+        <i class="fa-solid fa-ellipsis-vertical"></i>
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <main class="updates-content">
+
+    <div class="section-label">My Status</div>
+
+    <div class="my-status">
+
+      <div class="status-avatar-wrap">
+        <img src="https://i.pravatar.cc/150?img=47" alt="My profile">
+      </div>
+
+      <div class="my-status-info">
+        <div class="my-status-name">My Status</div>
+        <div class="my-status-sub" id="myStatusText">
+          Tap the + button to share an update
+        </div>
+      </div>
+
+      <button class="add-status" id="addStatusBtn" aria-label="Add status">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+    </div>
+
+
+    <div class="section-label">Recent Updates</div>
+
+    <div class="status-list">
+
+      <button class="status-item" data-name="Sophia" data-status="Enjoying a beautiful day ✨">
+
+        <div class="status-ring">
+          <img src="https://i.pravatar.cc/150?img=32" alt="Sophia">
+        </div>
+
+        <div class="status-info">
+          <div class="status-name">Sophia</div>
+          <div class="status-time">10 minutes ago</div>
+        </div>
+
+        <i class="fa-solid fa-chevron-right status-arrow"></i>
+
+      </button>
+
+
+      <button class="status-item" data-name="Michael" data-status="Working on something exciting 🚀">
+
+        <div class="status-ring">
+          <img src="https://i.pravatar.cc/150?img=12" alt="Michael">
+        </div>
+
+        <div class="status-info">
+          <div class="status-name">Michael</div>
+          <div class="status-time">28 minutes ago</div>
+        </div>
+
+        <i class="fa-solid fa-chevron-right status-arrow"></i>
+
+      </button>
+
+
+      <button class="status-item" data-name="Aisha" data-status="Good vibes only 💜">
+
+        <div class="status-ring">
+          <img src="https://i.pravatar.cc/150?img=47" alt="Aisha">
+        </div>
+
+        <div class="status-info">
+          <div class="status-name">Aisha</div>
+          <div class="status-time">45 minutes ago</div>
+        </div>
+
+        <i class="fa-solid fa-chevron-right status-arrow"></i>
+
+      </button>
+
+
+      <button class="status-item viewed" data-name="James" data-status="Status already viewed.">
+
+        <div class="status-ring">
+          <img src="https://i.pravatar.cc/150?img=15" alt="James">
+        </div>
+
+        <div class="status-info">
+          <div class="status-name">James</div>
+          <div class="status-time">1 hour ago</div>
+        </div>
+
+        <i class="fa-solid fa-chevron-right status-arrow"></i>
+
+      </button>
+
+    </div>
+
+
+    <section class="preview-section">
+
+      <div class="section-label">Featured Update</div>
+
+      <div class="preview-card" id="featuredUpdate">
+
+        <div class="preview-overlay"></div>
+
+        <div class="preview-content">
+          <h3>The Buzz is Growing.</h3>
+          <p>Connect, share and discover more with BuzzChat.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="channel-update">
+
+      <div class="channel-header">
+
+        <div class="channel-icon">B</div>
+
+        <div class="channel-info">
+          <div class="channel-name">BuzzChat Official</div>
+          <div class="channel-meta">Channel update • Today</div>
+        </div>
+
+        <i class="fa-solid fa-circle-check" style="color:#d4af37;"></i>
+
+      </div>
+
+      <div class="channel-post">
+        Welcome to the new BuzzChat Updates experience. Follow
+        the latest announcements, discover new communities and
+        share moments with the people who matter.
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <nav class="bottom-nav">
+
+    <a href="index.html" class="nav-link">
+      <i class="fa-solid fa-message"></i>
+      <span>Chats</span>
+    </a>
+
+    <a href="updates.html" class="nav-link active">
+      <i class="fa-solid fa-circle-play"></i>
+      <span>Updates</span>
+    </a>
+
+    <a href="groups.html" class="nav-link">
+      <i class="fa-solid fa-users"></i>
+      <span>Groups</span>
+    </a>
+
+    <a href="channels.html" class="nav-link">
+      <i class="fa-solid fa-tower-broadcast"></i>
+      <span>Channels</span>
+    </a>
+
+    <a href="ik.html" class="nav-link">
+      <span class="ik-nav-icon">ik</span>
+      <span>ik</span>
+    </a>
+
+  </nav>
+
+</div>
+
+
+<div class="status-modal" id="statusModal">
+
+  <div class="modal-card">
+
+    <h2>Add an update</h2>
+
+    <p>Share a short update with your BuzzChat contacts.</p>
+
+    <input
+      type="text"
+      id="statusInput"
+      class="status-input"
+      placeholder="What's happening?"
+    >
+
+    <div class="modal-actions">
+
+      <button class="modal-btn" id="cancelStatusBtn">
+        Cancel
+      </button>
+
+      <button class="modal-btn primary" id="postStatusBtn">
+        Post Update
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+  const statusModal = document.getElementById("statusModal");
+  const addStatusBtn = document.getElementById("addStatusBtn");
+  const cancelStatusBtn = document.getElementById("cancelStatusBtn");
+  const postStatusBtn = document.getElementById("postStatusBtn");
+  const statusInput = document.getElementById("statusInput");
+  const myStatusText = document.getElementById("myStatusText");
+
+
+  addStatusBtn.addEventListener("click", function () {
+    statusModal.classList.add("show");
+    statusInput.focus();
+  });
+
+
+  cancelStatusBtn.addEventListener("click", function () {
+    statusModal.classList.remove("show");
+    statusInput.value = "";
+  });
+
+
+  postStatusBtn.addEventListener("click", function () {
+
+    const text = statusInput.value.trim();
+
+    if (!text) {
+      alert("Please write an update first.");
+      return;
+    }
+
+    myStatusText.textContent = text;
+
+    localStorage.setItem("buzzchat_my_status", text);
+
+    statusInput.value = "";
+
+    statusModal.classList.remove("show");
+
+  });
+
+
+  const savedStatus = localStorage.getItem("buzzchat_my_status");
+
+  if (savedStatus) {
+    myStatusText.textContent = savedStatus;
+  }
+
+
+  document.querySelectorAll(".status-item").forEach(function (item) {
+
+    item.addEventListener("click", function () {
+
+      const name = item.dataset.name;
+      const status = item.dataset.status;
+
+      alert(name + "'s Update\n\n" + status);
+
+      item.classList.add("viewed");
+
+    });
+
+  });
+
+
+  document.getElementById("searchUpdatesBtn").addEventListener("click", function () {
+
+    const search = prompt("Search updates:");
+
+    if (!search) return;
+
+    const query = search.toLowerCase();
+
+    let found = false;
+
+    document.querySelectorAll(".status-item").forEach(function (item) {
+
+      const name = item.dataset.name.toLowerCase();
+
+      if (name.includes(query)) {
+        item.style.display = "flex";
+        found = true;
+      } else {
+        item.style.display = "none";
+      }
+
+    });
+
+    if (!found) {
+      alert("No matching updates found.");
+    }
+
+  });
+
+
+  document.getElementById("moreUpdatesBtn").addEventListener("click", function () {
+
+    alert(
+      "BuzzChat Updates\n\n" +
+      "Status privacy and update settings will be available here."
+    );
+
+  });
+
+
+  document.getElementById("featuredUpdate").addEventListener("click", function () {
+
+    alert(
+      "The Buzz is Growing.\n\n" +
+      "Welcome to the BuzzChat community."
+    );
+
+  });
+
+
+  statusModal.addEventListener("click", function (event) {
+
+    if (event.target === statusModal) {
+      statusModal.classList.remove("show");
+    }
+
+  });
+
+</script>
+
+</body>
+</html>

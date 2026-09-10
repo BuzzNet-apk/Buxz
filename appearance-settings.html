@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Appearance • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.16),
+                    transparent 36%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212,175,55,.07),
+                    transparent 36%
+                ),
+                #07070a;
+
+            color: #f8f7ff;
+
+            font-family: Inter, sans-serif;
+        }
+
+
+        .appearance-page {
+            width: 100%;
+            max-width: 700px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            padding-bottom: 45px;
+        }
+
+
+        /* TOPBAR */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 15px 18px;
+
+            background: rgba(7,7,10,.88);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .info-btn {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .page-title {
+            flex: 1;
+        }
+
+
+        .page-title h1 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .page-title span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 30px 18px 20px;
+        }
+
+
+        .hero-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 17px;
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,.20),
+                    rgba(212,175,55,.10)
+                );
+
+            border: 1px solid rgba(124,58,237,.23);
+
+            color: #a78bfa;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 15px 45px rgba(124,58,237,.10);
+        }
+
+
+        .hero h2 {
+            margin: 0 0 9px;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .hero p {
+            margin: 0;
+
+            color: #92919d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            padding: 0 18px 10px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        /* THEME CARD */
+
+        .theme-card {
+            margin: 0 18px 28px;
+
+            padding: 17px;
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.12),
+                    rgba(17,17,22,.96)
+                );
+
+            border: 1px solid rgba(124,58,237,.20);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.22);
+        }
+
+
+        .theme-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 16px;
+        }
+
+
+        .theme-icon {
+            width: 44px;
+            height: 44px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.14);
+
+            color: #c4b5fd;
+        }
+
+
+        .theme-header strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .theme-header span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        /* THEME OPTIONS */
+
+        .theme-options {
+            display: grid;
+
+            grid-template-columns: repeat(3,1fr);
+
+            gap: 9px;
+        }
+
+
+        .theme-option {
+            position: relative;
+
+            padding: 10px;
+
+            border-radius: 15px;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            background: #0d0d12;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .theme-option:hover {
+            transform: translateY(-2px);
+        }
+
+
+        .theme-option.selected {
+            border-color: rgba(212,175,55,.65);
+
+            box-shadow:
+                0 0 0 1px rgba(212,175,55,.12);
+        }
+
+
+        .theme-preview {
+            height: 55px;
+
+            margin-bottom: 9px;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        .dark-preview {
+            background:
+                linear-gradient(
+                    135deg,
+                    #08080b,
+                    #1b1728
+                );
+        }
+
+
+        .light-preview {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f4f3f8,
+                    #dcd9e8
+                );
+        }
+
+
+        .system-preview {
+            background:
+                linear-gradient(
+                    135deg,
+                    #09090c 50%,
+                    #e8e6ee 50%
+                );
+        }
+
+
+        .preview-line {
+            position: absolute;
+
+            height: 5px;
+
+            border-radius: 10px;
+
+            background: rgba(255,255,255,.18);
+
+            left: 8px;
+            right: 18px;
+        }
+
+
+        .preview-line.one {
+            top: 12px;
+        }
+
+
+        .preview-line.two {
+            top: 23px;
+
+            right: 35px;
+        }
+
+
+        .preview-line.three {
+            top: 34px;
+
+            right: 13px;
+        }
+
+
+        .light-preview .preview-line {
+            background: rgba(0,0,0,.15);
+        }
+
+
+        .theme-name {
+            font-size: 10px;
+
+            font-weight: 700;
+
+            text-align: center;
+        }
+
+
+        .check {
+            position: absolute;
+
+            right: 7px;
+            top: 7px;
+
+            width: 18px;
+            height: 18px;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #d4af37;
+
+            color: #07070a;
+
+            font-size: 8px;
+        }
+
+
+        .theme-option.selected .check {
+            display: flex;
+        }
+
+
+        /* SETTINGS */
+
+        .settings-list {
+            padding: 0 12px;
+
+            margin-bottom: 27px;
+        }
+
+
+        .setting {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 9px;
+
+            border-radius: 17px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .setting:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .setting-icon {
+            width: 43px;
+            height: 43px;
+
+            min-width: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+
+            font-size: 15px;
+        }
+
+
+        .setting:nth-child(2) .setting-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .setting:nth-child(3) .setting-icon {
+            background: rgba(53,208,127,.09);
+
+            color: #55dd93;
+        }
+
+
+        .setting:nth-child(4) .setting-icon {
+            background: rgba(255,255,255,.06);
+
+            color: #b7b4c1;
+        }
+
+
+        .setting-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .setting-name {
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .setting-description {
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            line-height: 1.45;
+        }
+
+
+        .setting-value {
+            color: #a78bfa;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .chevron {
+            color: #55535e;
+
+            font-size: 10px;
+        }
+
+
+        /* ACCENT COLORS */
+
+        .accent-card {
+            margin: 0 18px 28px;
+
+            padding: 17px;
+
+            border-radius: 19px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .accent-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .accent-title i {
+            color: #d4af37;
+        }
+
+
+        .accent-title strong {
+            font-size: 12px;
+        }
+
+
+        .accent-colors {
+            display: flex;
+
+            gap: 13px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .accent {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            border: 3px solid #111116;
+
+            outline: 1px solid rgba(255,255,255,.12);
+
+            cursor: pointer;
+
+            position: relative;
+        }
+
+
+        .accent.purple {
+            background: #7c3aed;
+        }
+
+
+        .accent.gold {
+            background: #d4af37;
+        }
+
+
+        .accent.blue {
+            background: #3b82f6;
+        }
+
+
+        .accent.green {
+            background: #22c55e;
+        }
+
+
+        .accent.red {
+            background: #ef4444;
+        }
+
+
+        .accent-pink {
+            background: #ec4899;
+        }
+
+
+        .accent.selected::after {
+            content: "\f00c";
+
+            font-family: "Font Awesome 6 Free";
+
+            font-weight: 900;
+
+            position: absolute;
+
+            inset: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #fff;
+
+            font-size: 11px;
+        }
+
+
+        /* CHAT APPEARANCE */
+
+        .chat-preview {
+            margin: 0 18px 28px;
+
+            padding: 17px;
+
+            border-radius: 20px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .chat-preview-title {
+            margin-bottom: 13px;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        .preview-chat {
+            min-height: 135px;
+
+            padding: 14px;
+
+            border-radius: 15px;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.13),
+                    transparent 45%
+                ),
+                #0b0b10;
+
+            border: 1px solid rgba(255,255,255,.05);
+        }
+
+
+        .bubble {
+            width: fit-content;
+
+            max-width: 75%;
+
+            padding: 9px 11px;
+
+            margin-bottom: 8px;
+
+            border-radius: 13px;
+
+            font-size: 9px;
+
+            line-height: 1.5;
+        }
+
+
+        .received {
+            background: #18181f;
+
+            color: #bbb8c5;
+
+            border-bottom-left-radius: 4px;
+        }
+
+
+        .sent {
+            margin-left: auto;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #6d28d9
+                );
+
+            color: #fff;
+
+            border-bottom-right-radius: 4px;
+        }
+
+
+        /* RESET */
+
+        .reset-btn {
+            width: calc(100% - 36px);
+
+            margin: 0 18px 25px;
+
+            padding: 13px;
+
+            border-radius: 13px;
+
+            border: 1px solid rgba(212,175,55,.20);
+
+            background: rgba(212,175,55,.06);
+
+            color: #f1d77a;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .footer {
+            padding: 8px 20px 30px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+
+        @media(max-width:430px) {
+
+            .theme-options {
+                grid-template-columns: 1fr;
+            }
+
+            .theme-preview {
+                height: 48px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="appearance-page">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+        <a href="settings.html"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="page-title">
+
+            <h1>Appearance</h1>
+
+            <span>Personalize your BuzzChat experience</span>
+
+        </div>
+
+
+        <button class="info-btn"
+                onclick="showInfo()">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-icon">
+
+            <i class="fa-solid fa-palette"></i>
+
+        </div>
+
+
+        <h2>Make it yours</h2>
+
+
+        <p>
+            Personalize the look and feel of BuzzChat
+            with themes, colors, text size and chat styles.
+        </p>
+
+    </section>
+
+
+
+    <!-- THEME -->
+
+    <div class="section-title">
+        APP THEME
+    </div>
+
+
+    <div class="theme-card">
+
+        <div class="theme-header">
+
+            <div class="theme-icon">
+
+                <i class="fa-solid fa-moon"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Choose your theme
+                </strong>
+
+                <span>
+                    Select the appearance you prefer.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="theme-options">
+
+
+            <div class="theme-option selected"
+                 onclick="selectTheme(this,'Dark')">
+
+                <div class="check">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+
+                <div class="theme-preview dark-preview">
+
+                    <span class="preview-line one"></span>
+                    <span class="preview-line two"></span>
+                    <span class="preview-line three"></span>
+
+                </div>
+
+
+                <div class="theme-name">
+                    Dark
+                </div>
+
+            </div>
+
+
+
+            <div class="theme-option"
+                 onclick="selectTheme(this,'Light')">
+
+                <div class="check">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+
+                <div class="theme-preview light-preview">
+
+                    <span class="preview-line one"></span>
+                    <span class="preview-line two"></span>
+                    <span class="preview-line three"></span>
+
+                </div>
+
+
+                <div class="theme-name">
+                    Light
+                </div>
+
+            </div>
+
+
+
+            <div class="theme-option"
+                 onclick="selectTheme(this,'System')">
+
+                <div class="check">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+
+                <div class="theme-preview system-preview">
+
+                    <span class="preview-line one"></span>
+                    <span class="preview-line two"></span>
+                    <span class="preview-line three"></span>
+
+                </div>
+
+
+                <div class="theme-name">
+                    System
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ACCENT -->
+
+    <div class="section-title">
+        ACCENT COLOR
+    </div>
+
+
+    <div class="accent-card">
+
+        <div class="accent-title">
+
+            <i class="fa-solid fa-droplet"></i>
+
+            <strong>
+                Choose your accent
+            </strong>
+
+        </div>
+
+
+        <div class="accent-colors">
+
+            <div class="accent purple selected"
+                 onclick="selectAccent(this,'Purple')"></div>
+
+            <div class="accent gold"
+                 onclick="selectAccent(this,'Gold')"></div>
+
+            <div class="accent blue"
+                 onclick="selectAccent(this,'Blue')"></div>
+
+            <div class="accent green"
+                 onclick="selectAccent(this,'Green')"></div>
+
+            <div class="accent red"
+                 onclick="selectAccent(this,'Red')"></div>
+
+            <div class="accent accent-pink"
+                 onclick="selectAccent(this,'Pink')"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INTERFACE -->
+
+    <div class="section-title">
+        INTERFACE
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="chooseTextSize()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-text-height"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Text size
+                </div>
+
+                <div class="setting-description">
+                    Adjust message and interface text size.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Standard
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="chooseChatStyle()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-comment-dots"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Chat style
+                </div>
+
+                <div class="setting-description">
+                    Customize the shape and appearance of message bubbles.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Modern
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="chooseAnimation()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Interface animations
+                </div>
+
+                <div class="setting-description">
+                    Add smooth transitions and visual effects.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                On
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="chooseNavigation()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+         

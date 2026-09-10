@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Voice Call • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="call-page">
+
+    <a href="chat.html" class="call-back">
+      <i class="fa-solid fa-chevron-down"></i>
+    </a>
+
+    <div class="call-content">
+
+      <div class="call-avatar">
+        <img src="https://i.pravatar.cc/300?img=47" alt="Daniel">
+      </div>
+
+      <p class="call-status">VOICE CALL</p>
+
+      <h1>Daniel K.</h1>
+
+      <p class="calling-text" id="callStatus">Calling...</p>
+
+    </div>
+
+    <div class="call-controls">
+
+      <button class="call-control" id="muteBtn">
+        <i class="fa-solid fa-microphone"></i>
+        <span>Mute</span>
+      </button>
+
+      <button class="call-control" id="speakerBtn">
+        <i class="fa-solid fa-volume-high"></i>
+        <span>Speaker</span>
+      </button>
+
+      <button class="end-call" id="endCallBtn">
+        <i class="fa-solid fa-phone-slash"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Privacy • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.16),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212,175,55,.08),
+                    transparent 35%
+                ),
+                #07070a;
+            color: #f8f7ff;
+            font-family: Inter, sans-serif;
+        }
+
+
+        .privacy-page {
+            width: 100%;
+            max-width: 700px;
+            min-height: 100vh;
+            margin: auto;
+            padding-bottom: 40px;
+        }
+
+
+        /* TOP BAR */
+
+        .privacy-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 16px 18px;
+
+            background: rgba(7,7,10,.88);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .top-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .page-title {
+            flex: 1;
+        }
+
+
+        .page-title h1 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .page-title span {
+            color: #92919d;
+
+            font-size: 12px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 30px 18px 25px;
+        }
+
+
+        .security-icon {
+            width: 62px;
+            height: 62px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            margin-bottom: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,.20),
+                    rgba(212,175,55,.10)
+                );
+
+            border: 1px solid rgba(124,58,237,.25);
+
+            color: #d4af37;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 12px 40px rgba(124,58,237,.12);
+        }
+
+
+        .hero h2 {
+            margin: 0 0 9px;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .hero p {
+            margin: 0;
+
+            max-width: 600px;
+
+            color: #92919d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* PRIVACY SCORE */
+
+        .privacy-card {
+            margin: 0 18px 25px;
+
+            padding: 18px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.12),
+                    rgba(17,17,22,.92)
+                );
+
+            border: 1px solid rgba(124,58,237,.20);
+        }
+
+
+        .privacy-card-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+        }
+
+
+        .privacy-card-title {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .privacy-card-title i {
+            color: #d4af37;
+        }
+
+
+        .privacy-score {
+            color: #f1d77a;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .progress {
+            width: 100%;
+
+            height: 7px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,.07);
+        }
+
+
+        .progress span {
+            display: block;
+
+            width: 82%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7c3aed,
+                    #d4af37
+                );
+        }
+
+
+        .privacy-card p {
+            margin: 11px 0 0;
+
+            color: #92919d;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            padding: 0 18px 10px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .settings-list {
+            padding: 0 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* SETTING */
+
+        .setting {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 9px;
+
+            border-radius: 17px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .setting:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .setting-icon {
+            width: 43px;
+            height: 43px;
+
+            min-width: 43px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+
+            font-size: 16px;
+        }
+
+
+        .setting:nth-child(2) .setting-icon,
+        .setting:nth-child(5) .setting-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .setting:nth-child(3) .setting-icon {
+            background: rgba(53,208,127,.10);
+
+            color: #55dd93;
+        }
+
+
+        .setting-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .setting-name {
+            color: #f8f7ff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .setting-description {
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 11px;
+
+            line-height: 1.4;
+        }
+
+
+        .setting-value {
+            color: #a78bfa;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            text-align: right;
+        }
+
+
+        .chevron {
+            color: #55535e;
+
+            font-size: 11px;
+
+            margin-left: 3px;
+        }
+
+
+        /* TOGGLE */
+
+        .toggle {
+            position: relative;
+
+            width: 43px;
+            height: 24px;
+
+            border: 0;
+
+            border-radius: 30px;
+
+            background: #292831;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+
+        .toggle::after {
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            left: 3px;
+            top: 3px;
+
+            border-radius: 50%;
+
+            background: #92919d;
+
+            transition: .25s;
+        }
+
+
+        .toggle.active {
+            background: #7c3aed;
+        }
+
+
+        .toggle.active::after {
+            left: 22px;
+
+            background: #fff;
+        }
+
+
+        /* DANGER */
+
+        .danger .setting-icon {
+            background: rgba(239,68,68,.09);
+
+            color: #f87171;
+        }
+
+
+        .danger .setting-name {
+            color: #f87171;
+        }
+
+
+        /* FOOTER */
+
+        .privacy-footer {
+            padding: 10px 25px 35px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .privacy-footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+
+        @media (max-width: 430px) {
+
+            .hero h2 {
+                font-size: 24px;
+            }
+
+            .setting {
+                padding: 13px 7px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="privacy-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="privacy-topbar">
+
+        <a href="settings.html"
+           class="back-btn"
+           aria-label="Back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="page-title">
+
+            <h1>Privacy</h1>
+
+            <span>Your privacy, your control</span>
+
+        </div>
+
+
+        <button class="top-btn"
+                onclick="showPrivacyInfo()"
+                aria-label="Privacy information">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="security-icon">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+        </div>
+
+
+        <h2>Your privacy matters</h2>
+
+
+        <p>
+            Control who can contact you, what people can see,
+            and how your information is protected on BuzzChat.
+        </p>
+
+    </section>
+
+
+
+    <!-- PRIVACY SCORE -->
+
+    <div class="privacy-card">
+
+        <div class="privacy-card-top">
+
+            <div class="privacy-card-title">
+
+                <i class="fa-solid fa-shield-check"></i>
+
+                Privacy protection
+
+            </div>
+
+
+            <div class="privacy-score">
+                Strong
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <span></span>
+
+        </div>
+
+
+        <p>
+            Your current privacy settings provide strong
+            protection. You can customize them below.
+        </p>
+
+    </div>
+
+
+
+    <!-- VISIBILITY -->
+
+    <div class="section-title">
+        VISIBILITY
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="selectOption('Last seen & online')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-circle-dot"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Last seen & online
+                </div>
+
+                <div class="setting-description">
+                    Choose who can see when you're online.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Everyone
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="selectOption('Profile photo')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-image"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Profile photo
+                </div>
+
+                <div class="setting-description">
+                    Control who can view your profile picture.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Everyone
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="selectOption('About')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    About
+                </div>
+
+                <div class="setting-description">
+                    Control who can see your profile information.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Contacts
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CONTACT & COMMUNICATION -->
+
+    <div class="section-title">
+        CONTACT & COMMUNICATION
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="selectOption('Groups')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Groups
+                </div>
+
+                <div class="setting-description">
+                    Decide who can add you to groups.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                My contacts
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="selectOption('Calls')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-phone"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Calls
+                </div>
+
+                <div class="setting-description">
+                    Manage who can call you on BuzzChat.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Everyone
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="selectOption('Channels')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-bullhorn"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Channels
+                </div>
+
+                <div class="setting-description">
+                    Manage channel recommendations and invitations.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Contacts
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- MESSAGING -->
+
+    <div class="section-title">
+        MESSAGING
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="toggleSetting(this)">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-check-double"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Read receipts
+                </div>
+
+                <div class="setting-description">
+                    Let contacts know when you've read their messages.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    aria-label="Read receipts">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="toggleSetting(this)">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-eye-slash"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Message previews
+                </div>
+
+                <div class="setting-description">
+                    Show message content in notifications.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    aria-label="Message previews">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="toggleSetting(this)">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Block unknown contacts
+                </div>
+
+                <div class="setting-description">
+                    Automatically restrict messages from unknown users.
+                </div>
+
+            </div>
+
+
+            <button class="toggle"
+                    aria-label="Block unknown contacts">
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- SECURITY -->
+
+    <div class="section-title">
+        SECURITY
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="selectOption('App lock')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-lock"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    App lock
+                </div>
+
+                <div class="setting-description">
+                    Protect BuzzChat with your device security.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Off
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="selectOption('Blocked contacts')">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-ban"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Blocked contacts
+                </div>
+
+                <div class="setting-description">
+                    View and manage people you've blocked.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                0
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting danger"
+             onclick="manageBlocked()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-user-slash"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Report & block
+                </div>
+
+                <div class="setting-description">
+                    Report suspicious or unwanted accounts.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="privacy-footer">
+
+        <div>
+            <i class="fa-solid fa-shield-halved"></i>
+            BuzzChat privacy controls
+        </div>
+
+        Your privacy settings are stored securely
+        when full account functionality is connected.
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    function toggleSetting(element) {
+
+        const toggle =
+            element.querySelector(".toggle");
+
+        if (!toggle) return;
+
+        toggle.classList.toggle("active");
+
+    }
+
+
+    function selectOption(name) {
+
+        alert(
+            name +
+            "\n\nThis privacy option will become fully configurable when BuzzChat account functionality is connected."
+        );
+
+    }
+
+
+    function manageBlocked() {
+
+        alert(
+            "Report & Block\n\nYou can manage unwanted contacts here when the full account system is connected."
+        );
+
+    }
+
+
+    function showPrivacyInfo() {
+
+        alert(
+            "Privacy Center\n\n" +
+            "BuzzChat gives you control over your visibility, " +
+            "messages, calls, groups and account security."
+        );
+
+    }
+
+</script>
+
+
+</body>
+</html>

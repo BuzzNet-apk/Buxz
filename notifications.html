@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notifications • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.16),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212,175,55,.08),
+                    transparent 35%
+                ),
+                #07070a;
+
+            color: #f8f7ff;
+            font-family: Inter, sans-serif;
+        }
+
+        .notifications-page {
+            width: 100%;
+            max-width: 700px;
+            min-height: 100vh;
+            margin: auto;
+            padding-bottom: 90px;
+        }
+
+
+        /* TOP BAR */
+
+        .notification-topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 16px 18px;
+
+            background: rgba(7,7,10,.88);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .top-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            color: #fff;
+
+            cursor: pointer;
+
+            text-decoration: none;
+        }
+
+
+        .notification-title {
+            flex: 1;
+        }
+
+        .notification-title h1 {
+            margin: 0;
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .notification-title span {
+            color: #92919d;
+            font-size: 12px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 28px 18px 22px;
+        }
+
+        .hero-label {
+            color: #d4af37;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+
+            margin-bottom: 8px;
+        }
+
+        .hero h2 {
+            margin: 0 0 8px;
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+        .hero p {
+            margin: 0;
+
+            color: #92919d;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* FILTERS */
+
+        .filters {
+            display: flex;
+
+            gap: 8px;
+
+            overflow-x: auto;
+
+            padding: 0 18px 20px;
+
+            scrollbar-width: none;
+        }
+
+        .filters::-webkit-scrollbar {
+            display: none;
+        }
+
+
+        .filter {
+            flex: 0 0 auto;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #92919d;
+
+            padding: 9px 14px;
+
+            border-radius: 30px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .filter.active {
+            background: rgba(124,58,237,.16);
+
+            color: #c4b5fd;
+
+            border-color: rgba(124,58,237,.45);
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding: 4px 18px 12px;
+        }
+
+        .section-title h3 {
+            margin: 0;
+
+            font-size: 13px;
+
+            letter-spacing: .6px;
+
+            font-weight: 800;
+        }
+
+        .section-title button {
+            border: 0;
+
+            background: transparent;
+
+            color: #a78bfa;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            cursor: pointer;
+        }
+
+
+        /* NOTIFICATION LIST */
+
+        .notification-list {
+            padding: 0 12px;
+        }
+
+
+        .notification {
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 13px 8px;
+
+            border-radius: 18px;
+
+            margin-bottom: 3px;
+
+            transition: .2s;
+
+            cursor: pointer;
+        }
+
+
+        .notification:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .notification.unread {
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(124,58,237,.09),
+                    rgba(124,58,237,.02)
+                );
+        }
+
+
+        /* AVATAR */
+
+        .avatar-wrap {
+            position: relative;
+
+            width: 52px;
+            height: 52px;
+
+            min-width: 52px;
+        }
+
+
+        .avatar {
+            width: 52px;
+            height: 52px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+
+            border: 2px solid rgba(212,175,55,.25);
+        }
+
+
+        .notification-icon {
+            position: absolute;
+
+            right: -3px;
+
+            bottom: -2px;
+
+            width: 22px;
+            height: 22px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border: 3px solid #07070a;
+
+            font-size: 9px;
+        }
+
+
+        .message-icon {
+            background: #7c3aed;
+            color: #fff;
+        }
+
+        .reaction-icon {
+            background: #d4af37;
+            color: #07070a;
+        }
+
+        .call-icon {
+            background: #35d07f;
+            color: #07070a;
+        }
+
+        .group-icon {
+            background: #a78bfa;
+            color: #07070a;
+        }
+
+        .channel-icon {
+            background: #f1d77a;
+            color: #07070a;
+        }
+
+
+        /* CONTENT */
+
+        .notification-content {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .notification-text {
+            color: #dddbe5;
+
+            font-size: 13px;
+
+            line-height: 1.45;
+        }
+
+
+        .notification-text strong {
+            color: #fff;
+
+            font-weight: 700;
+        }
+
+
+        .notification-time {
+            margin-top: 5px;
+
+            color: #777581;
+
+            font-size: 11px;
+        }
+
+
+        .notification-action {
+            padding: 7px 11px;
+
+            border-radius: 9px;
+
+            border: 1px solid rgba(124,58,237,.35);
+
+            background: rgba(124,58,237,.11);
+
+            color: #b28cff;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .notification-action.gold {
+            border-color: rgba(212,175,55,.35);
+
+            background: rgba(212,175,55,.09);
+
+            color: #f1d77a;
+        }
+
+
+        .unread-dot {
+            width: 7px;
+            height: 7px;
+
+            min-width: 7px;
+
+            border-radius: 50%;
+
+            background: #a78bfa;
+
+            box-shadow: 0 0 10px rgba(167,139,250,.8);
+        }
+
+
+        /* EMPTY */
+
+        .empty {
+            display: none;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            color: #92919d;
+        }
+
+        .empty i {
+            font-size: 34px;
+
+            color: #a78bfa;
+
+            margin-bottom: 15px;
+        }
+
+        .empty strong {
+            display: block;
+
+            color: #fff;
+
+            font-size: 15px;
+
+            margin-bottom: 6px;
+        }
+
+        .empty span {
+            font-size: 12px;
+        }
+
+
+        /* BOTTOM NAV */
+
+        .bottom-nav {
+            position: fixed;
+
+            bottom: 0;
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            width: min(100%, 600px);
+
+            height: 68px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-around;
+
+            background: rgba(10,10,14,.94);
+
+            backdrop-filter: blur(20px);
+
+            border-top: 1px solid rgba(255,255,255,.08);
+
+            z-index: 50;
+        }
+
+
+        .nav-item {
+            text-decoration: none;
+
+            color: #777581;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            gap: 5px;
+
+            font-size: 10px;
+
+            font-weight: 600;
+
+            min-width: 55px;
+        }
+
+
+        .nav-item i {
+            font-size: 18px;
+        }
+
+
+        .nav-item.active {
+            color: #d4af37;
+        }
+
+
+        .ik-nav-icon {
+            width: 31px;
+            height: 31px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #d4af37
+                );
+
+            color: #fff;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 0 18px rgba(124,58,237,.3);
+        }
+
+
+        @media (max-width: 430px) {
+
+            .notification-action {
+                padding: 7px 9px;
+            }
+
+            .notification {
+                gap: 10px;
+            }
+
+            .hero h2 {
+                font-size: 25px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="notifications-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="notification-topbar">
+
+        <a href="index.html"
+           class="back-btn"
+           aria-label="Back">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="notification-title">
+
+            <h1>Notifications</h1>
+
+            <span id="notificationSummary">
+                5 new notifications
+            </span>
+
+        </div>
+
+
+        <button class="top-btn"
+                onclick="markAllRead()"
+                aria-label="Mark all as read">
+
+            <i class="fa-solid fa-check-double"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-label">
+            BUZZCHAT ACTIVITY
+        </div>
+
+        <h2>Stay in the loop</h2>
+
+        <p>
+            See messages, reactions, group activity,
+            calls and updates from your BuzzChat network.
+        </p>
+
+    </section>
+
+
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+        <button class="filter active"
+                onclick="filterNotifications('all', this)">
+            All
+        </button>
+
+        <button class="filter"
+                onclick="filterNotifications('messages', this)">
+            Messages
+        </button>
+
+        <button class="filter"
+                onclick="filterNotifications('groups', this)">
+            Groups
+        </button>
+
+        <button class="filter"
+                onclick="filterNotifications('calls', this)">
+            Calls
+        </button>
+
+        <button class="filter"
+                onclick="filterNotifications('channels', this)">
+            Channels
+        </button>
+
+    </div>
+
+
+
+    <!-- TODAY -->
+
+    <div class="section-title">
+
+        <h3>TODAY</h3>
+
+        <button onclick="markAllRead()">
+            Mark all read
+        </button>
+
+    </div>
+
+
+
+    <div class="notification-list"
+         id="notificationList">
+
+
+        <!-- 1 -->
+
+        <div class="notification unread"
+             data-type="messages"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=47"
+                     alt="Daniel K.">
+
+                <span class="notification-icon message-icon">
+                    <i class="fa-solid fa-comment"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    <strong>Daniel K.</strong>
+                    sent you a new message.
+
+                </div>
+
+                <div class="notification-time">
+                    2 minutes ago
+                </div>
+
+            </div>
+
+
+            <span class="unread-dot"></span>
+
+        </div>
+
+
+
+        <!-- 2 -->
+
+        <div class="notification unread"
+             data-type="messages"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=32"
+                     alt="Alicia M.">
+
+                <span class="notification-icon reaction-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    <strong>Alicia M.</strong>
+                    reacted ❤️ to your message.
+
+                </div>
+
+                <div class="notification-time">
+                    18 minutes ago
+                </div>
+
+            </div>
+
+
+            <span class="unread-dot"></span>
+
+        </div>
+
+
+
+        <!-- 3 -->
+
+        <div class="notification unread"
+             data-type="groups"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=12"
+                     alt="Maya R.">
+
+                <span class="notification-icon group-icon">
+                    <i class="fa-solid fa-users"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    <strong>Maya R.</strong>
+                    added you to <strong>Weekend Crew</strong>.
+
+                </div>
+
+                <div class="notification-time">
+                    42 minutes ago
+                </div>
+
+            </div>
+
+
+            <button class="notification-action"
+                    onclick="event.stopPropagation(); openGroup()">
+                Open
+            </button>
+
+        </div>
+
+
+
+        <!-- 4 -->
+
+        <div class="notification unread"
+             data-type="calls"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=68"
+                     alt="Michael B.">
+
+                <span class="notification-icon call-icon">
+                    <i class="fa-solid fa-phone"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    Missed voice call from
+                    <strong>Michael B.</strong>
+
+                </div>
+
+                <div class="notification-time">
+                    1 hour ago
+                </div>
+
+            </div>
+
+
+            <button class="notification-action gold"
+                    onclick="event.stopPropagation(); openCalls()">
+                Call
+            </button>
+
+        </div>
+
+
+
+        <!-- 5 -->
+
+        <div class="notification unread"
+             data-type="channels"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=68"
+                     alt="BuzzChat Official">
+
+                <span class="notification-icon channel-icon">
+                    <i class="fa-solid fa-bullhorn"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    <strong>BuzzChat Official</strong>
+                    posted a new announcement.
+
+                </div>
+
+                <div class="notification-time">
+                    2 hours ago
+                </div>
+
+            </div>
+
+
+            <span class="unread-dot"></span>
+
+        </div>
+
+
+
+        <!-- 6 -->
+
+        <div class="notification"
+             data-type="groups"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=44"
+                     alt="Sarah N.">
+
+                <span class="notification-icon group-icon">
+                    <i class="fa-solid fa-user-plus"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    <strong>Sarah N.</strong>
+                    invited you to join <strong>Business Network</strong>.
+
+                </div>
+
+                <div class="notification-time">
+                    Yesterday
+                </div>
+
+            </div>
+
+
+            <button class="notification-action"
+                    onclick="event.stopPropagation(); acceptInvite(this)">
+                Join
+            </button>
+
+        </div>
+
+
+
+        <!-- 7 -->
+
+        <div class="notification"
+             data-type="messages"
+             onclick="openNotification(this)">
+
+            <div class="avatar-wrap">
+
+                <img class="avatar"
+                     src="https://i.pravatar.cc/150?img=11"
+                     alt="Alex T.">
+
+                <span class="notification-icon reaction-icon">
+                    <i class="fa-solid fa-face-smile"></i>
+                </span>
+
+            </div>
+
+
+            <div class="notification-content">
+
+                <div class="notification-text">
+
+                    <strong>Alex T.</strong>
+                    reacted 👍 to your message.
+
+                </div>
+
+                <div class="notification-time">
+                    Yesterday
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- EMPTY -->
+
+    <div class="empty"
+         id="emptyState">
+
+        <i class="fa-regular fa-bell-slash"></i>
+
+        <strong>No notifications here</strong>
+
+        <span>
+            You're all caught up.
+        </span>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <a href="index.html"
+       class="nav-item">
+
+        <i class="fa-solid fa-comments"></i>
+
+        <span>Chats</span>
+
+    </a>
+
+
+    <a href="updates.html"
+       class="nav-item">
+
+        <i class="fa-solid fa-circle-notch"></i>
+
+        <span>Updates</span>
+
+    </a>
+
+
+    <a href="groups.html"
+       class="nav-item">
+
+        <i class="fa-solid fa-users"></i>
+
+        <span>Groups</span>
+
+    </a>
+
+
+    <a href="channels.html"
+       class="nav-item">
+
+        <i class="fa-solid fa-bullhorn"></i>
+
+        <span>Channels</span>
+
+    </a>
+
+
+    <a href="ik.html"
+       class="nav-item">
+
+        <span class="ik-nav-icon">ik</span>
+
+        <span>ik</span>
+
+    </a>
+
+</nav>
+
+
+
+<script>
+
+    function openNotification(element) {
+
+        element.classList.remove("unread");
+
+        const dot = element.querySelector(".unread-dot");
+
+        if (dot) {
+            dot.remove();
+        }
+
+        updateSummary();
+    }
+
+
+    function markAllRead() {
+
+        const notifications =
+            document.querySelectorAll(".notification");
+
+        notifications.forEach(notification => {
+
+            notification.classList.remove("unread");
+
+            const dot =
+                notification.querySelector(".unread-dot");
+
+            if (dot) {
+     

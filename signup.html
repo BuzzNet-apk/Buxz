@@ -1,0 +1,890 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Create Account • BuzzChat</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.18),
+          transparent 38%
+        ),
+        #07070a;
+
+      color: #f8f7ff;
+
+      font-family: Inter, sans-serif;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px 15px;
+    }
+
+    .page {
+      width: min(440px, 100%);
+    }
+
+    /* BRAND */
+
+    .brand {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .logo {
+      width: 68px;
+      height: 68px;
+
+      margin: auto;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #1b1028
+        );
+
+      border: 2px solid #d4af37;
+
+      color: #f1d77a;
+
+      font-size: 20px;
+      font-weight: 800;
+
+      box-shadow:
+        0 0 28px rgba(124,58,237,.3);
+    }
+
+    .brand h1 {
+      margin: 12px 0 5px;
+
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    .brand h1 span {
+      color: #d4af37;
+    }
+
+    .brand p {
+      margin: 0;
+
+      color: #92919d;
+
+      font-size: 12px;
+    }
+
+    /* CARD */
+
+    .card {
+      padding: 24px 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(24,24,31,.98),
+          rgba(13,13,18,.98)
+        );
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 25px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.5);
+    }
+
+    .heading {
+      margin-bottom: 19px;
+    }
+
+    .heading h2 {
+      margin: 0 0 6px;
+
+      font-size: 20px;
+    }
+
+    .heading p {
+      margin: 0;
+
+      color: #777582;
+
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    /* PROFILE PHOTO */
+
+    .photo-section {
+      text-align: center;
+
+      margin-bottom: 20px;
+    }
+
+    .photo {
+      width: 76px;
+      height: 76px;
+
+      margin: auto;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #251438
+        );
+
+      border: 2px solid rgba(212,175,55,.55);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #f1d77a;
+
+      font-size: 23px;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .photo input {
+      display: none;
+    }
+
+    .photo-label {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 5px;
+
+      margin-top: 8px;
+
+      color: #a78bfa;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* FIELDS */
+
+    .field {
+      margin-bottom: 13px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #c4c1cb;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .input {
+      height: 48px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 0 13px;
+
+      border-radius: 13px;
+
+      background: #0d0d12;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      transition: .2s;
+    }
+
+    .input:focus-within {
+      border-color: rgba(124,58,237,.7);
+
+      box-shadow:
+        0 0 0 3px rgba(124,58,237,.08);
+    }
+
+    .input i {
+      color: #777582;
+
+      font-size: 13px;
+    }
+
+    .input input {
+      flex: 1;
+
+      min-width: 0;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 12px;
+    }
+
+    .input input::placeholder {
+      color: #5f5e68;
+    }
+
+    /* PASSWORD */
+
+    .password-toggle {
+      border: none;
+
+      background: transparent;
+
+      color: #777582;
+
+      cursor: pointer;
+    }
+
+    /* PASSWORD STRENGTH */
+
+    .strength {
+      display: flex;
+
+      gap: 4px;
+
+      margin-top: 7px;
+    }
+
+    .strength span {
+      height: 3px;
+
+      flex: 1;
+
+      border-radius: 5px;
+
+      background: #27252e;
+    }
+
+    .strength-text {
+      margin-top: 5px;
+
+      color: #5f5e68;
+
+      font-size: 9px;
+    }
+
+    /* TERMS */
+
+    .terms {
+      display: flex;
+
+      gap: 8px;
+
+      align-items: flex-start;
+
+      margin: 17px 0;
+
+      color: #777582;
+
+      font-size: 9px;
+
+      line-height: 1.5;
+    }
+
+    .terms input {
+      margin-top: 2px;
+
+      accent-color: #7c3aed;
+    }
+
+    .terms a {
+      color: #a78bfa;
+
+      text-decoration: none;
+    }
+
+    /* BUTTON */
+
+    .create-btn {
+      width: 100%;
+
+      height: 50px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #5b21b6
+        );
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      box-shadow:
+        0 10px 25px rgba(124,58,237,.2);
+
+      cursor: pointer;
+    }
+
+    .create-btn i {
+      margin-left: 7px;
+
+      color: #f1d77a;
+    }
+
+    /* LOGIN */
+
+    .login {
+      text-align: center;
+
+      margin-top: 19px;
+
+      color: #777582;
+
+      font-size: 11px;
+    }
+
+    .login a {
+      color: #f1d77a;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      text-align: center;
+
+      margin-top: 18px;
+
+      color: #4f4e57;
+
+      font-size: 8px;
+
+      line-height: 1.6;
+    }
+
+  </style></head><body><div class="page">  <!-- BRAND -->  <div class="brand"><div class="logo">
+  Buzz
+</div>
+
+<h1>
+  Buzz<span>Chat</span>
+</h1>
+
+<p>
+  Create your account and join the conversation.
+</p>
+
+  </div>  <!-- CARD -->  <div class="card"><div class="heading">
+
+  <h2>
+    Create your account
+  </h2>
+
+  <p>
+    Set up your BuzzChat profile in a few simple steps.
+  </p>
+
+</div>
+
+
+<!-- PROFILE PHOTO -->
+
+<div class="photo-section">
+
+  <div class="photo" id="photoPreview">
+
+    <i class="fa-solid fa-camera"></i>
+
+  </div>
+
+  <label class="photo-label">
+
+    <input
+      type="file"
+      id="photoInput"
+      accept="image/*"
+    >
+
+    <span
+      onclick="document.getElementById('photoInput').click()"
+      style="cursor:pointer"
+    >
+      <i class="fa-solid fa-camera"></i>
+      Add profile photo
+    </span>
+
+  </label>
+
+</div>
+
+
+<!-- FULL NAME -->
+
+<div class="field">
+
+  <label>
+    FULL NAME
+  </label>
+
+  <div class="input">
+
+    <i class="fa-regular fa-user"></i>
+
+    <input
+      id="name"
+      type="text"
+      placeholder="Enter your full name"
+      autocomplete="name"
+    >
+
+  </div>
+
+</div>
+
+
+<!-- USERNAME -->
+
+<div class="field">
+
+  <label>
+    USERNAME
+  </label>
+
+  <div class="input">
+
+    <i class="fa-solid fa-at"></i>
+
+    <input
+      id="username"
+      type="text"
+      placeholder="Choose a username"
+      autocomplete="username"
+    >
+
+  </div>
+
+</div>
+
+
+<!-- PHONE / EMAIL -->
+
+<div class="field">
+
+  <label>
+    EMAIL OR PHONE
+  </label>
+
+  <div class="input">
+
+    <i class="fa-regular fa-envelope"></i>
+
+    <input
+      id="contact"
+      type="text"
+      placeholder="Email or phone number"
+    >
+
+  </div>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="field">
+
+  <label>
+    PASSWORD
+  </label>
+
+  <div class="input">
+
+    <i class="fa-solid fa-lock"></i>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Create a strong password"
+      oninput="checkStrength()"
+      autocomplete="new-password"
+    >
+
+    <button
+      type="button"
+      class="password-toggle"
+      onclick="togglePassword()"
+    >
+
+      <i
+        id="eye"
+        class="fa-regular fa-eye"
+      ></i>
+
+    </button>
+
+  </div>
+
+  <div class="strength">
+
+    <span id="s1"></span>
+    <span id="s2"></span>
+    <span id="s3"></span>
+    <span id="s4"></span>
+
+  </div>
+
+  <div
+    class="strength-text"
+    id="strengthText"
+  >
+    Password strength
+  </div>
+
+</div>
+
+
+<!-- CONFIRM PASSWORD -->
+
+<div class="field">
+
+  <label>
+    CONFIRM PASSWORD
+  </label>
+
+  <div class="input">
+
+    <i class="fa-solid fa-shield-halved"></i>
+
+    <input
+      id="confirmPassword"
+      type="password"
+      placeholder="Confirm your password"
+      autocomplete="new-password"
+    >
+
+  </div>
+
+</div>
+
+
+<!-- TERMS -->
+
+<label class="terms">
+
+  <input
+    type="checkbox"
+    id="terms"
+  >
+
+  <span>
+    I agree to the
+    <a href="#">Terms of Service</a>
+    and
+    <a href="#">Privacy Policy</a>.
+  </span>
+
+</label>
+
+
+<!-- CREATE -->
+
+<button
+  class="create-btn"
+  type="button"
+  onclick="createAccount()"
+>
+
+  Create Account
+
+  <i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+
+<!-- LOGIN -->
+
+<div class="login">
+
+  Already have an account?
+
+  <a href="login.html">
+    Sign in
+  </a>
+
+</div>
+
+  </div>  <div class="footer">Your account details are used to create your
+BuzzChat profile and personalize your experience.
+
+  </div></div><script>
+
+  /* PASSWORD VISIBILITY */
+
+  function togglePassword() {
+
+    const password =
+      document.getElementById("password");
+
+    const eye =
+      document.getElementById("eye");
+
+    if (password.type === "password") {
+
+      password.type = "text";
+
+      eye.className =
+        "fa-regular fa-eye-slash";
+
+    } else {
+
+      password.type = "password";
+
+      eye.className =
+        "fa-regular fa-eye";
+
+    }
+
+  }
+
+
+  /* PASSWORD STRENGTH */
+
+  function checkStrength() {
+
+    const password =
+      document.getElementById("password").value;
+
+    const bars = [
+      document.getElementById("s1"),
+      document.getElementById("s2"),
+      document.getElementById("s3"),
+      document.getElementById("s4")
+    ];
+
+    const text =
+      document.getElementById("strengthText");
+
+    bars.forEach(bar => {
+      bar.style.background = "#27252e";
+    });
+
+    let score = 0;
+
+    if (password.length >= 6)
+      score++;
+
+    if (password.length >= 10)
+      score++;
+
+    if (/[A-Z]/.test(password) &&
+        /[a-z]/.test(password))
+      score++;
+
+    if (/\d/.test(password) &&
+        /[^A-Za-z0-9]/.test(password))
+      score++;
+
+    if (score === 0) {
+
+      text.textContent =
+        "Password strength";
+
+    } else if (score === 1) {
+
+      bars[0].style.background =
+        "#7c3aed";
+
+      text.textContent =
+        "Weak password";
+
+    } else if (score === 2) {
+
+      bars[0].style.background =
+        "#7c3aed";
+
+      bars[1].style.background =
+        "#7c3aed";
+
+      text.textContent =
+        "Fair password";
+
+    } else if (score === 3) {
+
+      bars[0].style.background =
+        "#7c3aed";
+
+      bars[1].style.background =
+        "#7c3aed";
+
+      bars[2].style.background =
+        "#d4af37";
+
+      text.textContent =
+        "Good password";
+
+    } else {
+
+      bars.forEach(bar => {
+        bar.style.background =
+          "#d4af37";
+      });
+
+      text.textContent =
+        "Strong password";
+
+    }
+
+  }
+
+
+  /* PROFILE PHOTO PREVIEW */
+
+  document
+    .getElementById("photoInput")
+    .addEventListener("change", function() {
+
+      const file = this.files[0];
+
+      if (!file) return;
+
+      const reader =
+        new FileReader();
+
+      reader.onload = function(event) {
+
+        const preview =
+          document.getElementById("photoPreview");
+
+        preview.innerHTML = "";
+
+        preview.style.backgroundImage =
+          `url("${event.target.result}")`;
+
+        preview.style.backgroundSize =
+          "cover";
+
+        preview.style.backgroundPosition =
+          "center";
+
+      };
+
+      reader.readAsDataURL(file);
+
+    });
+
+
+  /* CREATE ACCOUNT */
+
+  function createAccount() {
+
+    const name =
+      document.getElementById("name").value.trim();
+
+    const username =
+      document.getElementById("username").value.trim();
+
+    const contact =
+      document.getElementById("contact").value.trim();
+
+    const password =
+      document.getElementById("password").value;
+
+    const confirmPassword =
+      document.getElementById("confirmPassword").value;
+
+    const terms =
+      document.getElementById("terms").checked;
+
+
+    if (!name ||
+        !username ||
+        !contact ||
+        !password ||
+        !confirmPassword) {
+
+      alert("Please complete all required fields.");
+
+      return;
+
+    }
+
+
+    if (password !== confirmPassword) {
+
+      alert("Your passwords do not match.");
+
+      return;
+
+    }
+
+
+    if (password.length < 6) {
+
+      alert("Password must contain at least 6 characters.");
+
+      return;
+
+    }
+
+
+    if (!terms) {
+
+      alert("Please accept the Terms of Service and Privacy Policy.");
+
+      return;
+
+    }
+
+
+    /*
+      Account creation will be connected
+      to the real authentication system later.
+    */
+
+    alert("Account setup complete!");
+
+    window.location.href =
+      "index.html";
+
+  }
+
+</script></body>
+</html>

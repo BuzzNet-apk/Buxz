@@ -1,0 +1,622 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Login • BuzzChat</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.18),
+          transparent 38%
+        ),
+        #07070a;
+
+      color: #f8f7ff;
+
+      font-family: Inter, sans-serif;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 25px 15px;
+
+      overflow-x: hidden;
+    }
+
+    .login-page {
+      width: min(430px, 100%);
+    }
+
+    /* BRAND */
+
+    .brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .brand-logo {
+      width: 76px;
+      height: 76px;
+
+      margin: 0 auto 17px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle at 30% 25%,
+          #a78bfa,
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #17101f
+        );
+
+      border: 2px solid #d4af37;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #f1d77a;
+
+      font-size: 25px;
+      font-weight: 800;
+
+      box-shadow:
+        0 0 30px rgba(124,58,237,.32);
+    }
+
+    .brand h1 {
+      margin: 0;
+
+      font-size: 29px;
+      font-weight: 800;
+      letter-spacing: -.8px;
+    }
+
+    .brand h1 span {
+      color: #d4af37;
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+
+      color: #92919d;
+
+      font-size: 13px;
+    }
+
+    /* CARD */
+
+    .login-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(24,24,31,.97),
+          rgba(13,13,18,.97)
+        );
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      border-radius: 25px;
+
+      padding: 25px 20px;
+
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.5);
+    }
+
+    .login-heading {
+      margin-bottom: 22px;
+    }
+
+    .login-heading h2 {
+      margin: 0 0 6px;
+
+      font-size: 20px;
+    }
+
+    .login-heading p {
+      margin: 0;
+
+      color: #777582;
+
+      font-size: 12px;
+    }
+
+    /* INPUT */
+
+    .field {
+      margin-bottom: 15px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #c4c1cb;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .input-box {
+      height: 51px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 0 14px;
+
+      border-radius: 14px;
+
+      background: #0d0d12;
+
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .input-box:focus-within {
+      border-color: rgba(124,58,237,.65);
+
+      box-shadow:
+        0 0 0 3px rgba(124,58,237,.08);
+    }
+
+    .input-box i {
+      color: #777582;
+
+      font-size: 14px;
+    }
+
+    .input-box input {
+      flex: 1;
+
+      min-width: 0;
+
+      border: none;
+      outline: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 13px;
+    }
+
+    .input-box input::placeholder {
+      color: #5f5e68;
+    }
+
+    .password-toggle {
+      border: none;
+
+      background: transparent;
+
+      color: #777582;
+
+      font-size: 14px;
+    }
+
+    /* OPTIONS */
+
+    .login-options {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin: 4px 0 20px;
+    }
+
+    .remember {
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: #92919d;
+
+      font-size: 11px;
+    }
+
+    .remember input {
+      accent-color: #7c3aed;
+    }
+
+    .forgot {
+      color: #a78bfa;
+
+      text-decoration: none;
+
+      font-size: 11px;
+
+      font-weight: 600;
+    }
+
+    /* LOGIN BUTTON */
+
+    .login-btn {
+      width: 100%;
+
+      height: 51px;
+
+      border: none;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #5b21b6
+        );
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      box-shadow:
+        0 10px 25px rgba(124,58,237,.2);
+    }
+
+    .login-btn i {
+      margin-left: 7px;
+
+      color: #f1d77a;
+    }
+
+    /* DIVIDER */
+
+    .divider {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin: 22px 0;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+
+      flex: 1;
+
+      height: 1px;
+
+      background: rgba(255,255,255,.07);
+    }
+
+    .divider span {
+      color: #5f5e68;
+
+      font-size: 10px;
+    }
+
+    /* SOCIAL */
+
+    .social-login {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 9px;
+    }
+
+    .social-btn {
+      height: 46px;
+
+      border-radius: 13px;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      background: #111116;
+
+      color: #ddd9e5;
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      font-weight: 700;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+    }
+
+    .social-btn i {
+      font-size: 14px;
+    }
+
+    /* SIGN UP */
+
+    .signup-text {
+      text-align: center;
+
+      margin-top: 22px;
+
+      color: #777582;
+
+      font-size: 12px;
+    }
+
+    .signup-text a {
+      color: #f1d77a;
+
+      text-decoration: none;
+
+      font-weight: 700;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      text-align: center;
+
+      margin-top: 22px;
+
+      color: #4f4e57;
+
+      font-size: 9px;
+
+      line-height: 1.6;
+    }
+
+    .footer span {
+      color: #6d6a76;
+    }
+
+  </style></head><body><div class="login-page">  <!-- BRAND -->  <div class="brand"><div class="brand-logo">
+  Buzz
+</div>
+
+<h1>
+  Buzz<span>Chat</span>
+</h1>
+
+<p>
+  Connect. Communicate. Buzz.
+</p>
+
+  </div>  <!-- LOGIN CARD -->  <section class="login-card"><div class="login-heading">
+
+  <h2>
+    Welcome back
+  </h2>
+
+  <p>
+    Sign in to continue to your BuzzChat account.
+  </p>
+
+</div>
+
+
+<!-- EMAIL / PHONE -->
+
+<div class="field">
+
+  <label>
+    Email or phone number
+  </label>
+
+  <div class="input-box">
+
+    <i class="fa-regular fa-user"></i>
+
+    <input
+      type="text"
+      placeholder="Enter your email or phone"
+      autocomplete="username"
+    >
+
+  </div>
+
+</div>
+
+
+<!-- PASSWORD -->
+
+<div class="field">
+
+  <label>
+    Password
+  </label>
+
+  <div class="input-box">
+
+    <i class="fa-solid fa-lock"></i>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Enter your password"
+      autocomplete="current-password"
+    >
+
+    <button
+      class="password-toggle"
+      type="button"
+      onclick="togglePassword()"
+    >
+
+      <i
+        id="eyeIcon"
+        class="fa-regular fa-eye"
+      ></i>
+
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- OPTIONS -->
+
+<div class="login-options">
+
+  <label class="remember">
+
+    <input type="checkbox">
+
+    Remember me
+
+  </label>
+
+  <a href="#" class="forgot">
+    Forgot password?
+  </a>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<button
+  class="login-btn"
+  type="button"
+  onclick="loginUser()"
+>
+
+  Sign In
+
+  <i class="fa-solid fa-arrow-right"></i>
+
+</button>
+
+
+<!-- DIVIDER -->
+
+<div class="divider">
+  <span>OR CONTINUE WITH</span>
+</div>
+
+
+<!-- SOCIAL LOGIN -->
+
+<div class="social-login">
+
+  <button class="social-btn">
+
+    <i class="fa-brands fa-google"></i>
+
+    Google
+
+  </button>
+
+  <button class="social-btn">
+
+    <i class="fa-brands fa-apple"></i>
+
+    Apple
+
+  </button>
+
+</div>
+
+
+<!-- SIGN UP -->
+
+<div class="signup-text">
+
+  Don't have an account?
+
+  <a href="signup.html">
+    Create one
+  </a>
+
+</div>
+
+  </section>  <div class="footer">By continuing, you agree to BuzzChat's
+<span>Terms</span> and <span>Privacy Policy</span>.
+
+  </div></div><script>
+
+  function togglePassword() {
+
+    const password =
+      document.getElementById("password");
+
+    const icon =
+      document.getElementById("eyeIcon");
+
+    if (password.type === "password") {
+
+      password.type = "text";
+
+      icon.className =
+        "fa-regular fa-eye-slash";
+
+    } else {
+
+      password.type = "password";
+
+      icon.className =
+        "fa-regular fa-eye";
+
+    }
+
+  }
+
+
+  function loginUser() {
+
+    const email =
+      document.querySelector(
+        '.input-box input[type="text"]'
+      ).value.trim();
+
+    const password =
+      document.getElementById("password").value.trim();
+
+    if (!email || !password) {
+
+      alert("Please enter your email/phone and password.");
+
+      return;
+
+    }
+
+    /*
+      Authentication will be connected later.
+      For now this simply takes the user
+      into the BuzzChat home screen.
+    */
+
+    window.location.href = "index.html";
+
+  }
+
+</script></body>
+</html>

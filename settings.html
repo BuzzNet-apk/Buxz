@@ -1,0 +1,816 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Settings • BuzzChat</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #07070a;
+      --surface: #111116;
+      --surface2: #18181f;
+      --purple: #7c3aed;
+      --purpleLight: #a78bfa;
+      --gold: #d4af37;
+      --goldLight: #f1d77a;
+      --white: #f8f7ff;
+      --muted: #92919d;
+      --danger: #ef4444;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.16),
+          transparent 35%
+        ),
+        var(--black);
+
+      color: var(--white);
+
+      font-family: Inter, sans-serif;
+
+      padding-bottom: 85px;
+    }
+
+    .page {
+      width: min(600px, 100%);
+      margin: auto;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      height: 65px;
+
+      padding: 0 17px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      position: sticky;
+      top: 0;
+      z-index: 20;
+
+      background: rgba(7,7,10,.88);
+
+      backdrop-filter: blur(18px);
+
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .back {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--white);
+
+      background: var(--surface2);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      text-decoration: none;
+    }
+
+    .title {
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    /* PROFILE MINI */
+
+    .account-card {
+      margin: 17px 13px 10px;
+
+      padding: 16px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.12),
+          rgba(212,175,55,.04)
+        );
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      border-radius: 20px;
+    }
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+
+      min-width: 58px;
+
+      border-radius: 50%;
+
+      overflow: hidden;
+
+      border: 2px solid rgba(212,175,55,.45);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .account-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .account-info h2 {
+      margin: 0;
+
+      font-size: 15px;
+    }
+
+    .account-info p {
+      margin: 4px 0 0;
+
+      color: var(--purpleLight);
+
+      font-size: 10px;
+    }
+
+    .account-arrow {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* SECTIONS */
+
+    .section {
+      margin: 14px 13px;
+    }
+
+    .section-title {
+      padding: 0 5px 8px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      font-weight: 800;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+    }
+
+    .settings-card {
+      overflow: hidden;
+
+      background: var(--surface);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      border-radius: 18px;
+    }
+
+    .setting {
+      min-height: 58px;
+
+      padding: 9px 14px;
+
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      border-bottom: 1px solid rgba(255,255,255,.05);
+
+      cursor: pointer;
+    }
+
+    .setting:last-child {
+      border-bottom: none;
+    }
+
+    .setting-icon {
+      width: 35px;
+      height: 35px;
+
+      min-width: 35px;
+
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(124,58,237,.12);
+
+      color: var(--purpleLight);
+
+      font-size: 12px;
+    }
+
+    .setting-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .setting-content strong {
+      display: block;
+
+      font-size: 11px;
+    }
+
+    .setting-content span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    .chevron {
+      color: #55545d;
+      font-size: 10px;
+    }
+
+    /* TOGGLE */
+
+    .toggle {
+      width: 39px;
+      height: 22px;
+
+      border-radius: 20px;
+
+      background: #292831;
+
+      position: relative;
+
+      border: none;
+
+      padding: 0;
+    }
+
+    .toggle::after {
+      content: "";
+
+      position: absolute;
+
+      width: 16px;
+      height: 16px;
+
+      top: 3px;
+      left: 3px;
+
+      border-radius: 50%;
+
+      background: #8b8994;
+
+      transition: .2s;
+    }
+
+    .toggle.active {
+      background: var(--purple);
+    }
+
+    .toggle.active::after {
+      left: 20px;
+
+      background: white;
+    }
+
+    /* IK */
+
+    .ik-icon {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.3),
+          rgba(212,175,55,.12)
+        );
+
+      color: var(--goldLight);
+
+      font-weight: 800;
+    }
+
+    /* DANGER */
+
+    .danger .setting-icon {
+      background: rgba(239,68,68,.1);
+      color: var(--danger);
+    }
+
+    .danger .setting-content strong {
+      color: #ef7777;
+    }
+
+    /* VERSION */
+
+    .version {
+      text-align: center;
+
+      margin: 25px 0;
+
+      color: #4d4b55;
+
+      font-size: 8px;
+
+      line-height: 1.7;
+    }
+
+    .version strong {
+      color: #6b6874;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottom-nav {
+      position: fixed;
+
+      left: 50%;
+      bottom: 0;
+
+      transform: translateX(-50%);
+
+      width: min(600px, 100%);
+
+      height: 68px;
+
+      display: grid;
+
+      grid-template-columns: repeat(5, 1fr);
+
+      background: rgba(12,12,17,.97);
+
+      border-top: 1px solid rgba(255,255,255,.07);
+
+      backdrop-filter: blur(18px);
+
+      z-index: 50;
+    }
+
+    .nav-item {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 5px;
+
+      font-size: 9px;
+    }
+
+    .nav-item i {
+      font-size: 16px;
+    }
+
+    .nav-item.active {
+      color: var(--goldLight);
+    }
+
+    .ik-nav {
+      width: 32px;
+      height: 32px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #251032
+        );
+
+      border: 1px solid rgba(212,175,55,.45);
+
+      color: var(--goldLight);
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+  </style></head><body><div class="page">  <!-- TOP BAR -->  <header class="topbar"><a href="index.html" class="back">
+  <i class="fa-solid fa-arrow-left"></i>
+</a>
+
+<div class="title">
+  Settings
+</div>
+
+  </header>  <!-- ACCOUNT -->  <div class="account-card"><div class="avatar">
+
+  <img
+    src="https://i.pravatar.cc/150?img=47"
+    alt="Profile"
+  >
+
+</div>
+
+<div class="account-info">
+
+  <h2>
+    Daniel K.
+  </h2>
+
+  <p>
+    @danielk
+  </p>
+
+</div>
+
+<i class="fa-solid fa-chevron-right account-arrow"></i>
+
+  </div>  <!-- ACCOUNT SETTINGS -->  <section class="section"><div class="section-title">
+  Account
+</div>
+
+<div class="settings-card">
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-regular fa-user"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Account
+      </strong>
+
+      <span>
+        Phone number, email and security
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-lock"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Privacy
+      </strong>
+
+      <span>
+        Control who can contact you
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-shield-halved"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Security
+      </strong>
+
+      <span>
+        Password and login protection
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+</div>
+
+  </section>  <!-- CHAT SETTINGS -->  <section class="section"><div class="section-title">
+  Chats
+</div>
+
+<div class="settings-card">
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-palette"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Appearance
+      </strong>
+
+      <span>
+        Dark theme • Luxury mode
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-bell"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Notifications
+      </strong>
+
+      <span>
+        Messages, calls and alerts
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-database"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Storage & Data
+      </strong>
+
+      <span>
+        Media usage and network settings
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+</div>
+
+  </section>  <!-- SPECIAL -->  <section class="section"><div class="section-title">
+  BuzzChat
+</div>
+
+<div class="settings-card">
+
+  <div class="setting">
+
+    <div class="setting-icon ik-icon">
+      ik
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        ik AI
+      </strong>
+
+      <span>
+        Personal AI assistant and smart features
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-circle-question"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Help & Support
+      </strong>
+
+      <span>
+        Get help with BuzzChat
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+
+<a href="about-creator.html" class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-user-tie"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        About the Creator
+      </strong>
+
+      <span>
+        Meet the person behind BuzzChat
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+</a>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+</div>
+
+  </section>  <!-- PRIVACY -->  <section class="section"><div class="section-title">
+  Preferences
+</div>
+
+<div class="settings-card">
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-eye"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Read Receipts
+      </strong>
+
+      <span>
+        Show when messages have been read
+      </span>
+
+    </div>
+
+    <button
+      class="toggle active"
+      onclick="this.classList.toggle('active')"
+    ></button>
+
+  </div>
+
+
+  <div class="setting">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-circle-play"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Auto-play Media
+      </strong>
+
+      <span>
+        Automatically play videos
+      </span>
+
+    </div>
+
+    <button
+      class="toggle active"
+      onclick="this.classList.toggle('active')"
+    ></button>
+
+  </div>
+
+</div>
+
+  </section>  <!-- LOGOUT -->  <section class="section"><div class="settings-card">
+
+  <div class="setting danger">
+
+    <div class="setting-icon">
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </div>
+
+    <div class="setting-content">
+
+      <strong>
+        Log Out
+      </strong>
+
+      <span>
+        Sign out of this BuzzChat account
+      </span>
+
+    </div>
+
+    <i class="fa-solid fa-chevron-right chevron"></i>
+
+  </div>
+
+</div>
+
+  </section>  <div class="version"><strong>BuzzChat</strong><br>
+
+Your conversations. Your world.<br>
+
+Version 1.0.0
+
+  </div></div><!-- BOTTOM NAV --><nav class="bottom-nav">  <a href="index.html" class="nav-item"><i class="fa-solid fa-comments"></i>
+
+<span>
+  Chats
+</span>
+
+  </a>  <a href="updates.html" class="nav-item"><i class="fa-regular fa-circle-play"></i>
+
+<span>
+  Updates
+</span>
+
+  </a>  <a href="groups.html" class="nav-item"><i class="fa-solid fa-users"></i>
+
+<span>
+  Groups
+</span>
+
+  </a>  <a href="channels.html" class="nav-item"><i class="fa-solid fa-bullhorn"></i>
+
+<span>
+  Channels
+</span>
+
+  </a>  <a href="ik.html" class="nav-item"><div class="ik-nav">
+  ik
+</div>
+
+<span>
+  ik
+</span>
+
+  </a></nav></body>
+</html>

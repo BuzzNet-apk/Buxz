@@ -1,0 +1,810 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Profile • BuzzChat</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --black: #07070a;
+      --surface: #111116;
+      --surface2: #18181f;
+      --purple: #7c3aed;
+      --purpleLight: #a78bfa;
+      --gold: #d4af37;
+      --goldLight: #f1d77a;
+      --white: #f8f7ff;
+      --muted: #92919d;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          rgba(124,58,237,.18),
+          transparent 36%
+        ),
+        var(--black);
+
+      color: var(--white);
+
+      font-family: Inter, sans-serif;
+
+      padding-bottom: 85px;
+    }
+
+    .page {
+      width: min(600px, 100%);
+      margin: auto;
+    }
+
+    /* TOP BAR */
+
+    .topbar {
+      height: 65px;
+
+      padding: 0 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid rgba(255,255,255,.06);
+
+      background: rgba(7,7,10,.82);
+
+      backdrop-filter: blur(18px);
+
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .top-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .back {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--white);
+
+      background: var(--surface2);
+
+      text-decoration: none;
+
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .top-title {
+      font-size: 16px;
+      font-weight: 800;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 7px;
+    }
+
+    .top-action {
+      width: 38px;
+      height: 38px;
+
+      border: none;
+      border-radius: 12px;
+
+      background: var(--surface2);
+
+      color: var(--white);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* COVER */
+
+    .cover {
+      height: 180px;
+
+      position: relative;
+
+      background:
+        radial-gradient(
+          circle at 25% 30%,
+          rgba(167,139,250,.35),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(212,175,55,.18),
+          transparent 25%
+        ),
+        linear-gradient(
+          135deg,
+          #171020,
+          #0b0b10
+        );
+
+      overflow: hidden;
+    }
+
+    .cover::after {
+      content: "";
+
+      position: absolute;
+
+      width: 220px;
+      height: 220px;
+
+      border: 1px solid rgba(212,175,55,.18);
+
+      border-radius: 50%;
+
+      right: -80px;
+      top: -100px;
+    }
+
+    .edit-cover {
+      position: absolute;
+
+      right: 15px;
+      top: 15px;
+
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,.12);
+
+      background: rgba(0,0,0,.4);
+
+      color: white;
+    }
+
+    /* PROFILE HEADER */
+
+    .profile-header {
+      padding: 0 18px 20px;
+
+      position: relative;
+    }
+
+    .avatar {
+      width: 105px;
+      height: 105px;
+
+      border-radius: 50%;
+
+      border: 4px solid var(--black);
+
+      position: relative;
+
+      margin-top: -52px;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #261139
+        );
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,.45);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+    .online {
+      position: absolute;
+
+      width: 18px;
+      height: 18px;
+
+      border-radius: 50%;
+
+      background: #22c55e;
+
+      border: 3px solid var(--black);
+
+      bottom: 5px;
+      right: 6px;
+    }
+
+    .profile-name {
+      margin-top: 12px;
+
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .profile-name h1 {
+      margin: 0;
+
+      font-size: 23px;
+    }
+
+    .verified {
+      color: var(--goldLight);
+
+      font-size: 14px;
+    }
+
+    .username {
+      margin-top: 4px;
+
+      color: var(--purpleLight);
+
+      font-size: 12px;
+    }
+
+    .bio {
+      margin-top: 14px;
+
+      color: #c0bdc8;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    /* STATS */
+
+    .stats {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      margin-top: 18px;
+
+      padding: 14px 0;
+
+      border-top: 1px solid rgba(255,255,255,.07);
+
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .stat {
+      text-align: center;
+
+      border-right: 1px solid rgba(255,255,255,.07);
+    }
+
+    .stat:last-child {
+      border-right: none;
+    }
+
+    .stat strong {
+      display: block;
+
+      font-size: 17px;
+    }
+
+    .stat span {
+      color: var(--muted);
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+
+      letter-spacing: .5px;
+    }
+
+    /* ACTIONS */
+
+    .profile-actions {
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 9px;
+
+      margin-top: 17px;
+    }
+
+    .profile-btn {
+      height: 44px;
+
+      border-radius: 12px;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      background: var(--surface2);
+
+      color: var(--white);
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+    .profile-btn.primary {
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #5b21b6
+        );
+
+      border-color: transparent;
+    }
+
+    /* INFO CARD */
+
+    .section {
+      margin: 12px 12px 0;
+
+      background: var(--surface);
+
+      border: 1px solid rgba(255,255,255,.06);
+
+      border-radius: 19px;
+
+      overflow: hidden;
+    }
+
+    .section-title {
+      padding: 15px;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .info-row {
+      min-height: 55px;
+
+      padding: 10px 15px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 13px;
+    }
+
+    .info-icon {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(124,58,237,.12);
+
+      color: var(--purpleLight);
+
+      font-size: 12px;
+    }
+
+    .info-text {
+      min-width: 0;
+    }
+
+    .info-text small {
+      display: block;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      margin-bottom: 3px;
+    }
+
+    .info-text span {
+      display: block;
+
+      font-size: 11px;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+    /* MEDIA */
+
+    .media-grid {
+      display: grid;
+
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 3px;
+    }
+
+    .media {
+      height: 105px;
+
+      overflow: hidden;
+
+      background: var(--surface2);
+    }
+
+    .media img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      display: block;
+    }
+
+    /* BOTTOM NAV */
+
+    .bottom-nav {
+      position: fixed;
+
+      bottom: 0;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: min(600px, 100%);
+
+      height: 68px;
+
+      display: grid;
+
+      grid-template-columns: repeat(5, 1fr);
+
+      background: rgba(12,12,17,.96);
+
+      border-top: 1px solid rgba(255,255,255,.07);
+
+      backdrop-filter: blur(18px);
+
+      z-index: 50;
+    }
+
+    .nav-item {
+      color: var(--muted);
+
+      text-decoration: none;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 5px;
+
+      font-size: 9px;
+    }
+
+    .nav-item i {
+      font-size: 16px;
+    }
+
+    .nav-item.active {
+      color: var(--goldLight);
+    }
+
+    .ik-nav {
+      width: 32px;
+      height: 32px;
+
+      border-radius: 50%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--purple),
+          #251032
+        );
+
+      color: var(--goldLight);
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      border: 1px solid rgba(212,175,55,.45);
+    }
+
+    @media (min-width: 601px) {
+
+      body {
+        padding-top: 15px;
+      }
+
+      .page {
+        border-left: 1px solid rgba(255,255,255,.04);
+        border-right: 1px solid rgba(255,255,255,.04);
+      }
+
+    }
+
+  </style></head><body><div class="page">  <!-- TOP BAR -->  <header class="topbar"><div class="top-left">
+
+  <a href="index.html" class="back">
+    <i class="fa-solid fa-arrow-left"></i>
+  </a>
+
+  <div class="top-title">
+    Profile
+  </div>
+
+</div>
+
+<div class="top-actions">
+
+  <button class="top-action">
+    <i class="fa-solid fa-share-nodes"></i>
+  </button>
+
+  <button class="top-action">
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+  </button>
+
+</div>
+
+  </header>  <!-- COVER -->  <div class="cover"><button class="edit-cover">
+  <i class="fa-solid fa-camera"></i>
+</button>
+
+  </div>  <!-- PROFILE -->  <section class="profile-header"><div class="avatar">
+
+  <img
+    src="https://i.pravatar.cc/300?img=47"
+    alt="Profile picture"
+  >
+
+  <div class="online"></div>
+
+</div>
+
+
+<div class="profile-name">
+
+  <h1>
+    Daniel K.
+  </h1>
+
+  <i class="fa-solid fa-circle-check verified"></i>
+
+</div>
+
+<div class="username">
+  @danielk
+</div>
+
+
+<div class="bio">
+
+  Building ideas, connecting people and enjoying
+  every conversation. 🚀
+
+</div>
+
+
+<!-- STATS -->
+
+<div class="stats">
+
+  <div class="stat">
+
+    <strong>248</strong>
+
+    <span>
+      Contacts
+    </span>
+
+  </div>
+
+  <div class="stat">
+
+    <strong>36</strong>
+
+    <span>
+      Groups
+    </span>
+
+  </div>
+
+  <div class="stat">
+
+    <strong>18</strong>
+
+    <span>
+      Channels
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- ACTIONS -->
+
+<div class="profile-actions">
+
+  <button class="profile-btn primary">
+
+    <i class="fa-solid fa-pen"></i>
+
+    Edit Profile
+
+  </button>
+
+  <button class="profile-btn">
+
+    <i class="fa-solid fa-share-nodes"></i>
+
+    Share Profile
+
+  </button>
+
+</div>
+
+  </section>  <!-- ABOUT -->  <section class="section"><div class="section-title">
+  About
+</div>
+
+
+<div class="info-row">
+
+  <div class="info-icon">
+    <i class="fa-regular fa-message"></i>
+  </div>
+
+  <div class="info-text">
+
+    <small>
+      Status
+    </small>
+
+    <span>
+      Available for conversations
+    </span>
+
+  </div>
+
+</div>
+
+
+<div class="info-row">
+
+  <div class="info-icon">
+    <i class="fa-solid fa-location-dot"></i>
+  </div>
+
+  <div class="info-text">
+
+    <small>
+      Location
+    </small>
+
+    <span>
+      Kampala
+    </span>
+
+  </div>
+
+</div>
+
+
+<div class="info-row">
+
+  <div class="info-icon">
+    <i class="fa-solid fa-calendar"></i>
+  </div>
+
+  <div class="info-text">
+
+    <small>
+      Joined BuzzChat
+    </small>
+
+    <span>
+      August 2026
+    </span>
+
+  </div>
+
+</div>
+
+  </section>  <!-- MEDIA -->  <section class="section"><div class="section-title">
+  Shared Media
+</div>
+
+<div class="media-grid">
+
+  <div class="media">
+    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=500&q=80">
+  </div>
+
+  <div class="media">
+    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=500&q=80">
+  </div>
+
+  <div class="media">
+    <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=500&q=80">
+  </div>
+
+  <div class="media">
+    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=500&q=80">
+  </div>
+
+  <div class="media">
+    <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=500&q=80">
+  </div>
+
+  <div class="media">
+    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=500&q=80">
+  </div>
+
+</div>
+
+  </section></div><!-- BOTTOM NAV --><nav class="bottom-nav">  <a href="index.html" class="nav-item"><i class="fa-solid fa-comments"></i>
+
+<span>
+  Chats
+</span>
+
+  </a>  <a href="updates.html" class="nav-item"><i class="fa-regular fa-circle-play"></i>
+
+<span>
+  Updates
+</span>
+
+  </a>  <a href="groups.html" class="nav-item"><i class="fa-solid fa-users"></i>
+
+<span>
+  Groups
+</span>
+
+  </a>  <a href="channels.html" class="nav-item"><i class="fa-solid fa-bullhorn"></i>
+
+<span>
+  Channels
+</span>
+
+  </a>  <a href="ik.html" class="nav-item"><div class="ik-nav">
+  ik
+</div>
+
+<span>
+  ik
+</span>
+
+  </a></nav></body>
+</html>

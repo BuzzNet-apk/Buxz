@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Add Members • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+  <div class="add-members-page">
+
+    <!-- HEADER -->
+
+    <header class="add-members-header">
+
+      <a href="group-info.html" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+      </a>
+
+      <div>
+        <h1>Add Members</h1>
+        <p id="addMembersSubtitle">Select people to add</p>
+      </div>
+
+    </header>
+
+
+    <!-- SEARCH -->
+
+    <div class="add-members-search">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="text"
+        id="addMembersSearch"
+        placeholder="Search contacts..."
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <!-- SELECTED MEMBERS -->
+
+    <section
+      id="selectedAddMembers"
+      class="selected-add-members">
+    </section>
+
+
+    <!-- CONTACTS -->
+
+    <section class="add-members-list">
+
+      <p class="section-label">CONTACTS</p>
+
+
+      <article class="add-member-person"
+               data-name="Daniel K."
+               data-image="https://i.pravatar.cc/150?img=47">
+
+        <div class="add-member-info">
+
+          <img
+            src="https://i.pravatar.cc/150?img=47"
+            alt="Daniel">
+
+          <div>
+            <h3>Daniel K.</h3>
+            <p>Online</p>
+          </div>
+
+        </div>
+
+        <button class="add-member-select">
+          <i class="fa-solid fa-check"></i>
+        </button>
+
+      </article>
+
+
+      <article class="add-member-person"
+               data-name="Alicia M."
+               data-image="https://i.pravatar.cc/150?img=32">
+
+        <div class="add-member-info">
+
+          <img
+            src="https://i.pravatar.cc/150?img=32"
+            alt="Alicia">
+
+          <div>
+            <h3>Alicia M.</h3>
+            <p>Available</p>
+          </div>
+
+        </div>
+
+        <button class="add-member-select">
+          <i class="fa-solid fa-check"></i>
+        </button>
+
+      </article>
+
+
+      <article class="add-member-person"
+               data-name="Maya"
+               data-image="https://i.pravatar.cc/150?img=12">
+
+        <div class="add-member-info">
+
+          <img
+            src="https://i.pravatar.cc/150?img=12"
+            alt="Maya">
+
+          <div>
+            <h3>Maya</h3>
+            <p>Available</p>
+          </div>
+
+        </div>
+
+        <button class="add-member-select">
+          <i class="fa-solid fa-check"></i>
+        </button>
+
+      </article>
+
+    </section>
+
+
+    <!-- ADD BUTTON -->
+
+    <button
+      class="confirm-add-members"
+      id="confirmAddMembers">
+
+      <i class="fa-solid fa-user-plus"></i>
+
+      <span>Add Members</span>
+
+    </button>
+
+  </div>
+
+
+  <script src="script.js"></script>
+
+
+  <script>
+
+    const activeGroup =
+      localStorage.getItem("buzzchatActiveGroup");
+
+
+    const savedGroups =
+      JSON.parse(
+        localStorage.getItem("buzzchatGroups") || "[]"
+      );
+
+
+    const currentGroup =
+      savedGroups.find(function(group) {
+
+        return group.name === activeGroup;
+
+      });
+
+
+    const people =
+      document.querySelectorAll(".add-member-person");
+
+
+    const selectedContainer =
+      document.getElementById("selectedAddMembers");
+
+
+    const searchInput =
+      document.getElementById("addMembersSearch");
+
+
+    const confirmButton =
+      document.getElementById("confirmAddMembers");
+
+
+    /*
+       MARK EXISTING MEMBERS
+    */
+
+    if (currentGroup) {
+
+      people.forEach(function(person) {
+
+        const name =
+          person.dataset.name;
+
+
+        if (
+          currentGroup.members.includes(name)
+        ) {
+
+          person.classList.add("already-member");
+
+          const button =
+            person.querySelector(
+              ".add-member-select"
+            );
+
+          button.disabled = true;
+
+        }
+
+      });
+
+    }
+
+
+    /*
+       SELECT MEMBERS
+    */
+
+    people.forEach(function(person) {
+
+      const button =
+        person.querySelector(
+          ".add-member-select"
+        );
+
+
+      button.addEventListener(
+        "click",
+        function() {
+
+          if (
+            person.classList.contains(
+              "already-member"
+            )
+          ) return;
+
+
+          person.classList.toggle("selected");
+
+
+          const name =
+            person.dataset.name;
+
+
+          const image =
+            person.dataset.image;
+
+
+          const existing =
+            selectedContainer.querySelector(
+              `[data-selected="${name}"]`
+            );
+
+
+          if (
+            person.classList.contains("selected")
+          ) {
+
+            if (!existing) {
+
+              const selected =
+                document.createElement("div");
+
+
+              selected.className =
+                "selected-add-member";
+
+
+              selected.dataset.selected =
+                name;
+
+
+              selected.innerHTML = `
+
+                <img
+                  src="${image}"
+                  alt="${name}"
+                >
+
+                <span>${name}</span>
+
+              `;
+
+
+              selectedContainer.appendChild(
+                selected
+              );
+
+            }
+
+          } else {
+
+            if (existing) {
+              existing.remove();
+            }
+
+          }
+
+        }
+      );
+
+    });
+
+
+    /*
+       SEARCH
+    */
+
+    if (searchInput) {
+
+      searchInput.addEventListener(
+        "input",
+        function() {
+
+          const search =
+            this.value
+              .toLowerCase()
+              .trim();
+
+
+          people.forEach(function(person) {
+
+            const name =
+              person.dataset.name
+                .toLowerCase();
+
+
+            person.style.display =
+              name.includes(search)
+                ? "flex"
+                : "none";
+
+          });
+
+        }
+      );
+
+    }
+
+
+    /*
+       ADD MEMBERS
+    */
+
+    if (confirmButton) {
+
+      confirmButton.addEventListener(
+        "click",
+        function() {
+
+          if (!currentGroup) {
+
+            alert("Group not found.");
+
+            return;
+
+          }
+
+
+          const selected =
+            document.querySelectorAll(
+              ".add-member-person.selected"
+            );
+
+
+          if (selected.length === 0) {
+
+            alert(
+              "Please select at least one new member."
+            );
+
+            return;
+
+          }
+
+
+          selected.forEach(
+            function(person) {
+
+              const name =
+                person.dataset.name;
+
+
+              if (
+                !currentGroup.members.includes(
+                  name
+                )
+              ) {
+
+                currentGroup.members.push(
+                  name
+                );
+
+              }
+
+            }
+          );
+
+
+          localStorage.setItem(
+            "buzzchatGroups",
+            JSON.stringify(savedGroups)
+          );
+
+
+          window.location.href =
+            "group-info.html";
+
+        }
+      );
+
+    }
+
+  </script>
+
+</body>
+
+</html>

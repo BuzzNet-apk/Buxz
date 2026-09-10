@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Notification Settings • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.16),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212,175,55,.08),
+                    transparent 35%
+                ),
+                #07070a;
+
+            color: #f8f7ff;
+
+            font-family: Inter, sans-serif;
+        }
+
+
+        .notification-settings-page {
+            width: 100%;
+            max-width: 700px;
+            min-height: 100vh;
+
+            margin: auto;
+
+            padding-bottom: 40px;
+        }
+
+
+        /* TOP BAR */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 30;
+
+            display: flex;
+            align-items: center;
+            gap: 14px;
+
+            padding: 16px 18px;
+
+            background: rgba(7,7,10,.88);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .info-btn {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .title {
+            flex: 1;
+        }
+
+
+        .title h1 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .title span {
+            color: #92919d;
+
+            font-size: 12px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 30px 18px 23px;
+        }
+
+
+        .hero-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 21px;
+
+            margin-bottom: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,.20),
+                    rgba(212,175,55,.10)
+                );
+
+            border: 1px solid rgba(124,58,237,.25);
+
+            color: #a78bfa;
+
+            font-size: 26px;
+
+            box-shadow:
+                0 15px 45px rgba(124,58,237,.12);
+        }
+
+
+        .hero h2 {
+            margin: 0 0 9px;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .hero p {
+            margin: 0;
+
+            color: #92919d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* MASTER NOTIFICATION */
+
+        .master-card {
+            margin: 0 18px 27px;
+
+            padding: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.13),
+                    rgba(17,17,22,.94)
+                );
+
+            border: 1px solid rgba(124,58,237,.20);
+        }
+
+
+        .master-icon {
+            width: 46px;
+            height: 46px;
+
+            min-width: 46px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(124,58,237,.15);
+
+            color: #c4b5fd;
+
+            font-size: 18px;
+        }
+
+
+        .master-info {
+            flex: 1;
+        }
+
+
+        .master-info strong {
+            display: block;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        .master-info span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            padding: 0 18px 10px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .settings-list {
+            padding: 0 12px;
+
+            margin-bottom: 25px;
+        }
+
+
+        /* SETTING */
+
+        .setting {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 9px;
+
+            border-radius: 17px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .setting:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .setting-icon {
+            width: 43px;
+            height: 43px;
+
+            min-width: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+
+            font-size: 16px;
+        }
+
+
+        .setting:nth-child(2) .setting-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .setting:nth-child(3) .setting-icon {
+            background: rgba(53,208,127,.09);
+
+            color: #55dd93;
+        }
+
+
+        .setting:nth-child(4) .setting-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .setting-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .setting-name {
+            color: #f8f7ff;
+
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .setting-description {
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 11px;
+
+            line-height: 1.45;
+        }
+
+
+        /* TOGGLE */
+
+        .toggle {
+            position: relative;
+
+            width: 43px;
+            height: 24px;
+
+            border: 0;
+
+            border-radius: 30px;
+
+            background: #292831;
+
+            cursor: pointer;
+
+            transition: .25s;
+
+            flex-shrink: 0;
+        }
+
+
+        .toggle::after {
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            top: 3px;
+            left: 3px;
+
+            border-radius: 50%;
+
+            background: #92919d;
+
+            transition: .25s;
+        }
+
+
+        .toggle.active {
+            background: #7c3aed;
+        }
+
+
+        .toggle.active::after {
+            left: 22px;
+
+            background: #fff;
+        }
+
+
+        /* SELECT */
+
+        .setting-value {
+            color: #a78bfa;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .chevron {
+            color: #55535e;
+
+            font-size: 10px;
+        }
+
+
+        /* SOUND CARD */
+
+        .sound-card {
+            margin: 0 18px 27px;
+
+            padding: 17px;
+
+            border-radius: 19px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .sound-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-bottom: 14px;
+        }
+
+
+        .sound-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .sound-header strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .sound-header span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        .sound-row {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding-top: 13px;
+
+            border-top: 1px solid rgba(255,255,255,.06);
+        }
+
+
+        .sound-row span {
+            color: #aaa7b3;
+
+            font-size: 11px;
+        }
+
+
+        .sound-select {
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #18181f;
+
+            color: #f8f7ff;
+
+            border-radius: 10px;
+
+            padding: 8px 10px;
+
+            font-family: inherit;
+
+            font-size: 10px;
+
+            outline: none;
+        }
+
+
+        /* DND */
+
+        .dnd-card {
+            margin: 0 18px 27px;
+
+            padding: 17px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            border-radius: 19px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(212,175,55,.08),
+                    rgba(17,17,22,.95)
+                );
+
+            border: 1px solid rgba(212,175,55,.14);
+        }
+
+
+        .dnd-icon {
+            width: 44px;
+            height: 44px;
+
+            min-width: 44px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .dnd-info {
+            flex: 1;
+        }
+
+
+        .dnd-info strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .dnd-info span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            line-height: 1.4;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            padding: 8px 25px 30px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="notification-settings-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <a href="settings.html"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="title">
+
+            <h1>Notifications</h1>
+
+            <span>Customize your alerts</span>
+
+        </div>
+
+
+        <button class="info-btn"
+                onclick="showInfo()">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-icon">
+
+            <i class="fa-solid fa-bell"></i>
+
+        </div>
+
+
+        <h2>Make notifications yours</h2>
+
+
+        <p>
+            Choose how BuzzChat alerts you about messages,
+            groups, calls, channels and ik activity.
+        </p>
+
+    </section>
+
+
+
+    <!-- MASTER -->
+
+    <div class="master-card">
+
+        <div class="master-icon">
+
+            <i class="fa-solid fa-bell"></i>
+
+        </div>
+
+
+        <div class="master-info">
+
+            <strong>
+                Allow notifications
+            </strong>
+
+            <span>
+                Receive BuzzChat notifications on your device.
+            </span>
+
+        </div>
+
+
+        <button class="toggle active"
+                onclick="toggleButton(this)"
+                aria-label="Allow notifications">
+
+        </button>
+
+    </div>
+
+
+
+    <!-- MESSAGE NOTIFICATIONS -->
+
+    <div class="section-title">
+        MESSAGE NOTIFICATIONS
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-comment"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Private messages
+                </div>
+
+                <div class="setting-description">
+                    Notifications for messages from your contacts.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Private messages">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-users"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Group messages
+                </div>
+
+                <div class="setting-description">
+                    Alerts from your BuzzChat groups.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Group messages">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-bullhorn"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Channel updates
+                </div>
+
+                <div class="setting-description">
+                    Get alerts for new channel posts and announcements.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Channel updates">
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CALLS -->
+
+    <div class="section-title">
+        CALL NOTIFICATIONS
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-phone"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Incoming calls
+                </div>
+
+                <div class="setting-description">
+                    Notify you when someone calls.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Incoming calls">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-video"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Video calls
+                </div>
+
+                <div class="setting-description">
+                    Show alerts for incoming video calls.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Video calls">
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- IK -->
+
+    <div class="section-title">
+        IK AI
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <span style="
+                    font-size:11px;
+                    font-weight:800;
+                ">
+                    ik
+                </span>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    ik notifications
+                </div>
+
+                <div class="setting-description">
+                    Receive helpful alerts and responses from ik.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="ik notifications">
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- SOUND -->
+
+    <div class="section-title">
+        SOUND & VIBRATION
+    </div>
+
+
+    <div class="sound-card">
+
+
+        <div class="sound-header">
+
+            <div class="sound-icon">
+
+                <i class="fa-solid fa-volume-high"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Notification sound
+                </strong>
+
+                <span>
+                    Choose your preferred alert sound.
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="sound-row">
+
+            <span>
+                Message tone
+            </span>
+
+
+            <select class="sound-select"
+                    onchange="soundChanged(this)">
+
+                <option>BuzzChat Pulse</option>
+                <option>Classic</option>
+                <option>Soft Bell</option>
+                <option>None</option>
+
+            </select>
+
+        </div>
+
+
+    </div>
+
+
+
+    <div class="settings-list">
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-mobile-screen"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Vibration
+                </div>
+
+                <div class="setting-description">
+                    Vibrate your device for new notifications.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Vibration">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="previewOption()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-eye"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Notification previews
+                </div>
+
+                <div class="setting-description">
+                    Show message content in notifications.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Always
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- DND -->
+
+    <div class="section-title">
+        QUIET HOURS
+    </div>
+
+
+    <div class="dnd-card">
+
+        <div class="dnd-icon">
+
+            <i class="fa-solid fa-moon"></i>
+
+        </div>
+
+
+        <div class="dnd-info">
+
+            <strong>
+                Do Not Disturb
+            </strong>
+
+            <span>
+                Temporarily silence BuzzChat notifications.
+            </span>
+
+        </div>
+
+
+        <button class="toggle"
+                onclick="toggleButton(this)"
+                aria-label="Do Not Disturb">
+
+        </button>
+
+    </div>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div>
+            <i class="fa-solid fa-bell"></i>
+            BuzzChat Notification Center
+        </div>
+
+        Notification controls are ready to connect
+        to the full BuzzChat account and device system.
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+    function toggleButton(button) {
+
+        button.classList.toggle("active");
+
+    }
+
+
+    function showInfo() {
+
+        alert(
+            "Notification Settings\n\n" +
+            "Customize the alerts you receive from BuzzChat. " +
+            "These controls will connect to the device notification system when the app functionality is added."
+        );
+
+    }
+
+
+    function soundChanged(select) {
+
+        alert(
+            "Notification sound changed to: " +
+            select.value
+        );
+
+    }
+
+
+    function previewOption() {
+
+        alert(
+            "Notification previews\n\n" +
+            "Choose whether me

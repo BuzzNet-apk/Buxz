@@ -1,0 +1,1203 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>ik • BuzzChat</title>  <link rel="stylesheet" href="style.css">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    /* ==================================
+       BUZZCHAT — ik AI
+    ================================== */
+
+    body {
+      margin: 0;
+      background: #07070a;
+      color: #f8f7ff;
+      font-family: Inter, sans-serif;
+    }
+
+    .ik-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 92px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* BACKGROUND GLOW */
+
+    .ik-page::before {
+      content: "";
+      position: fixed;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: rgba(124,58,237,.16);
+      filter: blur(90px);
+      top: 90px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    /* TOP BAR */
+
+    .ik-topbar {
+      height: 68px;
+      padding: 0 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      position: sticky;
+      top: 0;
+      z-index: 30;
+
+      background: rgba(7,7,10,.88);
+      backdrop-filter: blur(20px);
+
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .ik-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .ik-logo {
+      width: 39px;
+      height: 39px;
+      border-radius: 50%;
+
+      background:
+        radial-gradient(circle at 30% 25%, #a78bfa, transparent 30%),
+        linear-gradient(135deg, #7c3aed, #17101f);
+
+      border: 1px solid #d4af37;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #f1d77a;
+      font-size: 14px;
+      font-weight: 800;
+
+      box-shadow:
+        0 0 20px rgba(124,58,237,.35);
+    }
+
+    .ik-brand-name {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -.4px;
+    }
+
+    .ik-brand-name span {
+      color: #d4af37;
+    }
+
+    .ik-status {
+      font-size: 10px;
+      color: #a78bfa;
+      margin-top: 2px;
+    }
+
+    .ik-top-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .ik-top-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      background: #111116;
+
+      color: #92919d;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* MAIN */
+
+    .ik-main {
+      width: min(620px, calc(100% - 26px));
+      margin: auto;
+      flex: 1;
+      padding: 24px 0 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* WELCOME */
+
+    .ik-welcome {
+      text-align: center;
+      padding: 20px 10px 25px;
+    }
+
+    .ik-large-logo {
+      width: 76px;
+      height: 76px;
+      margin: 0 auto 17px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(circle at 30% 25%, #b28cff, transparent 30%),
+        linear-gradient(135deg, #7c3aed, #130b1c);
+
+      border: 2px solid #d4af37;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #f1d77a;
+
+      font-size: 27px;
+      font-weight: 800;
+
+      box-shadow:
+        0 0 30px rgba(124,58,237,.32),
+        inset 0 0 20px rgba(212,175,55,.08);
+    }
+
+    .ik-welcome h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .ik-welcome h1 span {
+      color: #d4af37;
+    }
+
+    .ik-welcome p {
+      margin: 0 auto;
+      max-width: 430px;
+
+      color: #92919d;
+
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* AI BADGE */
+
+    .ai-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      margin-top: 13px;
+
+      padding: 6px 10px;
+
+      border-radius: 20px;
+
+      background: rgba(124,58,237,.12);
+
+      border: 1px solid rgba(124,58,237,.22);
+
+      color: #b28cff;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .ai-badge i {
+      font-size: 8px;
+    }
+
+    /* QUICK PROMPTS */
+
+    .quick-title {
+      color: #777582;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.3px;
+
+      text-transform: uppercase;
+
+      margin: 0 4px 10px;
+    }
+
+    .quick-prompts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-bottom: 24px;
+    }
+
+    .prompt {
+      text-align: left;
+
+      padding: 13px;
+
+      border-radius: 15px;
+
+      background: rgba(17,17,22,.9);
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      color: #d6d3df;
+
+      font-family: inherit;
+
+      font-size: 11px;
+
+      line-height: 1.45;
+    }
+
+    .prompt i {
+      display: block;
+
+      color: #a78bfa;
+
+      margin-bottom: 8px;
+
+      font-size: 14px;
+    }
+
+    .prompt:active {
+      border-color: rgba(212,175,55,.3);
+      background: #15141b;
+    }
+
+    /* CHAT AREA */
+
+    .conversation {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-top: 10px;
+    }
+
+    .message {
+      display: flex;
+      gap: 9px;
+      max-width: 92%;
+    }
+
+    .message.user {
+      margin-left: auto;
+      flex-direction: row-reverse;
+    }
+
+    .mini-ik {
+      width: 31px;
+      height: 31px;
+      min-width: 31px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(135deg,#7c3aed,#1a102d);
+
+      border: 1px solid #d4af37;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #f1d77a;
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .user-mini {
+      width: 31px;
+      height: 31px;
+      min-width: 31px;
+
+      border-radius: 50%;
+
+      object-fit: cover;
+
+      border: 1px solid rgba(212,175,55,.3);
+    }
+
+    .bubble {
+      padding: 11px 13px;
+
+      border-radius: 15px;
+
+      background: #111116;
+
+      border: 1px solid rgba(255,255,255,.07);
+
+      color: #dedbe6;
+
+      font-size: 12px;
+
+      line-height: 1.55;
+    }
+
+    .message.user .bubble {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.7),
+          rgba(77,36,129,.7)
+        );
+
+      border-color: rgba(167,139,250,.25);
+
+      color: white;
+    }
+
+    /* COMPOSER */
+
+    .ik-composer {
+      position: fixed;
+
+      bottom: 87px;
+      left: 50%;
+
+      transform: translateX(-50%);
+
+      width: min(620px, calc(100% - 26px));
+
+      z-index: 50;
+    }
+
+    .composer-box {
+      display: flex;
+      align-items: center;
+
+      gap: 7px;
+
+      min-height: 55px;
+
+      padding: 6px 7px 6px 12px;
+
+      border-radius: 19px;
+
+      background: rgba(17,17,22,.96);
+
+      border: 1px solid rgba(255,255,255,.1);
+
+      box-shadow:
+        0 12px 35px rgba(0,0,0,.45);
+
+      backdrop-filter: blur(20px);
+    }
+
+    .composer-btn {
+      width: 39px;
+      height: 39px;
+
+      min-width: 39px;
+
+      border-radius: 50%;
+
+      border: none;
+
+      background: transparent;
+
+      color: #777582;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      font-size: 15px;
+    }
+
+    .ik-input {
+      flex: 1;
+
+      min-width: 0;
+
+      border: none;
+
+      outline: none;
+
+      background: transparent;
+
+      color: white;
+
+      font-family: inherit;
+
+      font-size: 13px;
+    }
+
+    .ik-input::placeholder {
+      color: #777582;
+    }
+
+    .send-ik {
+      width: 43px;
+      height: 43px;
+
+      min-width: 43px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(212,175,55,.35);
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #4c1d95
+        );
+
+      color: #f1d77a;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      box-shadow:
+        0 0 15px rgba(124,58,237,.25);
+    }
+
+    /* BOTTOM NAV */
+
+    .ik-bottom-nav {
+      position: fixed;
+
+      left: 50%;
+      bottom: 12px;
+
+      transform: translateX(-50%);
+
+      width: calc(100% - 24px);
+
+      max-width: 570px;
+
+      height: 68px;
+
+      border-radius: 23px;
+
+      background: rgba(17,17,22,.95);
+
+      border: 1px solid rgba(255,255,255,.08);
+
+      backdrop-filter: blur(20px);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-around;
+
+      z-index: 100;
+
+      box-shadow: 0 15px 40px rgba(0,0,0,.5);
+    }
+
+    .bottom-link {
+      text-decoration: none;
+
+      color: #777582;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      gap: 5px;
+
+      font-size: 10px;
+
+      font-weight: 600;
+
+      min-width: 55px;
+    }
+
+    .bottom-link i {
+      font-size: 18px;
+    }
+
+    .bottom-link.active {
+      color: #f1d77a;
+    }
+
+    .bottom-ik {
+      width: 27px;
+      height: 27px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #7c3aed,
+          #1a102d
+        );
+
+      border: 1px solid #d4af37;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      color: #f1d77a;
+
+      font-size: 11px;
+
+      font-weight: 800;
+
+      box-shadow:
+        0 0 14px rgba(124,58,237,.35);
+    }
+
+    @media (max-width:420px) {
+
+      .ik-main {
+        width: calc(100% - 20px);
+      }
+
+      .quick-prompts {
+        gap: 7px;
+      }
+
+      .prompt {
+        padding: 11px;
+      }
+
+      .ik-composer {
+        width: calc(100% - 20px);
+      }
+
+    }
+/* IK CHAT SPACE FIX */
+
+.ik-main {
+  padding-bottom: 190px;
+}
+  /* IK MENU */
+
+.ik-menu {
+  position: absolute;
+  top: 58px;
+  right: 14px;
+  width: 205px;
+  padding: 7px;
+  background: rgba(17,17,22,.98);
+  border: 1px solid rgba(212,175,55,.18);
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(0,0,0,.55);
+  backdrop-filter: blur(20px);
+  z-index: 200;
+  display: none;
+}
+
+.ik-menu.show {
+  display: block;
+}
+
+.ik-menu-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 0;
+  border-radius: 11px;
+  background: transparent;
+  color: #dedbe6;
+  font-family: inherit;
+  font-size: 12px;
+  text-align: left;
+}
+
+.ik-menu-item i {
+  width: 18px;
+  color: #a78bfa;
+  text-align: center;
+}
+
+.ik-menu-item:active {
+  background: rgba(124,58,237,.15);
+}
+
+.ik-menu-item:hover {
+  background: rgba(124,58,237,.12);
+}
+  /* IK MOBILE SIZE FIX */
+@media (max-width: 600px) {
+
+  .ik-page {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 16px !important;
+  }
+
+  .ik-page h1,
+  .ik-page h2 {
+    font-size: 24px !important;
+  }
+
+  .ik-page p {
+    font-size: 15px !important;
+  }
+
+  .ik-page .bubble {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+
+  .ik-page .prompt {
+    font-size: 14px !important;
+  }
+
+  .ik-page #ikInput {
+    font-size: 16px !important;
+  }
+
+  .ik-page .composer-btn,
+  .ik-page #sendIk {
+    font-size: 20px !important;
+  }
+
+  .ik-page .conversation {
+    width: 100% !important;
+  }
+}
+  </style></head><body><div class="ik-page">  <!-- TOP BAR -->  <header class="ik-topbar"><div class="ik-brand">
+
+  <div class="ik-logo">
+    ik
+  </div>
+
+  <div>
+
+    <div class="ik-brand-name">
+      <span>ik</span> AI
+    </div>
+
+    <div class="ik-status">
+      ● Online
+    </div>
+
+  </div>
+
+</div>
+
+
+<div class="ik-top-actions">
+
+<button class="ik-top-btn" id="resetIkBtn">
+  <i class="fa-solid fa-rotate"></i>
+</button>
+
+<button class="ik-top-btn" id="ikMenuBtn">
+  <i class="fa-solid fa-ellipsis-vertical"></i>
+</button>
+
+</div>
+<div class="ik-menu" id="ikMenu">
+
+  <button class="ik-menu-item" id="newIkConversation">
+    <i class="fa-solid fa-plus"></i>
+    <span>New conversation</span>
+  </button>
+
+  <button class="ik-menu-item" id="clearIkChat">
+    <i class="fa-solid fa-trash"></i>
+    <span>Clear chat</span>
+  </button>
+
+  <button class="ik-menu-item" id="aboutIk">
+    <i class="fa-solid fa-circle-info"></i>
+    <span>About ik</span>
+  </button>
+
+</div>
+  </header>  <!-- MAIN -->  <main class="ik-main"><!-- WELCOME -->
+
+<section class="ik-welcome">
+
+  <div class="ik-large-logo">
+    ik
+  </div>
+
+  <h1>
+    Meet <span>ik</span>
+  </h1>
+
+  <p>
+    Your intelligent companion inside BuzzChat.
+    Ask questions, explore ideas, write, learn and create.
+  </p>
+
+  <div class="ai-badge">
+
+    <i class="fa-solid fa-sparkles"></i>
+
+    Powered by AI
+
+  </div>
+
+</section>
+
+
+<!-- QUICK PROMPTS -->
+
+<div class="quick-title">
+  Try asking ik
+</div>
+
+<div class="quick-prompts">
+
+  <button class="prompt">
+
+    <i class="fa-solid fa-lightbulb"></i>
+
+    Give me a creative idea for today
+
+  </button>
+
+
+  <button class="prompt">
+
+    <i class="fa-solid fa-graduation-cap"></i>
+
+    Help me understand something
+
+  </button>
+
+
+  <button class="prompt">
+
+    <i class="fa-solid fa-pen"></i>
+
+    Write a professional message
+
+  </button>
+
+
+  <button class="prompt">
+
+    <i class="fa-solid fa-code"></i>
+
+    Help me build something
+
+  </button>
+
+</div>
+
+
+<!-- SAMPLE CONVERSATION -->
+
+<div class="conversation">
+
+  <div class="message">
+
+    <div class="mini-ik">
+      ik
+    </div>
+
+    <div class="bubble">
+
+      Hello 👋 I'm <strong>ik</strong>.
+      I'm here to help you inside BuzzChat.
+      What would you like to do today?
+
+    </div>
+
+  </div>
+
+
+  <div class="message user">
+
+    <img
+      class="user-mini"
+      src="https://i.pravatar.cc/100?img=11"
+      alt="You"
+    >
+
+    <div class="bubble">
+
+      Help me come up with a great idea.
+
+    </div>
+
+  </div>
+
+
+  <div class="message">
+
+    <div class="mini-ik">
+      ik
+    </div>
+
+    <div class="bubble">
+
+      Absolutely ✨ Tell me what you're working
+      on and I'll help you turn the idea into
+      something exciting.
+
+    </div>
+
+  </div>
+
+</div>
+
+  </main>  <!-- COMPOSER -->  <div class="ik-composer"><div class="composer-box">
+
+  <button class="composer-btn">
+
+    <i class="fa-regular fa-face-smile"></i>
+
+  </button>
+
+  <button class="composer-btn">
+
+    <i class="fa-solid fa-paperclip"></i>
+
+  </button>
+
+<input
+  class="ik-input"
+  id="ikInput"
+  type="text"
+  placeholder="Message ik..."
+  autocomplete="off"
+>
+<button class="composer-btn" id="ikMicBtn" type="button">
+  <i class="fa-solid fa-microphone"></i>
+</button>
+<button class="send-ik" id="sendIk">
+    <i class="fa-solid fa-arrow-up"></i>
+
+  </button>
+
+</div>
+
+  </div>  <!-- BOTTOM NAV -->  <nav class="ik-bottom-nav"><a href="index.html" class="bottom-link">
+
+  <i class="fa-solid fa-comments"></i>
+
+  <span>Chats</span>
+
+</a>
+
+
+<a href="updates.html" class="bottom-link">
+
+  <i class="fa-solid fa-circle-play"></i>
+
+  <span>Updates</span>
+
+</a>
+
+
+<a href="groups.html" class="bottom-link">
+
+  <i class="fa-solid fa-users"></i>
+
+  <span>Groups</span>
+
+</a>
+
+
+<a href="channels.html" class="bottom-link">
+
+  <i class="fa-solid fa-bullhorn"></i>
+
+  <span>Channels</span>
+
+</a>
+
+
+<a href="ik.html" class="bottom-link active">
+
+  <div class="bottom-ik">
+    ik
+  </div>
+
+  <span>ik</span>
+
+</a>
+
+  </nav></div>
+  <script>
+const ikInput = document.getElementById("ikInput");
+const sendIk = document.getElementById("sendIk");
+const conversation = document.querySelector(".conversation");
+const savedIkConversation =
+  localStorage.getItem("buzzchatIkConversation");
+
+if (savedIkConversation) {
+  conversation.innerHTML = savedIkConversation;
+}
+function sendIkMessage() {
+  const text = ikInput.value.trim();
+
+  if (!text) return;
+
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+
+  userMessage.innerHTML = `
+    <div class="bubble">${text}</div>
+  `;
+
+ conversation.appendChild(userMessage);
+
+localStorage.setItem("buzzchatIkConversation", conversation.innerHTML);
+
+ikInput.value = "";
+
+  setTimeout(async function () {
+
+    const typingMessage = document.createElement("div");
+    typingMessage.className = "message";
+    typingMessage.innerHTML = `
+      <div class="bubble">ik is thinking... ✨</div>
+    `;
+
+    conversation.appendChild(typingMessage);
+    conversation.scrollTop = conversation.scrollHeight;
+
+    try {
+
+      const response = await fetch(
+        "https://szjcanxfwkhzoppokqgj.supabase.co/functions/v1/ik-ai",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify({
+            message: text
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      typingMessage.remove();
+
+      const aiMessage = document.createElement("div");
+      aiMessage.className = "message";
+
+      aiMessage.innerHTML = `
+        <div class="bubble">${data.reply || "Sorry, ik couldn't respond right now."}</div>
+      `;
+
+      conversation.appendChild(aiMessage);
+
+      localStorage.setItem(
+        "buzzchatIkConversation",
+        conversation.innerHTML
+      );
+
+      conversation.scrollTop = conversation.scrollHeight;
+
+    } catch (error) {
+
+      typingMessage.remove();
+
+      const errorMessage = document.createElement("div");
+      errorMessage.className = "message";
+
+      errorMessage.innerHTML = `
+        <div class="bubble">
+          Sorry, ik couldn't connect right now. Please try again. ✨
+        </div>
+      `;
+
+      conversation.appendChild(errorMessage);
+
+      conversation.scrollTop = conversation.scrollHeight;
+
+    }
+
+  }, 600);
+}
+
+sendIk.addEventListener("click", sendIkMessage);
+
+ikInput.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") {
+    sendIkMessage();
+  }
+});
+document.querySelectorAll(".prompt").forEach(function(prompt) {
+  prompt.addEventListener("click", function() {
+    ikInput.value = prompt.textContent.trim();
+sendIkMessage();
+  });
+});
+const resetIkBtn = document.getElementById("resetIkBtn");
+
+if (resetIkBtn) {
+  resetIkBtn.addEventListener("click", function() {
+
+    const confirmReset = confirm(
+      "Clear your ik conversation?"
+    );
+
+    if (!confirmReset) return;
+
+    localStorage.removeItem("buzzchatIkConversation");
+
+    location.reload();
+
+  });
+}
+const ikMenuBtn = document.getElementById("ikMenuBtn");
+const ikMenu = document.getElementById("ikMenu");
+
+if (ikMenuBtn && ikMenu) {
+
+  ikMenuBtn.addEventListener("click", function(event) {
+    event.stopPropagation();
+    ikMenu.classList.toggle("show");
+  });
+
+  document.addEventListener("click", function() {
+    ikMenu.classList.remove("show");
+  });
+
+}
+const newIkConversation =
+  document.getElementById("newIkConversation");
+
+const clearIkChat =
+  document.getElementById("clearIkChat");
+
+const aboutIk =
+  document.getElementById("aboutIk");
+
+
+if (newIkConversation) {
+  newIkConversation.addEventListener("click", function() {
+
+    localStorage.removeItem("buzzchatIkConversation");
+
+    conversation.innerHTML = "";
+
+    ikMenu.classList.remove("show");
+
+    ikInput.focus();
+
+  });
+}
+
+
+if (clearIkChat) {
+  clearIkChat.addEventListener("click", function() {
+
+    localStorage.removeItem("buzzchatIkConversation");
+
+    conversation.innerHTML = "";
+
+    ikMenu.classList.remove("show");
+
+  });
+}
+
+
+if (aboutIk) {
+  aboutIk.addEventListener("click", function() {
+
+    alert(
+      "ik AI\n\n" +
+      "Your intelligent AI assistant inside BuzzChat.\n\n" +
+      "Ask questions, learn, create and explore ideas with ik."
+    );
+
+    ikMenu.classList.remove("show");
+
+  });
+}
+const ikMicBtn = document.getElementById("ikMicBtn");
+
+if (ikMicBtn) {
+
+  const SpeechRecognition =
+    window.SpeechRecognition ||
+    window.webkitSpeechRecognition;
+
+  if (SpeechRecognition) {
+
+    const recognition = new SpeechRecognition();
+
+    recognition.lang = "en-US";
+    recognition.interimResults = false;
+    recognition.continuous = false;
+
+    ikMicBtn.addEventListener("click", function() {
+
+      try {
+  recognition.start();
+
+  ikMicBtn.innerHTML =
+    '<i class="fa-solid fa-microphone-lines"></i>';
+
+  ikMicBtn.title = "Listening...";
+
+} catch (error) {
+  console.log("Microphone error:", error);
+}
+
+    });
+
+    recognition.onresult = function(event) {
+
+      const spokenText =
+        event.results[0][0].transcript;
+
+      ikInput.value = spokenText;
+
+      ikInput.focus();
+
+      ikMicBtn.innerHTML =
+        '<i class="fa-solid fa-microphone"></i>';
+
+    };
+
+    recognition.onerror = function() {
+
+      ikMicBtn.innerHTML =
+        '<i class="fa-solid fa-microphone"></i>';
+
+    };
+
+    recognition.onend = function() {
+
+      ikMicBtn.innerHTML =
+        '<i class="fa-solid fa-microphone"></i>';
+
+    };
+
+  } else {
+
+    ikMicBtn.addEventListener("click", function() {
+
+      alert(
+        "Voice input is not supported by this browser."
+      );
+
+    });
+
+  }
+
+}
+</script>
+  </body>
+</html

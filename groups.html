@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Groups • BuzzChat</title>  <link rel="stylesheet" href="style.css">  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
+
+    body {
+      margin: 0;
+      background: #07070a;
+      color: #f8f7ff;
+      font-family: Inter, sans-serif;
+    }
+
+    .groups-page {
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    /* TOP BAR */
+
+    .groups-topbar {
+      height: 70px;
+      padding: 0 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(7,7,10,.94);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .groups-title {
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .groups-title span {
+      color: #d4af37;
+    }
+
+    .groups-actions {
+      display: flex;
+      gap: 9px;
+    }
+
+    .top-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.08);
+      background: #111116;
+      color: #f8f7ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* CONTENT */
+
+    .groups-content {
+      width: min(600px, calc(100% - 28px));
+      margin: auto;
+      padding-top: 22px;
+    }
+
+    .groups-intro {
+      padding: 22px;
+      border-radius: 22px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(124,58,237,.16),
+          rgba(212,175,55,.08)
+        );
+      border: 1px solid rgba(212,175,55,.16);
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .groups-intro::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      right: -55px;
+      top: -70px;
+      background: rgba(124,58,237,.2);
+      filter: blur(45px);
+    }
+
+    .groups-intro-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg,#7c3aed,#24143e);
+      color: #f1d77a;
+      font-size: 22px;
+      border: 1px solid rgba(212,175,55,.3);
+      margin-bottom: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .groups-intro h2 {
+      margin: 0 0 7px;
+      font-size: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .groups-intro p {
+      margin: 0;
+      color: #92919d;
+      font-size: 13px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* CREATE GROUP */
+
+    .create-group {
+      width: 100%;
+      border: 1px solid rgba(212,175,55,.22);
+      background: #111116;
+      color: #f1d77a;
+      border-radius: 17px;
+      padding: 15px;
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      font-family: inherit;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .create-group-icon {
+      width: 43px;
+      height: 43px;
+      min-width: 43px;
+      border-radius: 50%;
+      background: rgba(124,58,237,.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a78bfa;
+    }
+
+    /* SECTION */
+
+    .section-label {
+      margin: 10px 4px 13px;
+      color: #92919d;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* GROUP LIST */
+
+    .group-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .group-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 13px 10px;
+      border-radius: 18px;
+      border: 1px solid transparent;
+    }
+
+    .group-item:active {
+      background: #111116;
+      border-color: rgba(255,255,255,.06);
+    }
+
+    .group-avatar {
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+      border-radius: 50%;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid rgba(212,175,55,.22);
+      background: #18181f;
+    }
+
+    .group-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .group-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .group-name {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .group-preview {
+      color: #92919d;
+      font-size: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .group-meta {
+      align-self: flex-start;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 7px;
+    }
+
+    .group-time {
+      color: #777582;
+      font-size: 10px;
+    }
+
+    .unread {
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      border-radius: 20px;
+      background: #7c3aed;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* PINNED */
+
+    .pinned-icon {
+      color: #d4af37;
+      font-size: 11px;
+    }
+
+    /* BOTTOM NAV */
+
+    .groups-bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 12px;
+      transform: translateX(-50%);
+      width: calc(100% - 24px);
+      max-width: 570px;
+      height: 68px;
+      border-radius: 23px;
+      background: rgba(17,17,22,.95);
+      border: 1px solid rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      z-index: 100;
+      box-shadow: 0 15px 40px rgba(0,0,0,.5);
+    }
+
+    .bottom-link {
+      text-decoration: none;
+      color: #777582;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 600;
+      min-width: 55px;
+    }
+
+    .bottom-link i {
+      font-size: 18px;
+    }
+
+    .bottom-link.active {
+      color: #f1d77a;
+    }
+
+    .ik-bottom-icon {
+      width: 27px;
+      height: 27px;
+      border-radius: 50%;
+      background: linear-gradient(135deg,#7c3aed,#1a102d);
+      border: 1px solid #d4af37;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #f1d77a;
+      font-size: 11px;
+      font-weight: 800;
+      box-shadow: 0 0 12px rgba(124,58,237,.35);
+    }
+
+    @media (max-width:420px) {
+      .groups-content {
+        width: calc(100% - 20px);
+      }
+    }
+
+  </style></head><body><div class="groups-page">  <!-- TOP BAR -->  <header class="groups-topbar"><div class="groups-title">
+  Buzz<span>Chat</span>
+</div>
+
+<div class="groups-actions">
+
+  <button class="top-btn">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+
+  <button class="top-btn">
+    <i class="fa-solid fa-ellipsis-vertical"></i>
+  </button>
+
+</div>
+
+  </header>  <!-- CONTENT -->  <main class="groups-content"><!-- INTRO -->
+<section class="groups-intro">
+
+  <div class="groups-intro-icon">
+    <i class="fa-solid fa-users"></i>
+  </div>
+
+  <h2>Your Communities</h2>
+
+  <p>
+    Connect with people, share ideas and build conversations
+    around the things you care about.
+  </p>
+
+</section>
+
+
+<!-- CREATE -->
+<button class="create-group" onclick="window.location.href='new-group.html'">
+
+  <div class="create-group-icon">
+    <i class="fa-solid fa-plus"></i>
+  </div>
+
+  <div>
+    <div>Create New Group</div>
+    <small style="color:#777582;font-weight:400;">
+      Start a conversation with your community
+    </small>
+  </div>
+
+</button>
+
+
+<div class="section-label">
+  Your Groups
+</div>
+
+
+<div class="group-list">
+
+  <!-- GROUP 1 -->
+  <div class="group-item">
+
+    <div class="group-avatar">
+      <img
+        src="https://i.pravatar.cc/150?img=13"
+        alt="Developers"
+      >
+    </div>
+
+    <div class="group-info">
+
+      <div class="group-name">
+        BuzzChat Developers
+      </div>
+
+      <div class="group-preview">
+        Daniel: The new update looks amazing 🔥
+      </div>
+
+    </div>
+
+    <div class="group-meta">
+
+      <span class="group-time">
+        10:42 AM
+      </span>
+
+      <span class="unread">
+        4
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- GROUP 2 -->
+  <div class="group-item">
+
+    <div class="group-avatar">
+      <img
+        src="https://i.pravatar.cc/150?img=45"
+        alt="Friends"
+      >
+    </div>
+
+    <div class="group-info">
+
+      <div class="group-name">
+        Weekend Crew
+      </div>
+
+      <div class="group-preview">
+        Alicia: Are we still meeting Saturday?
+      </div>
+
+    </div>
+
+    <div class="group-meta">
+
+      <span class="group-time">
+        9:31 AM
+      </span>
+
+      <span class="unread">
+        2
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- GROUP 3 -->
+  <div class="group-item">
+
+    <div class="group-avatar">
+      <img
+        src="https://i.pravatar.cc/150?img=68"
+        alt="Business"
+      >
+    </div>
+
+    <div class="group-info">
+
+      <div class="group-name">
+        Business Network
+      </div>
+
+      <div class="group-preview">
+        Maya: Welcome everyone to the community.
+      </div>
+
+    </div>
+
+    <div class="group-meta">
+
+      <span class="group-time">
+        Yesterday
+      </span>
+
+      <span class="pinned-icon">
+        <i class="fa-solid fa-thumbtack"></i>
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- GROUP 4 -->
+  <div class="group-item">
+
+    <div class="group-avatar">
+      <img
+        src="https://i.pravatar.cc/150?img=56"
+        alt="Creators"
+      >
+    </div>
+
+    <div class="group-info">
+
+      <div class="group-name">
+        Content Creators
+      </div>
+
+      <div class="group-preview">
+        You: Shared a photo
+      </div>
+
+    </div>
+
+    <div class="group-meta">
+
+      <span class="group-time">
+        Yesterday
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <!-- GROUP 5 -->
+  <div class="group-item">
+
+    <div class="group-avatar">
+      <img
+        src="https://i.pravatar.cc/150?img=59"
+        alt="Gaming"
+      >
+    </div>
+
+    <div class="group-info">
+
+      <div class="group-name">
+        Buzz Gaming Arena
+      </div>
+
+      <div class="group-preview">
+        Alex: Who is joining tonight?
+      </div>
+
+    </div>
+
+    <div class="group-meta">
+
+      <span class="group-time">
+        Mon
+      </span>
+
+      <span class="unread">
+        8
+      </span>
+
+    </div>
+
+  </div>
+
+</div>
+
+  </main>  <!-- BOTTOM NAV -->  <nav class="groups-bottom-nav"><a href="index.html" class="bottom-link">
+  <i class="fa-solid fa-comments"></i>
+  <span>Chats</span>
+</a>
+
+<a href="updates.html" class="bottom-link">
+  <i class="fa-solid fa-circle-play"></i>
+  <span>Updates</span>
+</a>
+
+<a href="groups.html" class="bottom-link active">
+  <i class="fa-solid fa-users"></i>
+  <span>Groups</span>
+</a>
+
+<a href="#" class="bottom-link">
+  <i class="fa-solid fa-bullhorn"></i>
+  <span>Channels</span>
+</a>
+
+<a href="#" class="bottom-link">
+
+  <div class="ik-bottom-icon">
+    ik
+  </div>
+
+  <span>ik</span>
+
+</a>
+
+  </nav></div>
+  <script src="script.js"></script>
+  </body>
+</html>

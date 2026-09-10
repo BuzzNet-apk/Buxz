@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Video Call • BuzzChat</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="video-call-page">
+
+    <!-- REMOTE VIDEO -->
+    <div class="remote-video">
+
+      <img src="https://i.pravatar.cc/600?img=47" alt="Daniel K.">
+
+      <div class="video-overlay"></div>
+
+      <!-- CALL INFORMATION -->
+      <div class="video-info">
+
+        <p class="video-status">VIDEO CALL</p>
+
+        <h1>Daniel K.</h1>
+
+        <p id="videoCallStatus">Calling...</p>
+
+      </div>
+
+      <!-- YOUR VIDEO PREVIEW -->
+      <div class="self-video">
+
+        <i class="fa-solid fa-user"></i>
+
+        <span>You</span>
+
+      </div>
+
+    </div>
+
+
+    <!-- VIDEO CALL CONTROLS -->
+    <div class="video-controls">
+
+      <button class="video-control" id="videoMuteBtn">
+        <i class="fa-solid fa-microphone"></i>
+      </button>
+
+      <button class="video-control" id="cameraBtn">
+        <i class="fa-solid fa-video"></i>
+      </button>
+
+      <button class="video-control" id="videoSpeakerBtn">
+        <i class="fa-solid fa-volume-high"></i>
+      </button>
+
+      <button class="video-end-call" id="videoEndCallBtn">
+        <i class="fa-solid fa-phone-slash"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

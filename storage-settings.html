@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Storage & Data • BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        body {
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    rgba(124,58,237,.15),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at bottom left,
+                    rgba(212,175,55,.07),
+                    transparent 35%
+                ),
+                #07070a;
+
+            color: #f8f7ff;
+
+            font-family: Inter, sans-serif;
+        }
+
+
+        .storage-page {
+            width: 100%;
+            max-width: 700px;
+
+            min-height: 100vh;
+
+            margin: auto;
+
+            padding-bottom: 40px;
+        }
+
+
+        /* TOP BAR */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 15px 18px;
+
+            background: rgba(7,7,10,.88);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .back-btn,
+        .info-btn {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+
+        .page-title {
+            flex: 1;
+        }
+
+
+        .page-title h1 {
+            margin: 0;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .page-title span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        /* HERO */
+
+        .hero {
+            padding: 30px 18px 20px;
+        }
+
+
+        .hero-icon {
+            width: 65px;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 21px;
+
+            margin-bottom: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(124,58,237,.20),
+                    rgba(212,175,55,.10)
+                );
+
+            border: 1px solid rgba(124,58,237,.23);
+
+            color: #a78bfa;
+
+            font-size: 25px;
+
+            box-shadow:
+                0 15px 45px rgba(124,58,237,.10);
+        }
+
+
+        .hero h2 {
+            margin: 0 0 9px;
+
+            font-size: 27px;
+
+            font-weight: 800;
+
+            letter-spacing: -.7px;
+        }
+
+
+        .hero p {
+            margin: 0;
+
+            color: #92919d;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+
+        /* STORAGE CARD */
+
+        .storage-card {
+            margin: 0 18px 28px;
+
+            padding: 19px;
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.13),
+                    rgba(17,17,22,.96)
+                );
+
+            border: 1px solid rgba(124,58,237,.20);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.22);
+        }
+
+
+        .storage-top {
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 17px;
+        }
+
+
+        .storage-icon {
+            width: 48px;
+            height: 48px;
+
+            min-width: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(124,58,237,.15);
+
+            color: #c4b5fd;
+
+            font-size: 19px;
+        }
+
+
+        .storage-title {
+            flex: 1;
+        }
+
+
+        .storage-title strong {
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .storage-title span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        .storage-number {
+            text-align: right;
+        }
+
+
+        .storage-number strong {
+            display: block;
+
+            font-size: 15px;
+
+            color: #f1d77a;
+        }
+
+
+        .storage-number span {
+            color: #777581;
+
+            font-size: 9px;
+        }
+
+
+        /* PROGRESS */
+
+        .progress {
+            width: 100%;
+            height: 8px;
+
+            overflow: hidden;
+
+            border-radius: 20px;
+
+            background: #24232b;
+        }
+
+
+        .progress-bar {
+            width: 42%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7c3aed,
+                    #d4af37
+                );
+        }
+
+
+        .storage-footer {
+            display: flex;
+
+            justify-content: space-between;
+
+            margin-top: 10px;
+
+            color: #777581;
+
+            font-size: 9px;
+        }
+
+
+        /* SECTION */
+
+        .section-title {
+            padding: 0 18px 9px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.4px;
+        }
+
+
+        .settings-list {
+            padding: 0 12px;
+
+            margin-bottom: 26px;
+        }
+
+
+        /* SETTING */
+
+        .setting {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 9px;
+
+            border-radius: 17px;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .setting:hover {
+            background: rgba(255,255,255,.035);
+        }
+
+
+        .setting-icon {
+            width: 43px;
+            height: 43px;
+
+            min-width: 43px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+
+            font-size: 15px;
+        }
+
+
+        .setting:nth-child(2) .setting-icon {
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .setting:nth-child(3) .setting-icon {
+            background: rgba(53,208,127,.09);
+
+            color: #55dd93;
+        }
+
+
+        .setting:nth-child(4) .setting-icon {
+            background: rgba(255,255,255,.06);
+
+            color: #b7b4c1;
+        }
+
+
+        .setting-info {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+
+        .setting-name {
+            font-size: 13px;
+
+            font-weight: 700;
+        }
+
+
+        .setting-description {
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+
+            line-height: 1.45;
+        }
+
+
+        .setting-value {
+            color: #a78bfa;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+            white-space: nowrap;
+        }
+
+
+        .chevron {
+            color: #55535e;
+
+            font-size: 10px;
+        }
+
+
+        /* TOGGLE */
+
+        .toggle {
+            position: relative;
+
+            width: 43px;
+            height: 24px;
+
+            flex-shrink: 0;
+
+            border: 0;
+
+            border-radius: 30px;
+
+            background: #292831;
+
+            cursor: pointer;
+        }
+
+
+        .toggle::after {
+            content: "";
+
+            position: absolute;
+
+            width: 18px;
+            height: 18px;
+
+            top: 3px;
+            left: 3px;
+
+            border-radius: 50%;
+
+            background: #92919d;
+
+            transition: .25s;
+        }
+
+
+        .toggle.active {
+            background: #7c3aed;
+        }
+
+
+        .toggle.active::after {
+            left: 22px;
+
+            background: #fff;
+        }
+
+
+        /* DATA USAGE */
+
+        .usage-card {
+            margin: 0 18px 27px;
+
+            padding: 17px;
+
+            border-radius: 19px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+        }
+
+
+        .usage-header {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .usage-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: rgba(212,175,55,.10);
+
+            color: #f1d77a;
+        }
+
+
+        .usage-header strong {
+            display: block;
+
+            font-size: 12px;
+        }
+
+
+        .usage-header span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 10px;
+        }
+
+
+        .usage-grid {
+            display: grid;
+
+            grid-template-columns: repeat(3,1fr);
+
+            gap: 8px;
+        }
+
+
+        .usage-item {
+            padding: 12px 8px;
+
+            text-align: center;
+
+            border-radius: 13px;
+
+            background: #18181f;
+
+            border: 1px solid rgba(255,255,255,.05);
+        }
+
+
+        .usage-item strong {
+            display: block;
+
+            color: #f8f7ff;
+
+            font-size: 13px;
+        }
+
+
+        .usage-item span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 8px;
+        }
+
+
+        /* DANGER */
+
+        .danger-button {
+            width: calc(100% - 36px);
+
+            margin: 0 18px 25px;
+
+            padding: 13px;
+
+            border-radius: 13px;
+
+            border: 1px solid rgba(220,70,85,.18);
+
+            background: rgba(220,70,85,.06);
+
+            color: #ef7180;
+
+            font-family: inherit;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        /* FOOTER */
+
+        .footer {
+            padding: 8px 20px 30px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+
+        .footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+
+        @media(max-width:420px) {
+
+            .usage-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<div class="storage-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <a href="settings.html"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+
+        <div class="page-title">
+
+            <h1>Storage & Data</h1>
+
+            <span>Manage media, storage and data usage</span>
+
+        </div>
+
+
+        <button class="info-btn"
+                onclick="showInfo()">
+
+            <i class="fa-solid fa-circle-info"></i>
+
+        </button>
+
+    </header>
+
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-icon">
+
+            <i class="fa-solid fa-database"></i>
+
+        </div>
+
+
+        <h2>Storage & data</h2>
+
+
+        <p>
+            Control your media storage, downloads,
+            uploads and mobile data usage.
+        </p>
+
+    </section>
+
+
+
+    <!-- STORAGE -->
+
+    <div class="storage-card">
+
+
+        <div class="storage-top">
+
+            <div class="storage-icon">
+
+                <i class="fa-solid fa-hard-drive"></i>
+
+            </div>
+
+
+            <div class="storage-title">
+
+                <strong>
+                    BuzzChat storage
+                </strong>
+
+                <span>
+                    Media and downloaded files
+                </span>
+
+            </div>
+
+
+            <div class="storage-number">
+
+                <strong>2.4 GB</strong>
+
+                <span>of 5 GB</span>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress">
+
+            <div class="progress-bar"></div>
+
+        </div>
+
+
+        <div class="storage-footer">
+
+            <span>
+                48% used
+            </span>
+
+            <span>
+                2.6 GB available
+            </span>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- STORAGE MANAGEMENT -->
+
+    <div class="section-title">
+        STORAGE MANAGEMENT
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting"
+             onclick="manageStorage()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-folder-open"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Manage storage
+                </div>
+
+                <div class="setting-description">
+                    Review conversations and media using the most space.
+                </div>
+
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="clearCache()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-broom"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Clear cache
+                </div>
+
+                <div class="setting-description">
+                    Remove temporary files without deleting your chats.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                186 MB
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+
+        <div class="setting"
+             onclick="downloadSettings()">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-download"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Automatic downloads
+                </div>
+
+                <div class="setting-description">
+                    Choose which media can download automatically.
+                </div>
+
+            </div>
+
+
+            <div class="setting-value">
+                Wi-Fi
+            </div>
+
+
+            <i class="fa-solid fa-chevron-right chevron"></i>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- DATA USAGE -->
+
+    <div class="section-title">
+        DATA USAGE
+    </div>
+
+
+    <div class="usage-card">
+
+
+        <div class="usage-header">
+
+            <div class="usage-icon">
+
+                <i class="fa-solid fa-chart-simple"></i>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Data usage
+                </strong>
+
+                <span>
+                    Activity from the current period
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="usage-grid">
+
+            <div class="usage-item">
+
+                <strong>1.8 GB</strong>
+
+                <span>
+                    Mobile data
+                </span>
+
+            </div>
+
+
+            <div class="usage-item">
+
+                <strong>6.7 GB</strong>
+
+                <span>
+                    Wi-Fi
+                </span>
+
+            </div>
+
+
+            <div class="usage-item">
+
+                <strong>412 MB</strong>
+
+                <span>
+                    Calls
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- MEDIA -->
+
+    <div class="section-title">
+        MEDIA & CALLS
+    </div>
+
+
+    <div class="settings-list">
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-images"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Save to gallery
+                </div>
+
+                <div class="setting-description">
+                    Save received media to your device gallery.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Save to gallery">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-play"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Auto-play videos
+                </div>
+
+                <div class="setting-description">
+                    Automatically play videos in chats and updates.
+                </div>
+
+            </div>
+
+
+            <button class="toggle active"
+                    onclick="toggleButton(this)"
+                    aria-label="Auto-play videos">
+
+            </button>
+
+        </div>
+
+
+
+        <div class="setting">
+
+            <div class="setting-icon">
+
+                <i class="fa-solid fa-phone-volume"></i>
+
+            </div>
+
+
+            <div class="setting-info">
+
+                <div class="setting-name">
+                    Use less data for calls
+                </div>
+
+                <div class="setting-description">
+                    Reduce mobile data usage during voice and video calls.
+                </div>
+
+            </div>
+
+
+            <button class="toggle"
+                    onclick="toggleButton(this)"
+                    aria-label="Use less data for calls">
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CLEAR ALL -->
+
+    <button class="danger-button"
+            onclick="clearAllData()">
+
+        <i class="fa-solid fa-trash"></i>
+        &nbsp; Clear downloaded media
+
+    </button>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        <div>
+            <i class="fa-solid fa-shield-halved"></i>
+            Your data stays under your control.
+        </div>
+
+        BuzzChat Storage & Data • Version 1.0.0
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+    function toggleButton(button) {
+
+        button.classList.toggle("active");
+
+    }
+
+
+    function showInfo() {
+
+        alert(
+            "Storage & Data\n\n" +
+            "Use these controls to manage BuzzChat media, " +
+            "downloads, calls and data usage."
+        );
+
+    }
+
+
+    function manageStorage() {
+
+        alert(
+            "Manage Storage\n\n" +
+            "A detailed storage manager will show which chats, groups and channels are using the most space."
+        );
+
+    }
+
+
+    function clearCache() {
+
+        const confirmed = confirm(
+            "Clear BuzzChat cache?\n\n" +
+            "Temporary files will be removed. Your chats and personal media will remain."
+        );
+
+        if (confirmed) {
+
+            alert(
+                "Cache cleared successfully."
+            );
+
+        }
+
+    }
+
+
+    function downloadSettings() {
+
+        alert(
+            "Automatic Downloads\n\n" +
+            "Choose whether photos, videos, documents and audio download on mobile data or Wi-Fi."
+        );
+
+    }
+
+
+    function clearAllData() {
+
+        const confirmed = confirm(
+            "Clear downloaded media?\n\n" +
+            "This will remove downloaded media from local storage. Your messages will not be deleted."
+        );
+
+        if (confirmed) {
+
+            alert(
+                "Downloaded media management will be connected to the BuzzChat storage system later."
+            );
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+</html>

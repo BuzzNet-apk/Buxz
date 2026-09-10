@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About BuzzChat</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+
+            background:
+                radial-gradient(
+                    circle at 85% 0%,
+                    rgba(124,58,237,.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 10% 65%,
+                    rgba(212,175,55,.07),
+                    transparent 35%
+                ),
+                #07070a;
+
+            color: #f8f7ff;
+
+            font-family: Inter, sans-serif;
+        }
+
+        .about-page {
+            width: 100%;
+            max-width: 700px;
+            min-height: 100vh;
+            margin: auto;
+            padding-bottom: 35px;
+        }
+
+        /* TOP BAR */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 14px;
+
+            padding: 0 18px;
+
+            background: rgba(7,7,10,.88);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,.07);
+        }
+
+        .back-btn,
+        .menu-btn {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,.08);
+
+            background: #111116;
+
+            color: #fff;
+
+            text-decoration: none;
+
+            cursor: pointer;
+        }
+
+        .title {
+            flex: 1;
+        }
+
+        .title strong {
+            display: block;
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+        .title span {
+            display: block;
+
+            margin-top: 3px;
+
+            color: #777581;
+
+            font-size: 9px;
+        }
+
+        /* BRAND HERO */
+
+        .brand-hero {
+            padding: 42px 20px 30px;
+
+            text-align: center;
+        }
+
+        .brand-logo {
+            width: 96px;
+            height: 96px;
+
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 29px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #7c3aed,
+                    #4c1d95
+                );
+
+            border: 1px solid rgba(212,175,55,.35);
+
+            box-shadow:
+                0 0 0 8px rgba(124,58,237,.06),
+                0 20px 55px rgba(124,58,237,.22);
+        }
+
+        .brand-logo span {
+            font-size: 35px;
+
+            font-weight: 800;
+
+            letter-spacing: -2px;
+
+            color: white;
+        }
+
+        .brand-hero h1 {
+            margin: 0;
+
+            font-size: 31px;
+
+            font-weight: 800;
+
+            letter-spacing: -1px;
+        }
+
+        .brand-hero h1 span {
+            color: #d4af37;
+        }
+
+        .brand-hero p {
+            max-width: 500px;
+
+            margin: 12px auto 0;
+
+            color: #92919d;
+
+            font-size: 12px;
+
+            line-height: 1.8;
+        }
+
+        .version {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 16px;
+
+            padding: 7px 11px;
+
+            border-radius: 20px;
+
+            background: rgba(255,255,255,.045);
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            color: #aaa7b2;
+
+            font-size: 9px;
+        }
+
+        .version i {
+            color: #d4af37;
+        }
+
+        /* SECTIONS */
+
+        .section {
+            padding: 0 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .section-label {
+            margin-bottom: 10px;
+
+            color: #777581;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+        }
+
+        .card {
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,.12);
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+
+            font-size: 16px;
+
+            font-weight: 800;
+        }
+
+        .card p {
+            margin: 0;
+
+            color: #8f8c98;
+
+            font-size: 11px;
+
+            line-height: 1.8;
+        }
+
+        /* VALUES */
+
+        .values {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 10px;
+        }
+
+        .value {
+            padding: 17px;
+
+            min-height: 130px;
+
+            border-radius: 18px;
+
+            background: #111116;
+
+            border: 1px solid rgba(255,255,255,.07);
+
+            transition: .2s;
+        }
+
+        .value:hover {
+            transform: translateY(-2px);
+
+            border-color: rgba(124,58,237,.25);
+        }
+
+        .value-icon {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 12px;
+
+            border-radius: 12px;
+
+            background: rgba(124,58,237,.11);
+
+            color: #a78bfa;
+        }
+
+        .value:nth-child(2) .value-icon {
+            background: rgba(212,175,55,.10);
+            color: #f1d77a;
+        }
+
+        .value:nth-child(3) .value-icon {
+            background: rgba(70,180,255,.09);
+            color: #79cfff;
+        }
+
+        .value:nth-child(4) .value-icon {
+            background: rgba(70,220,140,.09);
+            color: #6be6a0;
+        }
+
+        .value strong {
+            display: block;
+
+            margin-bottom: 6px;
+
+            font-size: 11px;
+        }
+
+        .value span {
+            color: #777581;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+        }
+
+        /* FEATURES */
+
+        .feature {
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+            padding: 14px 4px;
+
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .feature:last-child {
+            border-bottom: 0;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+
+            min-width: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background: rgba(124,58,237,.10);
+
+            color: #a78bfa;
+        }
+
+        .feature:nth-child(2) .feature-icon {
+            color: #f1d77a;
+            background: rgba(212,175,55,.09);
+        }
+
+        .feature:nth-child(3) .feature-icon {
+            color: #79cfff;
+            background: rgba(70,180,255,.08);
+        }
+
+        .feature:nth-child(4) .feature-icon {
+            color: #6be6a0;
+            background: rgba(70,220,140,.08);
+        }
+
+        .feature-info {
+            flex: 1;
+        }
+
+        .feature-info strong {
+            display: block;
+
+            font-size: 11px;
+        }
+
+        .feature-info span {
+            display: block;
+
+            margin-top: 4px;
+
+            color: #777581;
+
+            font-size: 9px;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 9px;
+        }
+
+        .stat {
+            padding: 17px 10px;
+
+            text-align: center;
+
+            border-radius: 16px;
+
+            background: rgba(255,255,255,.035);
+
+            border: 1px solid rgba(255,255,255,.06);
+        }
+
+        .stat strong {
+            display: block;
+
+            color: #f1d77a;
+
+            font-size: 20px;
+
+            font-weight: 800;
+        }
+
+        .stat span {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #777581;
+
+            font-size: 8px;
+        }
+
+        /* FUTURE CARD */
+
+        .future-card {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 22px;
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(124,58,237,.16),
+                    rgba(212,175,55,.05),
+                    #111116
+                );
+
+            border: 1px solid rgba(124,58,237,.20);
+        }
+
+        .future-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 130px;
+            height: 130px;
+
+            right: -55px;
+            top: -55px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(212,175,55,.18);
+        }
+
+        .future-card i {
+            color: #d4af37;
+
+            font-size: 20px;
+
+            margin-bottom: 13px;
+        }
+
+        .future-card h2 {
+            margin: 0 0 9px;
+
+            font-size: 16px;
+        }
+
+        .future-card p {
+            margin: 0;
+
+            color: #85828e;
+
+            font-size: 10px;
+
+            line-height: 1.7;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            padding: 15px 20px 25px;
+
+            text-align: center;
+
+            color: #5e5c66;
+
+            font-size: 9px;
+
+            line-height: 1.8;
+        }
+
+        .footer strong {
+            color: #9b98a4;
+        }
+
+        .footer i {
+            color: #d4af37;
+
+            margin-right: 4px;
+        }
+
+        @media(max-width:430px) {
+
+            .values {
+                grid-template-columns: 1fr;
+            }
+
+            .stats strong {
+                font-size: 17px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="about-page">
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <a href="settings.html"
+           class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+        <div class="title">
+
+            <strong>About BuzzChat</strong>
+
+            <span>Discover the platform</span>
+
+        </div>
+
+        <button class="menu-btn"
+                onclick="showAboutMenu()">
+
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+
+        </button>
+
+    </header>
+
+
+    <!-- BRAND HERO -->
+
+    <section class="brand-hero">
+
+        <div class="brand-logo">
+            <span>B</span>
+        </div>
+
+        <h1>
+            Buzz<span>Chat</span>
+        </h1>
+
+        <p>
+            A modern communication platform built to bring
+            conversations, communities, channels and intelligent
+            assistance together in one beautiful experience.
+        </p>
+
+        <div class="version">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            BuzzChat Version 1.0.0
+
+        </div>
+
+    </section>
+
+
+    <!-- OUR STORY -->
+
+    <section class="section">
+
+        <div class="section-label">
+            OUR STORY
+        </div>
+
+        <div class="card">
+
+            <h2>
+                Communication, redesigned.
+            </h2>
+
+            <p>
+                BuzzChat is designed around a simple idea:
+                staying connected should feel effortless,
+                personal and powerful.
+                <br><br>
+                From private conversations and communities
+                to channels, calls and the built-in ik AI
+                assistant, BuzzChat brings the tools people
+                use every day into one connected experience.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- VALUES -->
+
+    <section class="section">
+
+        <div class="section-label">
+            WHAT WE STAND FOR
+        </div>
+
+        <div class="values">
+
+            <div class="value">
+
+                <div class="value-icon">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+
+                <strong>Simple</strong>
+
+                <span>
+                    Powerful communication without unnecessary
+                    complexity.
+                </span>
+
+            </div>
+
+
+            <div class="value">
+
+                <div class="value-icon">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+
+                <strong>Premium</strong>
+
+                <span>
+                    A polished experience designed to feel
+                    modern and distinctive.
+                </span>
+
+            </div>
+
+
+            <div class="value">
+
+                <div class="value-icon">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+
+                <strong>Connected</strong>
+
+                <span>
+                    Bringing people and communities closer
+                    together.
+                </span>
+
+            </div>
+
+
+            <div class="value">
+
+                <div class="value-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+
+                <strong>Private</strong>
+
+                <span>
+                    Giving users meaningful control over their
+                    communication experience.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+
+    <section class="section">
+
+        <div class="section-label">
+            BUZZCHAT EXPERIENCE
+        </div>
+
+        <div class="card">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-comments"></i>
+                </div>
+
+                <div class="feature-info">
+
+                    <strong>Private Chats</strong>
+
+                    <span>
+                        Connect directly with the people who matter.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <div class="feature-info">
+
+                    <strong>Groups & Communities</strong>
+
+                    <span>
+                        Build spaces around shared interests.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-broadcast-tower"></i>
+                </div>
+
+                <div class="feature-info">
+
+                    <strong>Channels</strong>
+
+                    <span>
+                        Follow announcements, creators and updates.
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+
+                <div class="feature-info">
+
+                    <strong>ik AI</strong>
+
+                    <span>
+                        Your intelligent assistant inside BuzzChat.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PLATFORM STATS -->
+
+    <section class="section">
+
+        <div class="section-label">
+            THE VISION
+        </div>
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <strong>1</strong>
+
+                <span>
+                    CONNECTED PLATFORM
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>∞</strong>
+
+                <span>
+                    POSSIBILITIES
+                </span>
+
+            </div>
+
+            <div class="stat">
+
+                <strong>24/7</strong>
+
+                <span>
+                    CONNECTION
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUTURE -->
+
+    <section class="section">
+
+        <div class="future-card">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            <h2>
+                The future is buzzing.
+            </h2>
+
+            <p>
+                BuzzChat is being built to continuously evolve.
+                More communication tools, smarter experiences,
+                richer communities and new ways to connect are
+                part of the journey ahead.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <strong>BuzzChat</strong>
+
+        <br>
+
+        <i class="fa-solid fa-heart"></i>
+
+        Built for conversations, communities and connection.
+
+        <br><br>
+
+        © 2026 BuzzChat. All rights reserved.
+
+    </footer>
+
+</div>
+
+
+<script>
+
+    function showAboutMenu() {
+
+        alert(
+            "BuzzChat\n\n" +
+            "Version 1.0.0\n\n" +
+            "More information and legal resources will be available here."
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
